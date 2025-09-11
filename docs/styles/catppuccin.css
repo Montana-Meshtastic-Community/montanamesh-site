@@ -1,0 +1,143 @@
+/* ===========================
+   Catppuccin constants
+   =========================== */
+:root {
+    /* Latte palette */
+    --cp-latte-base:     #eff1f5;
+    --cp-latte-text:     #4c4f69;
+    --cp-latte-surface:  #e6e9ef;
+    --cp-latte-border:   #ccd0da;
+    --cp-latte-peach:    #fe640b;
+    --cp-latte-lavender: #7287fd;
+
+    /* Mocha palette */
+    --cp-mocha-base:     #1e1e2e;
+    --cp-mocha-text:     #cdd6f4;
+    --cp-mocha-surface:  #181825;
+    --cp-mocha-border:   #313244;
+    --cp-mocha-peach:    #fab387;
+
+    /* utility */
+    --cp-dark-ink:       #11111b;  /* for dark text on Peach headers */
+}
+
+/* ===========================
+   Latte (Light) — Peach top bar
+   =========================== */
+:root,
+[data-md-color-scheme="default"] {
+    --md-default-bg-color: var(--cp-latte-base);
+    --md-default-fg-color: var(--cp-latte-text);
+    --md-code-bg-color:    var(--cp-latte-surface);
+    --md-border-color:     var(--cp-latte-border);
+
+    /* Top bar + accent = Peach */
+    --md-primary-fg-color:        var(--cp-latte-peach);
+    --md-primary-fg-color--light: #ff7c2d;
+    --md-primary-fg-color--dark:  #d8550a;
+    --md-accent-fg-color:         var(--cp-latte-peach);
+    --md-typeset-a-color:         var(--cp-latte-peach);
+}
+
+/* Hover/focus in LIGHT mode → Lavender */
+[data-md-color-scheme="default"] a:hover,
+[data-md-color-scheme="default"] .md-nav__link:hover,
+[data-md-color-scheme="default"] .md-tabs__link:hover {
+    color: var(--cp-latte-lavender) !important;
+    text-decoration: underline;
+}
+[data-md-color-scheme="default"] .md-typeset a:focus-visible {
+    outline: 2px solid var(--cp-latte-lavender);
+    outline-offset: 2px;
+}
+
+/* ===========================
+   Mocha (Dark) — Peach top bar
+   =========================== */
+[data-md-color-scheme="slate"] {
+    --md-default-bg-color: var(--cp-mocha-base);
+    --md-default-fg-color: var(--cp-mocha-text);
+    --md-code-bg-color:    var(--cp-mocha-surface);
+    --md-border-color:     var(--cp-mocha-border);
+
+    /* Top bar + accent = Peach */
+    --md-primary-fg-color:        var(--cp-mocha-peach);
+    --md-primary-fg-color--light: #fcc5a5;
+    --md-primary-fg-color--dark:  #e79c72;
+    --md-accent-fg-color:         var(--cp-mocha-peach);
+    --md-typeset-a-color:         var(--cp-mocha-peach);
+}
+
+/* force dark text/icons on Peach header in dark mode */
+[data-md-color-scheme="slate"] .md-header,
+[data-md-color-scheme="slate"] .md-header .md-header__button,
+[data-md-color-scheme="slate"] .md-header .md-header__title,
+[data-md-color-scheme="slate"] .md-header .md-icon,
+[data-md-color-scheme="slate"] .md-tabs,
+[data-md-color-scheme="slate"] .md-tabs__link {
+    color: var(--cp-dark-ink) !important;
+    fill: var(--cp-dark-ink) !important;
+}
+
+/* guarantee header & tabs use Peach background */
+.md-header,
+.md-tabs {
+    background-color: var(--md-primary-fg-color);
+}
+
+/* Hover/focus in DARK mode → lighter version of base text */
+[data-md-color-scheme="slate"] a:hover,
+[data-md-color-scheme="slate"] .md-nav__link:hover,
+[data-md-color-scheme="slate"] .md-tabs__link:hover {
+    color: #f2f2f2 !important;  /* lighter than #cdd6f4 */
+    text-decoration: underline;
+}
+[data-md-color-scheme="slate"] .md-typeset a:focus-visible,
+[data-md-color-scheme="slate"] .md-nav__link:focus-visible,
+[data-md-color-scheme="slate"] .md-tabs__link:focus-visible {
+    outline: 2px solid #f2f2f2;
+    outline-offset: 2px;
+}
+
+/* ===========================
+   Buttons
+   =========================== */
+.md-button,
+.md-typeset .md-button {
+    border-color: var(--md-accent-fg-color);
+}
+.md-button--primary,
+.md-typeset .md-button--primary {
+    background-color: var(--md-accent-fg-color);
+    color: var(--cp-dark-ink); /* dark text on Peach */
+}
+
+/* ===========================
+   Font override: Iosevka
+   =========================== */
+@font-face {
+    font-family: 'Iosevka';
+    src: url('../assets/fonts/iosevka-regular.woff2') format('woff2');
+    font-weight: 400;
+    font-style: normal;
+    font-display: swap;
+}
+@font-face {
+    font-family: 'Iosevka';
+    src: url('../assets/fonts/iosevka-bold.woff2') format('woff2');
+    font-weight: 700;
+    font-style: normal;
+    font-display: swap;
+}
+@font-face {
+    font-family: 'Iosevka';
+    src: url('../assets/fonts/iosevka-italic.woff2') format('woff2');
+    font-weight: 400;
+    font-style: italic;
+    font-display: swap;
+}
+
+:root {
+    --md-text-font: "Iosevka", monospace;
+    --md-code-font: "Iosevka", monospace;
+}
