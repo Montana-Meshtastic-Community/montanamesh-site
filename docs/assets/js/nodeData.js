@@ -27,10 +27,11 @@ async function getNodes() {
 //   const nodes2hr = json.filter(node => now - new Date(node.updated_at) <= TWO_HOURS).length;
 //   const nodes24hr = json.filter(node => now - new Date(node.updated_at) <= TWENTY_FOUR_HOURS).length;
 //
-
+    const totalNodes = "Soon™";
     const nodes30min = "Soon™";
     const nodes2hr = "Soon™";
     const nodes24hr = "Soon™";
+    document.getElementById('totalNodes').textContent = totalNodes;
   document.getElementById('nodes30min').textContent = nodes30min;
   document.getElementById('nodes2hr').textContent = nodes2hr;
   document.getElementById('nodes24hr').textContent = nodes24hr;
