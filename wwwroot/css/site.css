@@ -1,0 +1,294 @@
+:root {
+  --font-ui: "Iosevka", ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+  --page-image: url("https://upload.wikimedia.org/wikipedia/commons/b/bd/Billings%2C_Montana_skyline_in_2024.jpg");
+}
+
+@font-face {
+  font-family: "Iosevka";
+  src: url("/assets/fonts/iosevka-regular.woff2") format("woff2");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Iosevka";
+  src: url("/assets/fonts/iosevka-bold.woff2") format("woff2");
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Iosevka";
+  src: url("/assets/fonts/iosevka-italic.woff2") format("woff2");
+  font-weight: 400;
+  font-style: italic;
+  font-display: swap;
+}
+
+:root[data-theme="dark"] {
+  --bg: #1e1e2e;
+  --surface: #181825;
+  --text: #cdd6f4;
+  --subtext: #a6adc8;
+  --accent: #fab387;
+  --accent-hover: #f5a97f;
+  --border: #313244;
+  --ink-on-accent: #11111b;
+  --header-bg: rgba(24, 24, 37, 0.52);
+  --footer-bg: rgba(24, 24, 37, 0.5);
+  --card-bg: rgba(24, 24, 37, 0.48);
+  --page-overlay: rgba(10, 12, 18, 0.42);
+}
+
+:root[data-theme="light"] {
+  --bg: #eff1f5;
+  --surface: #e6e9ef;
+  --text: #4c4f69;
+  --subtext: #5c5f77;
+  --accent: #fe640b;
+  --accent-hover: #e65c0a;
+  --border: #ccd0da;
+  --ink-on-accent: #eff1f5;
+  --header-bg: rgba(230, 233, 239, 0.52);
+  --footer-bg: rgba(230, 233, 239, 0.5);
+  --card-bg: rgba(230, 233, 239, 0.5);
+  --page-overlay: rgba(16, 22, 32, 0.35);
+}
+
+html,
+body {
+  min-height: 100vh;
+}
+
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--font-ui);
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  isolation: isolate;
+}
+
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: -2;
+  background-image:
+    linear-gradient(var(--page-overlay), var(--page-overlay)),
+    var(--page-image);
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+  filter: brightness(1.18) saturate(1.06);
+}
+
+body.page-billings {
+  --page-image: url("https://upload.wikimedia.org/wikipedia/commons/b/bd/Billings%2C_Montana_skyline_in_2024.jpg");
+}
+
+body.page-missoula {
+  --page-image: url("https://upload.wikimedia.org/wikipedia/commons/d/d5/Missoula%2C_Montana.jpg");
+}
+
+body.page-great-falls {
+  --page-image: url("https://upload.wikimedia.org/wikipedia/commons/8/88/Central_Ave_and_Civic_Center_2.JPG");
+}
+
+body.page-bozeman {
+  --page-image: url("https://upload.wikimedia.org/wikipedia/commons/0/06/Main_St%2C_Bozeman%2C_Montana_%281%29.JPG");
+}
+
+body.page-butte {
+  --page-image: url("https://upload.wikimedia.org/wikipedia/commons/3/31/Butte_uptown.jpg");
+}
+
+body::after {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  background: color-mix(in srgb, var(--bg) 42%, transparent);
+}
+
+.app-content {
+  flex: 1;
+}
+
+a,
+.navbar-brand,
+.nav-link {
+  color: var(--text);
+}
+
+a:hover,
+.nav-link:hover,
+.navbar-brand:hover {
+  color: var(--accent);
+}
+
+.navbar,
+footer {
+  background: var(--footer-bg);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+}
+
+.app-header {
+  background: var(--header-bg);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+}
+
+.app-border {
+  border-color: var(--border) !important;
+}
+
+.btn-outline-secondary {
+  border-color: var(--border);
+  color: var(--text);
+}
+
+.theme-toggle {
+  width: 38px;
+  height: 38px;
+  padding: 0;
+}
+
+#themeToggleIcon {
+  font-size: 1rem;
+  line-height: 1;
+}
+
+.nav-pill {
+  background: color-mix(in srgb, var(--surface) 78%, transparent);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 0.35rem 0.75rem !important;
+  margin-left: 0.35rem;
+}
+
+.nav-pill:hover,
+.nav-pill:focus {
+  background: var(--accent);
+  color: var(--ink-on-accent);
+  border-color: var(--accent);
+}
+
+.btn-outline-secondary:hover {
+  border-color: var(--accent);
+  background: var(--accent);
+  color: var(--ink-on-accent);
+}
+
+.app-dropdown-menu {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  transform-origin: top right;
+}
+
+.dropdown-menu {
+  display: block;
+  opacity: 0;
+  transform: translateY(-8px) scale(0.98);
+  visibility: hidden;
+  pointer-events: none;
+  transition: opacity 180ms ease, transform 180ms ease, visibility 0ms linear 180ms;
+}
+
+.dropdown-menu.show {
+  opacity: 1;
+  transform: translateY(0) scale(1);
+  visibility: visible;
+  pointer-events: auto;
+  transition: opacity 180ms ease, transform 180ms ease;
+}
+
+.app-dropdown-item {
+  color: var(--text);
+}
+
+.app-dropdown-item:hover,
+.app-dropdown-item:focus {
+  background: var(--accent);
+  color: var(--ink-on-accent);
+}
+
+.repo-link {
+  display: inline-block;
+  font-size: 0.78rem;
+  color: var(--subtext);
+  text-decoration: none;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 0.35rem 0.6rem;
+}
+
+.repo-link:hover {
+  color: var(--ink-on-accent);
+  background: var(--accent);
+  border-color: var(--accent);
+}
+
+.btn-primary {
+  background-color: var(--accent);
+  border-color: var(--accent);
+  color: var(--ink-on-accent);
+}
+
+.btn-primary:hover,
+.btn-primary:focus {
+  background-color: var(--accent-hover);
+  border-color: var(--accent-hover);
+  color: var(--ink-on-accent);
+}
+
+.card-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 1rem;
+  margin-bottom: 1rem;
+}
+
+.card-grid.single {
+  grid-template-columns: minmax(220px, 1fr);
+}
+
+.stat-card {
+  background: var(--card-bg);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 1rem;
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+}
+
+.stat-card h2 {
+  font-size: 1.1rem;
+  margin-bottom: 0.75rem;
+}
+
+.stat-value {
+  font-size: 2rem;
+  font-weight: 700;
+  margin: 0;
+  text-align: center;
+}
+
+code,
+pre {
+  background: var(--surface);
+  color: var(--text);
+  border-radius: 6px;
+}
+
+.table {
+  --bs-table-color: var(--text);
+  --bs-table-bg: var(--surface);
+  --bs-table-border-color: var(--border);
+  --bs-table-striped-color: var(--text);
+}

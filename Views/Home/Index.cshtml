@@ -1,0 +1,42 @@
+@{
+    ViewData["Title"] = "Home";
+}
+
+<h1>Welcome to Montana's Meshtastic Community!</h1>
+<p>
+    Whether you're a seasoned ham radio operator looking to explore new communication options, a tech enthusiast interested in
+    building your own mesh network, or just curious about off-grid connectivity, this is your hub to connect, share knowledge,
+    and explore the potential of Meshtastic.
+</p>
+
+<div class="d-flex flex-wrap gap-2 my-4 justify-content-center">
+    <a class="btn btn-primary" href="https://discord.gg/SKmsDCraTV" target="_blank" rel="noopener noreferrer">Join us on Discord</a>
+    <a class="btn btn-primary" asp-controller="Home" asp-action="Connect">Learn More</a>
+    <a class="btn btn-primary" href="https://map.montanamesh.com" target="_blank" rel="noopener noreferrer">Our Map</a>
+</div>
+
+<section class="card-grid single">
+    <article class="stat-card">
+        <h2>Total Nodes</h2>
+        <p id="totalNodes" class="stat-value">Loading...</p>
+    </article>
+</section>
+
+<section class="card-grid">
+    <article class="stat-card">
+        <h2>Nodes Online: Last 30 Mins</h2>
+        <p id="nodes30min" class="stat-value">Loading...</p>
+    </article>
+    <article class="stat-card">
+        <h2>Nodes Online: Last 2 Hours</h2>
+        <p id="nodes2hr" class="stat-value">Loading...</p>
+    </article>
+    <article class="stat-card">
+        <h2>Nodes Online: Last 24 Hours</h2>
+        <p id="nodes24hr" class="stat-value">Loading...</p>
+    </article>
+</section>
+
+@section Scripts {
+    <script src="~/js/nodeData.js" asp-append-version="true"></script>
+}

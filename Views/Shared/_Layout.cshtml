@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - Montana Meshtastic Community</title>
+    <link rel="icon" type="image/png" href="~/assets/images/favicon.png" />
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+</head>
+<body class="page-@((ViewData["BackgroundKey"] as string) ?? "billings")">
+    <header>
+        <nav class="navbar navbar-expand-lg border-bottom app-border app-header">
+            <div class="container-fluid">
+                <a class="navbar-brand d-flex align-items-center gap-2" asp-controller="Home" asp-action="Index">
+                    <img src="~/assets/images/logo.png" alt="Montana Mesh logo" width="28" height="28" />
+                    <span>Montana Meshtastic Community</span>
+                </a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
+                        aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="navbar-collapse collapse">
+                    <ul class="navbar-nav ms-auto align-items-lg-center">
+                        <li class="nav-item dropdown">
+                            <a class="nav-link nav-pill dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">About</a>
+                            <ul class="dropdown-menu dropdown-menu-end app-dropdown-menu">
+                                <li><a class="dropdown-item app-dropdown-item" asp-controller="Home" asp-action="Setup">Setup</a></li>
+                            </ul>
+                        </li>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link nav-pill dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">Join</a>
+                            <ul class="dropdown-menu dropdown-menu-end app-dropdown-menu">
+                                <li><a class="dropdown-item app-dropdown-item" asp-controller="Home" asp-action="Connect">How To Connect</a></li>
+                            </ul>
+                        </li>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link nav-pill dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">Devices</a>
+                            <ul class="dropdown-menu dropdown-menu-end app-dropdown-menu">
+                                <li><a class="dropdown-item app-dropdown-item" asp-controller="Home" asp-action="RecommendedConfigurationSettings">Recommended Setup</a></li>
+                            </ul>
+                        </li>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link nav-pill dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">Resources</a>
+                            <ul class="dropdown-menu dropdown-menu-end app-dropdown-menu">
+                                <li><a class="dropdown-item app-dropdown-item" asp-controller="Home" asp-action="Resources">Local Resources</a></li>
+                                <li><a class="dropdown-item app-dropdown-item" href="https://meshtastic.org/docs/" target="_blank" rel="noopener noreferrer">Meshtastic Wiki</a></li>
+                            </ul>
+                        </li>
+                        <li class="nav-item ms-lg-5 mt-2 mt-lg-0">
+                            <a id="repoStatsLink" class="repo-link" href="https://github.com/Montana-Meshtastic-Community/montanamesh-site" target="_blank" rel="noopener noreferrer">
+                                montanamesh-site ★ <span id="repoStars">-</span> | ⑂ <span id="repoForks">-</span>
+                            </a>
+                        </li>
+                        <li class="nav-item ms-lg-3 mt-2 mt-lg-0">
+                            <button id="themeToggle" type="button" class="btn btn-sm btn-outline-secondary theme-toggle" aria-label="Toggle theme" title="Toggle theme">
+                                <span id="themeToggleIcon" aria-hidden="true">◐</span>
+                            </button>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </header>
+    <div class="container py-4 app-content">
+        <main role="main">
+            @RenderBody()
+        </main>
+    </div>
+
+    <footer class="border-top app-border footer py-3">
+        <div class="container">
+            Copyright &copy; 2025 Montana Meshtastic Community
+        </div>
+    </footer>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    @await RenderSectionAsync("Scripts", required: false)
+</body>
+</html>

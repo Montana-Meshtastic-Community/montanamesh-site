@@ -1,14 +1,12 @@
-# Python virtual environment
-venv/
-.env/
+# .NET build artifacts
+**/bin/
+**/obj/
+*.user
+*.suo
 
-# Byte-compiled / optimized / DLL files
-__pycache__/
-*.py[cod]
-*$py.class
-
-# MkDocs build directory (only used locally; GitHub deploys from Actions)
-site/
+# Logs and diagnostic artifacts
+*.log
+*.binlog
 
 # VSCode/IDE files
 .vscode/
@@ -18,7 +16,7 @@ site/
 .DS_Store
 Thumbs.db
 
-#Podman
+# Podman/local env files
 podman-compose.yml
 passwords.txt
 .env

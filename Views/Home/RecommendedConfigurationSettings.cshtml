@@ -1,0 +1,48 @@
+@{
+    ViewData["Title"] = "Recommended Settings";
+}
+
+<h1>Recommended Settings</h1>
+<article class="stat-card">
+    <p>These recommendations are based on field use in Montana and may evolve as the network grows.</p>
+
+    <h2>Device Settings</h2>
+    <div class="table-responsive">
+        <table class="table table-striped table-bordered align-middle">
+            <thead>
+            <tr>
+                <th>Setting</th>
+                <th>Recommended Value</th>
+                <th>Details</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+                <td>Role</td>
+                <td><code>CLIENT</code> or <code>CLIENT_MUTE</code></td>
+                <td>For most nodes.</td>
+            </tr>
+            <tr>
+                <td>NodeInfo broadcast interval</td>
+                <td><code>10800</code> seconds (3 hours)</td>
+                <td>Keeps mesh metadata updated without excess traffic.</td>
+            </tr>
+            <tr>
+                <td>Hop limit</td>
+                <td><code>5</code></td>
+                <td>Avoid higher than <code>6</code> to reduce congestion.</td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <h2>CLI Examples</h2>
+    <pre><code>meshtastic \
+  --set device.role CLIENT \
+  --set device.node_info_broadcast_secs 10800
+
+meshtastic \
+  --set lora.hop_limit 5 \
+  --set lora.ignore_mqtt true \
+  --set lora.config_ok_to_mqtt true</code></pre>
+</article>
