@@ -7,7 +7,7 @@ ASP.NET Core (`net8.0`) website for the Montana Meshtastic Community.
 - Serves the public website pages (`/`, `/connect`, `/setup`, `/recommended-configuration-settings`, `/resources`).
 - Exposes a lightweight stats API at `/api/nodes/stats`.
 - Reads node stats from `data/node-stats.json`.
-- Includes a helper script (`scripts/update-node-stats.sh`) that can build/update `data/node-stats.json` from MQTT topic traffic.
+- Includes a helper script (`scripts/update-node-stats.sh`) that builds `data/node-stats.json` from the PotatoMesh node API.
 
 ## Tech stack
 
@@ -72,12 +72,17 @@ cd montanamesh-site
 ./scripts/update-node-stats.sh
 ```
 
-The script uses MQTT env vars from the parent repo `.env` when available (`../.env`), and writes:
+The script uses PotatoMesh env vars from the parent repo `.env` when available (`../.env`), and writes:
 
-- `data/node-history.tsv`
 - `data/node-stats.json`
 
-If you want automated refresh, schedule it with cron/systemd timer.
+Relevant settings:
+
+- `POTATOMESH_API_BASE` defaults to `http://127.0.0.1:8083`
+- `POTATOMESH_NODE_LIMIT` defaults to `5000`
+- `NODE_STATS_DATA_DIR` can override the output directory
+
+In the master-control stack, the `node-stats-updater` service runs this every 5 minutes.
 
 ## Screenshots
 
