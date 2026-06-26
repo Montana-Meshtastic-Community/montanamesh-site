@@ -37,4 +37,11 @@ public class HomeController : Controller
         ViewData["BackgroundKey"] = "butte";
         return View("Resources");
     }
+
+    [HttpGet("/resources/other-mesh-networks")]
+    public IActionResult OtherMeshNetworks()
+    {
+        ViewData["BackgroundKey"] = "missoula";
+        return View("OtherMeshNetworks");
+    }
 }
