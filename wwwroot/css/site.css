@@ -258,6 +258,10 @@ footer {
   grid-template-columns: minmax(220px, 1fr);
 }
 
+.home-info-grid {
+  margin-top: 9rem;
+}
+
 .stat-card {
   background: var(--card-bg);
   border: 1px solid var(--border);
@@ -269,7 +273,9 @@ footer {
 
 .stat-card h2 {
   font-size: 1.1rem;
+  font-weight: 700;
   margin-bottom: 0.75rem;
+  text-align: center;
 }
 
 .stat-value {

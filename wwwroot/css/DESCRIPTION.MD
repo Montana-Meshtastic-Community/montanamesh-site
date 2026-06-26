@@ -4,7 +4,7 @@ This folder contains site-wide CSS for the MontanaMesh website.
 
 ## Current Role
 
-`site.css` controls the visual theme, layout, local WebP page backgrounds, cards, navigation styling, responsive behavior, and light/dark presentation used by the shared layout and public pages.
+`site.css` controls the visual theme, layout, local WebP page backgrounds, cards, homepage information-card spacing, navigation styling, responsive behavior, and light/dark presentation used by the shared layout and public pages.
 
 ## Maintenance Rule
 
