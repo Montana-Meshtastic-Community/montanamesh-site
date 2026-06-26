@@ -1,6 +1,6 @@
 :root {
   --font-ui: "Iosevka", ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
-  --page-image: url("https://upload.wikimedia.org/wikipedia/commons/b/bd/Billings%2C_Montana_skyline_in_2024.jpg");
+  --page-image: url("/assets/images/backgrounds/billings-skyline-2024.webp");
 }
 
 @font-face {
@@ -87,23 +87,23 @@ body::before {
 }
 
 body.page-billings {
-  --page-image: url("https://upload.wikimedia.org/wikipedia/commons/b/bd/Billings%2C_Montana_skyline_in_2024.jpg");
+  --page-image: url("/assets/images/backgrounds/billings-skyline-2024.webp");
 }
 
 body.page-missoula {
-  --page-image: url("https://upload.wikimedia.org/wikipedia/commons/d/d5/Missoula%2C_Montana.jpg");
+  --page-image: url("/assets/images/backgrounds/missoula.webp");
 }
 
 body.page-great-falls {
-  --page-image: url("https://upload.wikimedia.org/wikipedia/commons/8/88/Central_Ave_and_Civic_Center_2.JPG");
+  --page-image: url("/assets/images/backgrounds/great-falls-central-ave.webp");
 }
 
 body.page-bozeman {
-  --page-image: url("https://upload.wikimedia.org/wikipedia/commons/0/06/Main_St%2C_Bozeman%2C_Montana_%281%29.JPG");
+  --page-image: url("/assets/images/backgrounds/bozeman-main-st.webp");
 }
 
 body.page-butte {
-  --page-image: url("https://upload.wikimedia.org/wikipedia/commons/3/31/Butte_uptown.jpg");
+  --page-image: url("/assets/images/backgrounds/butte-uptown.webp");
 }
 
 body::after {

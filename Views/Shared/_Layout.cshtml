@@ -1,3 +1,14 @@
+@{
+    var backgroundKey = (ViewData["BackgroundKey"] as string) ?? "billings";
+    var backgroundImagePath = backgroundKey switch
+    {
+        "missoula" => "/assets/images/backgrounds/missoula.webp",
+        "great-falls" => "/assets/images/backgrounds/great-falls-central-ave.webp",
+        "bozeman" => "/assets/images/backgrounds/bozeman-main-st.webp",
+        "butte" => "/assets/images/backgrounds/butte-uptown.webp",
+        _ => "/assets/images/backgrounds/billings-skyline-2024.webp"
+    };
+}
 <!DOCTYPE html>
 <html lang="en" data-theme="dark">
 <head>
@@ -5,10 +16,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>@ViewData["Title"] - Montana Meshtastic Community</title>
     <link rel="icon" type="image/png" href="~/assets/images/favicon.png" />
+    <link rel="preload" href="~/assets/fonts/iosevka-regular.woff2" as="font" type="font/woff2" crossorigin />
+    <link rel="preload" href="~/assets/fonts/iosevka-bold.woff2" as="font" type="font/woff2" crossorigin />
+    <link rel="preload" href="@backgroundImagePath" as="image" type="image/webp" />
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
 </head>
-<body class="page-@((ViewData["BackgroundKey"] as string) ?? "billings")">
+<body class="page-@backgroundKey">
     <header>
         <nav class="navbar navbar-expand-lg border-bottom app-border app-header">
             <div class="container-fluid">
