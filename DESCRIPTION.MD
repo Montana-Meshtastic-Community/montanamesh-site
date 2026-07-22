@@ -8,7 +8,7 @@ This folder is the ASP.NET Core MVC website for the Montana Meshtastic Community
 - Provides onboarding pages for joining the Discord, choosing hardware, and configuring Meshtastic nodes.
 - Links out to PotatoMesh and MeshMonitor.
 - Exposes `/api/nodes/stats`, which returns node-count data read from `data/node-stats.json`.
-- Includes a script that refreshes node stats from the Meshtastic MQTT broker.
+- Includes a script that refreshes node stats from PotatoMesh.
 
 ## Main Routes
 
@@ -26,7 +26,7 @@ This folder is the ASP.NET Core MVC website for the Montana Meshtastic Community
 - `Views/`: Razor pages and shared layout.
 - `wwwroot/`: CSS, JavaScript, images, favicon assets, fonts, and client libraries.
 - `data/`: node stats data read by the API.
-- `scripts/`: helper scripts, currently the MQTT-backed node stats updater.
+- `scripts/`: helper scripts, currently the PotatoMesh node stats updater.
 - `docs/`: project screenshots and supporting documentation assets.
 - `Properties/`: launch settings for local development.
 
