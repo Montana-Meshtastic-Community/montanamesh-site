@@ -8,7 +8,7 @@ This folder contains the main public pages served by `HomeController`.
 - `Setup.cshtml`: infrastructure transparency page describing the RackNerd VPS stack and Wormhole ingress node.
 - `Connect.cshtml`: onboarding page for getting a radio, installing the Meshtastic app, and joining the Discord.
 - `RecommendedConfigurationSettings.cshtml`: recommended Meshtastic settings and CLI examples.
-- `Resources.cshtml`: links to Meshtastic docs, Discord, PotatoMesh, MeshMonitor, and supported hardware.
+- `Resources.cshtml`: links to Meshtastic docs, Discord, MeshMonitor, other mesh networks, and supported hardware.
 - `OtherMeshNetworks.cshtml`: links to nearby Montana mesh groups in Hamilton and the Flathead area.
 - `Privacy.cshtml`: placeholder privacy page.
 

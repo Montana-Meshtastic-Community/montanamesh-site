@@ -6,7 +6,7 @@ This folder is the ASP.NET Core MVC website for the Montana Meshtastic Community
 
 - Serves the public website pages for MontanaMesh.
 - Provides onboarding pages for joining the Discord, choosing hardware, and configuring Meshtastic nodes.
-- Links out to PotatoMesh and MeshMonitor.
+- Links public map/dashboard calls to MeshMonitor.
 - Exposes `/api/nodes/stats`, which returns node-count data read from `data/node-stats.json`.
 - Includes a script that refreshes node stats from PotatoMesh.
 
