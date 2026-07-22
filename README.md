@@ -7,7 +7,7 @@ ASP.NET Core (`net8.0`) website for the Montana Meshtastic Community.
 - Serves the public website pages (`/`, `/connect`, `/setup`, `/recommended-configuration-settings`, `/resources`).
 - Exposes a lightweight stats API at `/api/nodes/stats`.
 - Reads node stats from `data/node-stats.json`.
-- Includes a helper script (`scripts/update-node-stats.sh`) that builds `data/node-stats.json` from the PotatoMesh node API.
+- Includes a helper script (`scripts/update-node-stats.sh`) that builds `data/node-stats.json` from the Meshtastic MQTT broker.
 
 ## Tech stack
 
@@ -72,14 +72,19 @@ cd montanamesh-site
 ./scripts/update-node-stats.sh
 ```
 
-The script uses PotatoMesh env vars from the parent repo `.env` when available (`../.env`), and writes:
+The script uses MQTT env vars from the parent repo `.env` when available (`../.env`), and writes:
 
 - `data/node-stats.json`
+- `data/node-history.tsv`
 
 Relevant settings:
 
-- `POTATOMESH_API_BASE` defaults to `http://127.0.0.1:8083`
-- `POTATOMESH_NODE_LIMIT` defaults to `5000`
+- `MQTT_HOST` or `NODE_STATS_MQTT_HOST` defaults to `127.0.0.1`
+- `MQTT_PORT` or `NODE_STATS_MQTT_PORT` defaults to `1883`
+- `MQTT_TOPIC` or `NODE_STATS_MQTT_TOPIC` defaults to `msh/US/#`
+- `MQTT_SAMPLE_SECONDS` or `NODE_STATS_MQTT_SAMPLE_SECONDS` defaults to `20`
+- `MQTT_NODE_HISTORY_SECONDS` or `NODE_STATS_MQTT_NODE_HISTORY_SECONDS` defaults to `2592000`
+- `MQTT_USERNAME` and `MQTT_PASSWORD` are optional broker credentials
 - `NODE_STATS_DATA_DIR` can override the output directory
 
 In the master-control stack, the `node-stats-updater` service runs this every 5 minutes.

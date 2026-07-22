@@ -9,7 +9,7 @@ This folder stores runtime data consumed by the MontanaMesh website.
 
 ## How Data Is Updated
 
-`montanamesh-site/scripts/update-node-stats.sh` calls the PotatoMesh nodes API, counts total and recently-heard nodes, and writes `node-stats.json`. In the root compose stack, the `node-stats-updater` container runs that script every five minutes by default.
+`montanamesh-site/scripts/update-node-stats.sh` samples the Meshtastic MQTT broker, extracts node IDs from matching topics, keeps the latest observation timestamp per node in `node-history.tsv`, and writes `node-stats.json`. In the root compose stack, the `node-stats-updater` container runs that script every five minutes by default.
 
 ## Maintenance Rule
 
