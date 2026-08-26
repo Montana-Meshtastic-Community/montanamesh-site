@@ -6,6 +6,6 @@ This folder holds supporting documentation assets for the MontanaMesh website pr
 
 The `screenshots/` subfolder stores screenshots referenced by the website README, including home, connect, and setup page screenshots.
 
-## Maintenance Rule
+## Documentation
 
-Whenever documentation assets, screenshots, or README references change in this folder, update this `DESCRIPTION.MD` in the same change.
+Whenever documentation assets, screenshots, or README references change in this folder, keep this service-local note current in the same change.

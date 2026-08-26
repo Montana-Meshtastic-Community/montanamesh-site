@@ -8,6 +8,6 @@ This folder contains Razor views for the MontanaMesh public website.
 - `Shared/` contains the common layout, error page, and validation script partial.
 - `_ViewImports.cshtml` and `_ViewStart.cshtml` set common Razor imports and the default layout.
 
-## Maintenance Rule
+## Documentation
 
-Whenever page structure, shared rendering behavior, layout selection, or Razor imports change in this folder, update this `DESCRIPTION.MD` in the same change.
+Whenever page structure, shared rendering behavior, layout selection, or Razor imports change in this folder, keep this service-local note current in the same change.

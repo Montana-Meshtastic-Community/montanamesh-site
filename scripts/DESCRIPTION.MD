@@ -15,6 +15,6 @@ The script can read environment values from the parent `.env` file and supports:
 - `NODE_STATS_DATA_DIR`, default `montanamesh-site/data`
 - `NODE_STATS_ENV_FILE`, default parent repo `.env`
 
-## Maintenance Rule
+## Documentation
 
-Whenever script behavior, required tools, output files, or environment variables change in this folder, update this `DESCRIPTION.MD` in the same change.
+Whenever script behavior, required tools, output files, or environment variables change in this folder, keep this service-local note current in the same change.

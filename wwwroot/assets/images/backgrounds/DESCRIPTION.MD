@@ -14,6 +14,6 @@ This folder contains optimized local WebP background images used by `wwwroot/css
 
 These local assets avoid first-page-load requests to Wikimedia and keep each background under roughly 400 KB for faster cold loads.
 
-## Maintenance Rule
+## Documentation
 
-Whenever background image files, source images, optimization settings, or CSS asset paths change in this folder, update this `DESCRIPTION.MD` in the same change.
+Whenever background image files, source images, optimization settings, or CSS asset paths change in this folder, keep this service-local note current in the same change.

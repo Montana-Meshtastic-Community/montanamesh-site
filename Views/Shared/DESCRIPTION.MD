@@ -9,6 +9,6 @@ This folder contains Razor views shared across the website.
 - `_ValidationScriptsPartial.cshtml` includes jQuery validation scripts for forms.
 - `Error.cshtml` renders the standard ASP.NET error page.
 
-## Maintenance Rule
+## Documentation
 
-Whenever navigation, global scripts, layout markup, shared styling, or shared error behavior changes in this folder, update this `DESCRIPTION.MD` in the same change.
+Whenever navigation, global scripts, layout markup, shared styling, or shared error behavior changes in this folder, keep this service-local note current in the same change.

@@ -12,6 +12,6 @@ This folder contains public static assets for the MontanaMesh website.
 - `images/backgrounds/` with optimized local WebP page backgrounds.
 - `js/` legacy or alternate JavaScript asset path.
 
-## Maintenance Rule
+## Documentation
 
-Whenever images, icons, manifest data, fonts, or asset paths change in this folder, update this `DESCRIPTION.MD` in the same change.
+Whenever images, icons, manifest data, fonts, or asset paths change in this folder, keep this service-local note current in the same change.

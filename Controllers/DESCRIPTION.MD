@@ -11,6 +11,6 @@ This folder contains the ASP.NET Core controllers for the MontanaMesh website.
 
 The node stats API is intentionally tolerant: if the updater has not run yet or a bad JSON file is present, the website still responds instead of failing the page.
 
-## Maintenance Rule
+## Documentation
 
-Whenever routes, controller behavior, API contracts, or error handling change in this folder, update this `DESCRIPTION.MD` in the same change.
+Whenever routes, controller behavior, API contracts, or error handling change in this folder, keep this service-local note current in the same change.

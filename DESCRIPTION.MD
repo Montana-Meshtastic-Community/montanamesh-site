@@ -34,6 +34,6 @@ This folder is the ASP.NET Core MVC website for the Montana Meshtastic Community
 
 The project targets `.NET 8` and listens on port `8080` inside the container. In the root stack it is exposed locally on `8082` and proxied publicly by Caddy at `montanamesh.com`.
 
-## Maintenance Rule
+## Documentation
 
-Whenever website behavior, routes, data contracts, styling, or deployment behavior in this folder change, update this `DESCRIPTION.MD` in the same change.
+When website behavior, routes, data contracts, styling, or deployment behavior change in this folder, keep this service-local note and the root `AGENTS.MD` stack guidance in sync.

@@ -8,6 +8,6 @@ This folder contains image assets used by the MontanaMesh website, including the
 - `favicon.png`: PNG favicon used by the shared layout.
 - `backgrounds/`: optimized local WebP page backgrounds referenced by `wwwroot/css/site.css`.
 
-## Maintenance Rule
+## Documentation
 
-Whenever image assets are added, removed, renamed, optimized, or replaced in this folder, update this `DESCRIPTION.MD` in the same change.
+Whenever image assets are added, removed, renamed, optimized, or replaced in this folder, keep this service-local note current in the same change.

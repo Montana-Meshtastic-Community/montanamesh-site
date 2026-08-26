@@ -6,6 +6,6 @@ This folder is an alternate or legacy JavaScript asset path under `assets`.
 
 The main layout currently loads scripts from `wwwroot/js`. If files here are kept, verify whether they are intentionally duplicated or needed by older references before editing.
 
-## Maintenance Rule
+## Documentation
 
-Whenever JavaScript files in this folder change or references move between `assets/js` and `wwwroot/js`, update this `DESCRIPTION.MD` in the same change.
+Whenever JavaScript files in this folder change or references move between `assets/js` and `wwwroot/js`, keep this service-local note current in the same change.

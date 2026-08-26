@@ -10,6 +10,6 @@ This folder stores screenshot images for the MontanaMesh website documentation.
 
 These are documentation/reference images and are not part of the live website routing.
 
-## Maintenance Rule
+## Documentation
 
-Whenever screenshots are added, removed, renamed, or regenerated in this folder, update this `DESCRIPTION.MD` in the same change.
+Whenever screenshots are added, removed, renamed, or regenerated in this folder, keep this service-local note current in the same change.

@@ -11,6 +11,6 @@ This folder stores runtime data consumed by the MontanaMesh website.
 
 `montanamesh-site/scripts/update-node-stats.sh` calls the PotatoMesh nodes API, counts total and recently-heard nodes, and writes `node-stats.json`. In the root compose stack, the `node-stats-updater` container runs that script every five minutes by default.
 
-## Maintenance Rule
+## Documentation
 
-Whenever the data format, update cadence, or files consumed by the website change in this folder, update this `DESCRIPTION.MD` in the same change.
+Whenever the data format, update cadence, or files consumed by the website change in this folder, keep this service-local note current in the same change.

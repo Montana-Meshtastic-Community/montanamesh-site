@@ -12,6 +12,6 @@ This folder contains the main public pages served by `HomeController`.
 - `OtherMeshNetworks.cshtml`: links to nearby Montana mesh groups in Hamilton and the Flathead area.
 - `Privacy.cshtml`: placeholder privacy page.
 
-## Maintenance Rule
+## Documentation
 
-Whenever public page content, links, recommendations, or frontend data expectations change in this folder, update this `DESCRIPTION.MD` in the same change.
+Whenever public page content, links, recommendations, or frontend data expectations change in this folder, keep this service-local note current in the same change.

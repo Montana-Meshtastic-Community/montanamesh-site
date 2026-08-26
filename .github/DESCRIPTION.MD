@@ -6,6 +6,6 @@ This folder is reserved for GitHub-specific configuration for the MontanaMesh we
 
 No active workflow behavior is documented here yet. If CI/CD, checks, or templates are added, document what they do and when they run.
 
-## Maintenance Rule
+## Documentation
 
-Whenever GitHub automation or repository metadata changes in this folder, update this `DESCRIPTION.MD` in the same change.
+Whenever GitHub automation or repository metadata changes in this folder, keep this service-local note current in the same change.

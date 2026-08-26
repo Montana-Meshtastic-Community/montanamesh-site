@@ -6,6 +6,6 @@ This folder stores font files served by the website.
 
 The site includes Iosevka regular, bold, and italic WOFF2 files for local font loading.
 
-## Maintenance Rule
+## Documentation
 
-Whenever fonts are added, removed, renamed, or changed in this folder, update this `DESCRIPTION.MD` in the same change.
+Whenever fonts are added, removed, renamed, or changed in this folder, keep this service-local note current in the same change.
