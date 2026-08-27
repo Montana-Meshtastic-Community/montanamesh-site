@@ -187,7 +187,34 @@ def format_utc(timestamp: int) -> str:
     return time.strftime("%Y-%m-%dT%H:%M:%SZ", time.gmtime(timestamp))
 
 
-def load_node_database() -> dict[str, dict[str, int]]:
+def merge_node_record(database: dict[str, dict[str, int]], node_id: str, seen_at: int) -> None:
+    record = database.setdefault(node_id, {"firstSeen": seen_at, "lastSeen": seen_at})
+    record["firstSeen"] = min(record.get("firstSeen", seen_at), seen_at)
+    record["lastSeen"] = max(record.get("lastSeen", seen_at), seen_at)
+
+
+def merge_node_history(database: dict[str, dict[str, int]], now: int) -> None:
+    history_file = DATA_DIR / "node-history.tsv"
+    if not history_file.exists():
+        return
+
+    try:
+        lines = history_file.read_text(encoding="utf-8").splitlines()
+    except OSError:
+        return
+
+    for line in lines:
+        parts = line.split()
+        if not parts:
+            continue
+        node_id = normalize_node_id(parts[0])
+        if not node_id:
+            continue
+        seen_at = parse_seen_time(parts[1]) if len(parts) > 1 else now
+        merge_node_record(database, node_id, seen_at or now)
+
+
+def load_node_database(now: int) -> dict[str, dict[str, int]]:
     candidate_files = [DATABASE_FILE]
     legacy_file = DATA_DIR / "node-observations.json"
     if legacy_file != DATABASE_FILE:
@@ -227,7 +254,9 @@ def load_node_database() -> dict[str, dict[str, int]]:
             continue
         if first_seen is None:
             first_seen = last_seen
-        result[normalized] = {"firstSeen": first_seen, "lastSeen": last_seen}
+        merge_node_record(result, normalized, first_seen)
+        merge_node_record(result, normalized, last_seen)
+    merge_node_history(result, now)
     return result
 
 
@@ -237,7 +266,7 @@ def write_json_atomic(path: Path, tmp_path: Path, payload: dict[str, object]) ->
 
 
 now = int(time.time())
-node_database = load_node_database()
+node_database = load_node_database(now)
 seen_this_run: set[str] = set()
 host, port, tls_enabled = parse_broker_url(BROKER_URL)
 tls_enabled = env_bool("MQTT_STATS_TLS", tls_enabled)
@@ -265,10 +294,7 @@ def on_message(client: mqtt.Client, userdata: object, message: mqtt.MQTTMessage)
     if not node_id:
         return
     seen_at = int(time.time())
-    record = node_database.setdefault(node_id, {"firstSeen": seen_at, "lastSeen": seen_at})
-    record["lastSeen"] = seen_at
-    if seen_at < record.get("firstSeen", seen_at):
-        record["firstSeen"] = seen_at
+    merge_node_record(node_database, node_id, seen_at)
     seen_this_run.add(node_id)
 
 

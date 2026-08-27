@@ -4,7 +4,7 @@ This folder contains helper scripts for the MontanaMesh website.
 
 ## Scripts
 
-- `update-node-stats.sh` samples MontanaMesh MQTT traffic, extracts Meshtastic node IDs from JSON payloads, protobuf `ServiceEnvelope` packets, or MQTT topic suffixes, updates `data/node-database.json` with unique node IDs plus first-seen and last-seen timestamps, and writes `data/node-stats.json`. `totalNodes` is the count of unique IDs in the node database; the 30-minute, 2-hour, and 24-hour counts are calculated from last-seen timestamps.
+- `update-node-stats.sh` samples MontanaMesh MQTT traffic, extracts Meshtastic node IDs from JSON payloads, protobuf `ServiceEnvelope` packets, or MQTT topic suffixes, updates `data/node-database.json` with unique node IDs plus first-seen and last-seen timestamps, and writes `data/node-stats.json`. `totalNodes` is the count of unique IDs in the node database; the 30-minute, 2-hour, and 24-hour counts are calculated from last-seen timestamps. Legacy `node-observations.json` and `node-history.tsv` are read as migration/seed inputs when present.
 
 ## Configuration
 
