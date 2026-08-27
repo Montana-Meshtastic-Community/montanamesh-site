@@ -23,12 +23,16 @@
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
 </head>
 <body class="page-@backgroundKey">
-    <header>
-        <nav class="navbar navbar-expand-lg border-bottom app-border app-header">
-            <div class="container-fluid">
-                <a class="navbar-brand d-flex align-items-center gap-2" asp-controller="Home" asp-action="Index">
-                    <img src="~/assets/images/logo.png" alt="Montana Mesh logo" width="28" height="28" />
-                    <span>Montana Meshtastic Community</span>
+    <a class="skip-nav" href="#main">Skip to content</a>
+    <header class="site-header">
+        <nav class="navbar navbar-expand-lg app-header" aria-label="Primary navigation">
+            <div class="container-fluid app-shell">
+                <a class="navbar-brand brand-mark" asp-controller="Home" asp-action="Index">
+                    <img src="~/assets/images/logo.png" alt="Montana Mesh logo" width="34" height="34" />
+                    <span class="brand-copy">
+                        <span class="brand-kicker">Montana</span>
+                        <span class="brand-name">Meshtastic Community</span>
+                    </span>
                 </a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
                         aria-expanded="false" aria-label="Toggle navigation">
@@ -64,12 +68,14 @@
                         </li>
                         <li class="nav-item ms-lg-5 mt-2 mt-lg-0">
                             <a id="repoStatsLink" class="repo-link" href="https://github.com/Montana-Meshtastic-Community/montanamesh-site" target="_blank" rel="noopener noreferrer">
-                                montanamesh-site ★ <span id="repoStars">-</span> | ⑂ <span id="repoForks">-</span>
+                                <span class="repo-label">montanamesh-site</span>
+                                <span class="repo-stat">Stars <span id="repoStars">-</span></span>
+                                <span class="repo-stat">Forks <span id="repoForks">-</span></span>
                             </a>
                         </li>
                         <li class="nav-item ms-lg-3 mt-2 mt-lg-0">
                             <button id="themeToggle" type="button" class="btn btn-sm btn-outline-secondary theme-toggle" aria-label="Toggle theme" title="Toggle theme">
-                                <span id="themeToggleIcon" aria-hidden="true">◐</span>
+                                <span id="themeToggleIcon" aria-hidden="true">D</span>
                             </button>
                         </li>
                     </ul>
@@ -77,15 +83,16 @@
             </div>
         </nav>
     </header>
-    <div class="container py-4 app-content">
-        <main role="main">
+    <div class="app-content">
+        <main id="main" role="main" tabindex="-1">
             @RenderBody()
         </main>
     </div>
 
-    <footer class="border-top app-border footer py-3">
-        <div class="container">
-            Copyright &copy; 2026 Montana Meshtastic Community
+    <footer class="site-footer">
+        <div class="app-shell footer-grid">
+            <span>Copyright &copy; 2026 Montana Meshtastic Community</span>
+            <span class="footer-meta">Billings first. Montana wide.</span>
         </div>
     </footer>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>

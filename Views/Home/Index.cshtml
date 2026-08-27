@@ -2,74 +2,109 @@
     ViewData["Title"] = "Home";
 }
 
-<h1>Welcome to Montana's Meshtastic Community!</h1>
-<p>
-    Whether you're a seasoned ham radio operator looking to explore new communication options, a tech enthusiast interested in
-    building your own mesh network, or just curious about off-grid connectivity, this is your hub to connect, share knowledge,
-    and explore the potential of Meshtastic.
-</p>
+<section class="hero-section" aria-labelledby="home-title">
+    <div class="hero-media" aria-hidden="true"></div>
+    <div class="app-shell hero-grid">
+        <div class="hero-copy reveal">
+            <p class="eyebrow">LongFast / Billings, Montana / 915 MHz</p>
+            <h1 id="home-title">Montana's off-grid message network is taking shape.</h1>
+            <p class="hero-lede">
+                A volunteer-built Meshtastic community connecting Billings, the Heights, Laurel, and the rest of Montana through practical LoRa radio coverage.
+            </p>
+            <div class="hero-actions" aria-label="Primary actions">
+                <a class="btn btn-primary signal-button" href="https://discord.gg/SKmsDCraTV" target="_blank" rel="noopener noreferrer">Join Discord</a>
+                <a class="btn btn-outline-light signal-button" href="https://meshmonitor.montanamesh.com" target="_blank" rel="noopener noreferrer">Open Live Map</a>
+                <a class="text-link" asp-controller="Home" asp-action="Connect">Start with a radio</a>
+            </div>
+        </div>
 
-<div class="d-flex flex-wrap gap-2 my-4 justify-content-center">
-    <a class="btn btn-primary" href="https://discord.gg/SKmsDCraTV" target="_blank" rel="noopener noreferrer">Join us on Discord</a>
-    <a class="btn btn-primary" asp-controller="Home" asp-action="Connect">Learn More</a>
-    <a class="btn btn-primary" href="https://meshmonitor.montanamesh.com" target="_blank" rel="noopener noreferrer">Our Map</a>
-</div>
-
-<section class="card-grid single">
-    <article class="stat-card">
-        <h2>Total Nodes</h2>
-        <p id="totalNodes" class="stat-value">Loading...</p>
-    </article>
+        <aside class="telemetry-panel reveal" aria-label="Live network telemetry">
+            <div class="panel-header">
+                <span>Network Pulse</span>
+                <span class="status-dot" aria-hidden="true"></span>
+            </div>
+            <div class="primary-stat">
+                <span class="stat-label">Total Nodes</span>
+                <strong id="totalNodes" class="stat-value" aria-live="polite">Loading</strong>
+            </div>
+            <div class="mini-stats">
+                <article>
+                    <span>30 min</span>
+                    <strong id="nodes30min" aria-live="polite">--</strong>
+                </article>
+                <article>
+                    <span>2 hr</span>
+                    <strong id="nodes2hr" aria-live="polite">--</strong>
+                </article>
+                <article>
+                    <span>24 hr</span>
+                    <strong id="nodes24hr" aria-live="polite">--</strong>
+                </article>
+            </div>
+            <p class="panel-note">Updated from MontanaMesh MQTT traffic. Best viewed with a radio, an antenna, and a clear bit of sky.</p>
+        </aside>
+    </div>
 </section>
 
-<section class="card-grid">
-    <article class="stat-card">
-        <h2>Nodes Online: Last 30 Mins</h2>
-        <p id="nodes30min" class="stat-value">Loading...</p>
-    </article>
-    <article class="stat-card">
-        <h2>Nodes Online: Last 2 Hours</h2>
-        <p id="nodes2hr" class="stat-value">Loading...</p>
-    </article>
-    <article class="stat-card">
-        <h2>Nodes Online: Last 24 Hours</h2>
-        <p id="nodes24hr" class="stat-value">Loading...</p>
-    </article>
+<section class="app-shell intro-band reveal" aria-labelledby="mission-title">
+    <div>
+        <p class="eyebrow">Community Infrastructure</p>
+        <h2 id="mission-title">Built for real people, real terrain, and the weird day when cell service is gone.</h2>
+    </div>
+    <p>
+        Whether you are a ham operator, hiker, tinkerer, emergency volunteer, or simply curious about resilient local communications, Montana Mesh is a place to learn, test, and add useful coverage.
+    </p>
 </section>
 
-<section class="card-grid home-info-grid">
-    <article class="stat-card home-info-card">
+<section class="app-shell signal-grid" aria-label="MontanaMesh overview">
+    <article class="signal-card reveal">
+        <span class="card-index">01</span>
         <h2>What Is Meshtastic?</h2>
         <p>
-            Meshtastic is an open-source, off-grid communication system built around small LoRa radios. These devices can
-            send text messages, location updates, and basic telemetry without needing cell service, Wi-Fi, or a traditional
-            internet connection.
+            Meshtastic is an open-source communication system built around small LoRa radios. Devices can send text messages, location updates, and basic telemetry without cell service, Wi-Fi, or traditional internet.
         </p>
         <p>
-            Instead of every radio needing to reach one central tower, nearby radios pass messages along for each other.
-            That creates a mesh network, where coverage gets stronger as more people add well-placed nodes around town,
-            on rooftops, in vehicles, or anywhere with a good view of the surrounding area.
+            Nearby radios repeat traffic for each other, so coverage improves as more well-placed nodes appear on rooftops, vehicles, hills, and high windows.
         </p>
     </article>
-    <article class="stat-card home-info-card">
+    <article class="signal-card reveal">
+        <span class="card-index">02</span>
         <h2>Who Are We?</h2>
         <p>
-            Right now, Montana Mesh is a volunteer-led project focused on building a stronger Meshtastic network in and
-            around Billings, with hopes of improving coverage toward the Heights, Laurel, and nearby communities.
+            Montana Mesh is volunteer-led and focused on growing useful coverage around Billings first, then helping nearby communities connect their own local meshes.
         </p>
         <p>
-            The project depends on people donating their time, equipment, installation help, site access, and local
-            knowledge. Every node, contact, and shared location helps make the mesh more useful for everyone.
+            The project depends on people donating time, gear, site access, installation help, and local knowledge.
         </p>
     </article>
-    <article class="stat-card home-info-card">
-        <h2>Our Goal</h2>
+    <article class="signal-card reveal">
+        <span class="card-index">03</span>
+        <h2>Where This Goes</h2>
         <p>
-            Our goal is to build a reliable Meshtastic presence across Montana's major cities. Over time, we hope those
-            city networks can be linked through MQTT where appropriate, creating options for both local communication and
-            broader statewide coordination during emergencies.
+            The long-term goal is reliable Meshtastic presence across Montana's major cities, with responsible MQTT links where they help coordination without crowding local radio traffic.
         </p>
     </article>
+</section>
+
+<section class="app-shell route-rail reveal" aria-labelledby="next-title">
+    <div>
+        <p class="eyebrow">Next Steps</p>
+        <h2 id="next-title">Pick your entry point.</h2>
+    </div>
+    <div class="route-list">
+        <a asp-controller="Home" asp-action="Connect">
+            <span>Get connected</span>
+            <small>Hardware, app setup, and first radio guidance.</small>
+        </a>
+        <a asp-controller="Home" asp-action="RecommendedConfigurationSettings">
+            <span>Configure cleanly</span>
+            <small>Recommended settings that keep the shared channel usable.</small>
+        </a>
+        <a asp-controller="Home" asp-action="Resources">
+            <span>Use the network</span>
+            <small>Maps, docs, dashboards, and regional groups.</small>
+        </a>
+    </div>
 </section>
 
 @section Scripts {

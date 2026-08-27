@@ -12,6 +12,10 @@ async function loadNodeStats() {
     document.getElementById("nodes24hr").textContent = data.nodes24Hr;
   } catch (error) {
     console.error("Unable to load node stats", error);
+    document.getElementById("totalNodes").textContent = "--";
+    document.getElementById("nodes30min").textContent = "--";
+    document.getElementById("nodes2hr").textContent = "--";
+    document.getElementById("nodes24hr").textContent = "--";
   }
 }
 

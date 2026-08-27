@@ -9,7 +9,7 @@
   function applyTheme(theme) {
     root.setAttribute("data-theme", theme);
     if (toggleIcon) {
-      toggleIcon.textContent = theme === "dark" ? "☀" : "☾";
+      toggleIcon.textContent = theme === "dark" ? "L" : "D";
     }
     if (toggle) {
       toggle.setAttribute("aria-label", theme === "dark" ? "Switch to light theme" : "Switch to dark theme");
@@ -54,4 +54,24 @@
   }
 
   loadRepoStats();
+
+  const revealEls = document.querySelectorAll(".reveal");
+  if (revealEls.length && !window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+    document.body.classList.add("reveal-ready");
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add("is-visible");
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.12 });
+
+    revealEls.forEach((el, index) => {
+      el.style.transitionDelay = `${Math.min(index * 70, 280)}ms`;
+      observer.observe(el);
+    });
+  } else {
+    revealEls.forEach((el) => el.classList.add("is-visible"));
+  }
 })();
