@@ -33,7 +33,7 @@ public class HomeController : Controller
     [HttpGet("/recommended-configuration-settings")]
     public IActionResult RecommendedConfigurationSettings()
     {
-        ViewData["MetaDescription"] = "Use MontanaMesh recommended Meshtastic settings for roles, hop limits, broadcast intervals, and clean shared-channel behavior.";
+        ViewData["MetaDescription"] = "Use MontanaMesh recommended Meshtastic settings for roles, LoRa, hop limits, position sharing, telemetry, MQTT, security, and clean shared-channel behavior.";
         ViewData["BackgroundKey"] = "bozeman";
         return View("RecommendedConfigurationSettings");
     }
