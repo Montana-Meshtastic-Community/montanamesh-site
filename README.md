@@ -4,7 +4,7 @@ ASP.NET Core (`net8.0`) website for the Montana Meshtastic Community.
 
 ## What this app does
 
-- Serves the public website pages (`/`, `/connect`, `/devices`, `/host-a-node`, `/setup`, `/recommended-configuration-settings`, `/resources`, `/privacy`).
+- Serves the public website pages (`/`, `/connect`, `/devices`, `/optimal-settings`, `/host-a-node`, `/setup`, `/recommended-configuration-settings`, `/resources`, `/privacy`).
 - Serves `robots.txt` and a custom 404 page for missing routes.
 - Exposes a lightweight stats API at `/api/nodes/stats`.
 - Reads node stats from `data/node-stats.json`.

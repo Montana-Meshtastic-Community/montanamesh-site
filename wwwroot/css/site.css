@@ -799,6 +799,13 @@ h1 {
   margin-bottom: 1rem;
 }
 
+.table-lede {
+  max-width: 76ch;
+  margin: 0 0 1rem;
+  color: var(--subtext);
+  line-height: 1.62;
+}
+
 .kit-table {
   margin-bottom: 0;
 }
@@ -911,6 +918,10 @@ h1 {
 
 .setting-card h2 code {
   font-size: 0.82em;
+}
+
+.profile-summary .setting-card {
+  min-height: 220px;
 }
 
 .resource-card {

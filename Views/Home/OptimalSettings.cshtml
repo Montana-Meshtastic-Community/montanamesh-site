@@ -1,0 +1,263 @@
+@{
+    ViewData["Title"] = "Optimal Meshtastic Settings";
+}
+
+<section class="app-shell page-hero reveal" aria-labelledby="optimal-settings-title">
+    <p class="eyebrow">Portable / Base Station / Router</p>
+    <h1 id="optimal-settings-title">Optimal node settings.</h1>
+    <p>
+        Use the profile that matches the job your radio is doing. A hiking node should conserve battery and avoid excess broadcasts; a base station should be stable and helpful; a router should be planned infrastructure, not a casual checkbox.
+    </p>
+</section>
+
+<section class="app-shell settings-grid profile-summary" aria-label="Optimal settings profile summary">
+    <article class="setting-card reveal">
+        <span class="card-index">Portable</span>
+        <h2><code>CLIENT</code></h2>
+        <p>Best for handhelds, trackers, backpacks, vehicles, and radios that move around or rely on battery.</p>
+    </article>
+    <article class="setting-card reveal">
+        <span class="card-index">Base Station</span>
+        <h2><code>CLIENT_BASE</code></h2>
+        <p>Best for your well-placed home, attic, roofline, or shop node that supports your nearby weaker radios.</p>
+    </article>
+    <article class="setting-card reveal">
+        <span class="card-index">Router</span>
+        <h2><code>ROUTER</code></h2>
+        <p>Best only for coordinated infrastructure sites with excellent placement, stable power, and community agreement.</p>
+    </article>
+</section>
+
+<section class="app-shell kit-table-wrap reveal" aria-labelledby="portable-title">
+    <h2 id="portable-title">Portable node</h2>
+    <p class="table-lede">Use this for pocket carry, hiking, road testing, loaner devices, and mobile radios.</p>
+    <div class="table-responsive">
+        <table class="table table-striped table-bordered align-middle kit-table">
+            <thead>
+            <tr>
+                <th>Setting</th>
+                <th>Recommended Value</th>
+                <th>Why</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+                <td>Device role</td>
+                <td><code>CLIENT</code></td>
+                <td>Normal user node behavior: app-friendly and still able to rebroadcast when useful.</td>
+            </tr>
+            <tr>
+                <td>LoRa region</td>
+                <td><code>US</code></td>
+                <td>Use the United States 915 MHz region for Montana.</td>
+            </tr>
+            <tr>
+                <td>Modem preset</td>
+                <td><code>LONG_FAST</code></td>
+                <td>Matches the common public LongFast mesh expectation.</td>
+            </tr>
+            <tr>
+                <td>Hop limit</td>
+                <td><code>3</code></td>
+                <td>Keeps portable traffic useful without spreading every packet too far.</td>
+            </tr>
+            <tr>
+                <td>Node info broadcast</td>
+                <td><code>10800</code> seconds</td>
+                <td>Three hours is enough for identity freshness without constant metadata chatter.</td>
+            </tr>
+            <tr>
+                <td>Position broadcast</td>
+                <td>Smart broadcast on</td>
+                <td>Moving nodes should update intelligently instead of blasting fixed-interval positions.</td>
+            </tr>
+            <tr>
+                <td>Power saving</td>
+                <td>Use role defaults first</td>
+                <td>Advanced power tuning can make devices harder to reach; start simple.</td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</section>
+
+<section class="app-shell code-panel reveal" aria-labelledby="portable-cli-title">
+    <div>
+        <p class="eyebrow">Portable CLI</p>
+        <h2 id="portable-cli-title">Good starting point</h2>
+    </div>
+    <pre><code>meshtastic \
+  --set lora.region US \
+  --set lora.modem_preset LONG_FAST \
+  --set lora.hop_limit 3 \
+  --set device.role CLIENT \
+  --set device.node_info_broadcast_secs 10800 \
+  --set position.position_broadcast_smart_enabled true</code></pre>
+</section>
+
+<section class="app-shell kit-table-wrap reveal" aria-labelledby="base-title">
+    <h2 id="base-title">Base station</h2>
+    <p class="table-lede">Use this for a stable home, shop, attic, roofline, or window node that stays powered and helps your local cluster.</p>
+    <div class="table-responsive">
+        <table class="table table-striped table-bordered align-middle kit-table">
+            <thead>
+            <tr>
+                <th>Setting</th>
+                <th>Recommended Value</th>
+                <th>Why</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+                <td>Device role</td>
+                <td><code>CLIENT_BASE</code></td>
+                <td>Prioritizes traffic to and from your favorited nodes while remaining usable as a normal client.</td>
+            </tr>
+            <tr>
+                <td>LoRa region</td>
+                <td><code>US</code></td>
+                <td>Use the United States 915 MHz region for Montana.</td>
+            </tr>
+            <tr>
+                <td>Modem preset</td>
+                <td><code>LONG_FAST</code></td>
+                <td>Keeps the node on the shared public mesh preset.</td>
+            </tr>
+            <tr>
+                <td>Hop limit</td>
+                <td><code>5</code></td>
+                <td>Reasonable for a well-placed fixed node without defaulting to maximum reach.</td>
+            </tr>
+            <tr>
+                <td>Node info broadcast</td>
+                <td><code>10800</code> seconds</td>
+                <td>Three hours keeps the node visible without excess air time.</td>
+            </tr>
+            <tr>
+                <td>Position</td>
+                <td>Fixed position if public location is acceptable</td>
+                <td>A fixed base station does not need GPS movement updates; share only the location precision you are comfortable with.</td>
+            </tr>
+            <tr>
+                <td>MQTT</td>
+                <td>Off unless intentionally configured</td>
+                <td>Most base stations should focus on RF coverage. Gateways need separate planning and credentials.</td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</section>
+
+<section class="app-shell code-panel reveal" aria-labelledby="base-cli-title">
+    <div>
+        <p class="eyebrow">Base CLI</p>
+        <h2 id="base-cli-title">Stable fixed node</h2>
+    </div>
+    <pre><code>meshtastic \
+  --set lora.region US \
+  --set lora.modem_preset LONG_FAST \
+  --set lora.hop_limit 5 \
+  --set device.role CLIENT_BASE \
+  --set device.node_info_broadcast_secs 10800 \
+  --set position.fixed_position true</code></pre>
+</section>
+
+<section class="app-shell kit-table-wrap reveal" aria-labelledby="router-title">
+    <h2 id="router-title">Router infrastructure</h2>
+    <p class="table-lede">Use this only for planned coverage sites: high placement, good antenna, reliable power, and a real reason to prioritize routing.</p>
+    <div class="table-responsive">
+        <table class="table table-striped table-bordered align-middle kit-table">
+            <thead>
+            <tr>
+                <th>Setting</th>
+                <th>Recommended Value</th>
+                <th>Why</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+                <td>Device role</td>
+                <td><code>ROUTER</code> or <code>ROUTER_LATE</code></td>
+                <td>Use <code>ROUTER</code> for strategic backbone coverage; use <code>ROUTER_LATE</code> for local dead spots when lower priority is better.</td>
+            </tr>
+            <tr>
+                <td>LoRa region</td>
+                <td><code>US</code></td>
+                <td>Use the United States 915 MHz region for Montana.</td>
+            </tr>
+            <tr>
+                <td>Modem preset</td>
+                <td><code>LONG_FAST</code></td>
+                <td>Keeps the infrastructure node on the shared public mesh preset.</td>
+            </tr>
+            <tr>
+                <td>Hop limit</td>
+                <td><code>5</code></td>
+                <td>Start here. Higher values should be intentional because they can increase congestion.</td>
+            </tr>
+            <tr>
+                <td>Node info broadcast</td>
+                <td><code>10800</code> seconds</td>
+                <td>Even infrastructure does not need to announce itself constantly.</td>
+            </tr>
+            <tr>
+                <td>Position</td>
+                <td>Fixed position</td>
+                <td>Router sites should not send moving-position updates; use a deliberate public coordinate.</td>
+            </tr>
+            <tr>
+                <td>Power</td>
+                <td>Stable wall power or oversized solar</td>
+                <td>Router-class nodes are only useful when they stay online through weather and seasonal power swings.</td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</section>
+
+<section class="app-shell code-panel reveal" aria-labelledby="router-cli-title">
+    <div>
+        <p class="eyebrow">Router CLI</p>
+        <h2 id="router-cli-title">Planned infrastructure</h2>
+    </div>
+    <pre><code>meshtastic \
+  --set lora.region US \
+  --set lora.modem_preset LONG_FAST \
+  --set lora.hop_limit 5 \
+  --set device.role ROUTER \
+  --set device.node_info_broadcast_secs 10800 \
+  --set position.fixed_position true</code></pre>
+</section>
+
+<section class="app-shell decision-strip reveal" aria-labelledby="router-warning-title">
+    <div>
+        <p class="eyebrow">Important</p>
+        <h2 id="router-warning-title">Do not over-router the mesh.</h2>
+    </div>
+    <div class="decision-list">
+        <p>Most nodes should remain <code>CLIENT</code>, <code>CLIENT_MUTE</code>, or <code>CLIENT_BASE</code>.</p>
+        <p>Use <code>ROUTER</code> only where placement improves broad coverage and the node can stay online.</p>
+        <p>Ask in Discord before turning a high-traffic public node into infrastructure.</p>
+    </div>
+</section>
+
+<section class="app-shell route-rail reveal" aria-labelledby="optimal-next-title">
+    <div>
+        <p class="eyebrow">Next Steps</p>
+        <h2 id="optimal-next-title">Tune the right node.</h2>
+    </div>
+    <div class="route-list">
+        <a asp-controller="Home" asp-action="DeviceGuide">
+            <span>Choose hardware</span>
+            <small>Match the radio to portable, base, or infrastructure use.</small>
+        </a>
+        <a asp-controller="Home" asp-action="HostNode">
+            <span>Host a node</span>
+            <small>Find a useful fixed location before choosing router behavior.</small>
+        </a>
+        <a href="https://meshtastic.org/docs/configuration/radio/device/" target="_blank" rel="noopener noreferrer">
+            <span>Official role docs</span>
+            <small>Review current Meshtastic role behavior before changing infrastructure nodes.</small>
+        </a>
+    </div>
+</section>

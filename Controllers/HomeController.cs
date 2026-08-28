@@ -38,6 +38,14 @@ public class HomeController : Controller
         return View("RecommendedConfigurationSettings");
     }
 
+    [HttpGet("/optimal-settings")]
+    public IActionResult OptimalSettings()
+    {
+        ViewData["MetaDescription"] = "Compare MontanaMesh optimal Meshtastic settings for portable nodes, base stations, and planned router infrastructure.";
+        ViewData["BackgroundKey"] = "bozeman";
+        return View("OptimalSettings");
+    }
+
     [HttpGet("/devices")]
     public IActionResult DeviceGuide()
     {
