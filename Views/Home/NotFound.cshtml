@@ -1,0 +1,36 @@
+@{
+    ViewData["Title"] = "Page Not Found";
+}
+
+<section class="app-shell page-hero not-found-hero reveal" aria-labelledby="not-found-title">
+    <p class="eyebrow">404 / No Signal</p>
+    <h1 id="not-found-title">That page is out of range.</h1>
+    <p>
+        The route you requested does not exist on MontanaMesh. The network is still here; the link just needs a better path.
+    </p>
+</section>
+
+<section class="app-shell route-rail reveal" aria-labelledby="not-found-next-title">
+    <div>
+        <p class="eyebrow">Try These</p>
+        <h2 id="not-found-next-title">Useful places to land.</h2>
+    </div>
+    <div class="route-list">
+        <a asp-controller="Home" asp-action="Index">
+            <span>Homepage</span>
+            <small>Start from the network overview and live node pulse.</small>
+        </a>
+        <a asp-controller="Home" asp-action="Connect">
+            <span>How to connect</span>
+            <small>Get a radio, install the app, and join the local mesh.</small>
+        </a>
+        <a asp-controller="Home" asp-action="DeviceGuide">
+            <span>Device guide</span>
+            <small>Choose hardware for pocket carry, vehicles, rooftops, or solar relays.</small>
+        </a>
+        <a asp-controller="Home" asp-action="Resources">
+            <span>Resources</span>
+            <small>Open docs, maps, Discord, and regional mesh links.</small>
+        </a>
+    </div>
+</section>

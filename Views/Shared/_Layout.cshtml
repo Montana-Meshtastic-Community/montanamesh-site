@@ -1,5 +1,9 @@
 @{
     var backgroundKey = (ViewData["BackgroundKey"] as string) ?? "billings";
+    var siteName = "Montana Meshtastic Community";
+    var pageTitle = (ViewData["Title"] as string) ?? siteName;
+    var fullTitle = pageTitle == siteName ? siteName : $"{pageTitle} | {siteName}";
+    var metaDescription = (ViewData["MetaDescription"] as string) ?? "MontanaMesh is a volunteer Meshtastic community building practical off-grid LoRa messaging coverage around Billings and across Montana.";
     var backgroundImagePath = backgroundKey switch
     {
         "missoula" => "/assets/images/backgrounds/missoula.webp",
@@ -14,7 +18,8 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>@ViewData["Title"] - Montana Meshtastic Community</title>
+    <title>@fullTitle</title>
+    <meta name="description" content="@metaDescription" />
     <link rel="icon" type="image/png" href="~/assets/images/favicon.png" />
     <link rel="preload" href="~/assets/fonts/iosevka-regular.woff2" as="font" type="font/woff2" crossorigin />
     <link rel="preload" href="~/assets/fonts/iosevka-bold.woff2" as="font" type="font/woff2" crossorigin />
@@ -41,27 +46,27 @@
                 <div class="navbar-collapse collapse">
                     <ul class="navbar-nav ms-auto align-items-lg-center">
                         <li class="nav-item dropdown">
-                            <a class="nav-link nav-pill dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">About</a>
+                            <button class="nav-link nav-pill nav-button dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">About</button>
                             <ul class="dropdown-menu dropdown-menu-end app-dropdown-menu">
                                 <li><a class="dropdown-item app-dropdown-item" asp-controller="Home" asp-action="Setup">Setup</a></li>
                             </ul>
                         </li>
                         <li class="nav-item dropdown">
-                            <a class="nav-link nav-pill dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">Join</a>
+                            <button class="nav-link nav-pill nav-button dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">Join</button>
                             <ul class="dropdown-menu dropdown-menu-end app-dropdown-menu">
                                 <li><a class="dropdown-item app-dropdown-item" asp-controller="Home" asp-action="Connect">How To Connect</a></li>
                                 <li><a class="dropdown-item app-dropdown-item" asp-controller="Home" asp-action="HostNode">Host a Node</a></li>
                             </ul>
                         </li>
                         <li class="nav-item dropdown">
-                            <a class="nav-link nav-pill dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">Devices</a>
+                            <button class="nav-link nav-pill nav-button dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">Devices</button>
                             <ul class="dropdown-menu dropdown-menu-end app-dropdown-menu">
                                 <li><a class="dropdown-item app-dropdown-item" asp-controller="Home" asp-action="DeviceGuide">Device Guide</a></li>
                                 <li><a class="dropdown-item app-dropdown-item" asp-controller="Home" asp-action="RecommendedConfigurationSettings">Recommended Setup</a></li>
                             </ul>
                         </li>
                         <li class="nav-item dropdown">
-                            <a class="nav-link nav-pill dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">Resources</a>
+                            <button class="nav-link nav-pill nav-button dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">Resources</button>
                             <ul class="dropdown-menu dropdown-menu-end app-dropdown-menu">
                                 <li><a class="dropdown-item app-dropdown-item" asp-controller="Home" asp-action="Resources">Local Resources</a></li>
                                 <li><a class="dropdown-item app-dropdown-item" asp-controller="Home" asp-action="OtherMeshNetworks">Other Mesh Networks</a></li>

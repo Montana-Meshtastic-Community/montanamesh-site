@@ -10,7 +10,8 @@ This folder contains the main public pages served by `HomeController`.
 - `RecommendedConfigurationSettings.cshtml`: recommended Meshtastic settings and CLI examples.
 - `Resources.cshtml`: links to Meshtastic docs, Discord, MeshMonitor, other mesh networks, and supported hardware.
 - `OtherMeshNetworks.cshtml`: links to nearby Montana mesh groups in Hamilton and the Flathead area.
-- `Privacy.cshtml`: placeholder privacy page.
+- `Privacy.cshtml`: public privacy notes covering website logs, mesh traffic, dashboard visibility, and location sharing.
+- `NotFound.cshtml`: custom 404 page with routes back to the main site sections.
 
 ## Documentation
 

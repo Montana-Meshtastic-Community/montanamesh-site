@@ -1,25 +1,42 @@
 ﻿@model ErrorViewModel
 @{
-    ViewData["Title"] = "Error";
+    ViewData["Title"] = ViewData["Title"] ?? "Site Error";
 }
 
-<h1 class="text-danger">Error.</h1>
-<h2 class="text-danger">An error occurred while processing your request.</h2>
+<section class="app-shell page-hero reveal" aria-labelledby="error-title">
+    <p class="eyebrow">Site Status</p>
+    <h1 id="error-title">Something dropped.</h1>
+    <p>
+        The site could not complete that request. Try one of the main MontanaMesh routes below, or check back in a minute if the service is being updated.
+    </p>
+</section>
 
 @if (Model.ShowRequestId)
 {
-    <p>
-        <strong>Request ID:</strong> <code>@Model.RequestId</code>
-    </p>
+    <section class="app-shell decision-strip reveal" aria-label="Request reference">
+        <div>
+            <p class="eyebrow">Reference</p>
+            <h2>Request ID</h2>
+        </div>
+        <div class="decision-list">
+            <p><code>@Model.RequestId</code></p>
+        </div>
+    </section>
 }
 
-<h3>Development Mode</h3>
-<p>
-    Swapping to <strong>Development</strong> environment will display more detailed information about the error that occurred.
-</p>
-<p>
-    <strong>The Development environment shouldn't be enabled for deployed applications.</strong>
-    It can result in displaying sensitive information from exceptions to end users.
-    For local debugging, enable the <strong>Development</strong> environment by setting the <strong>ASPNETCORE_ENVIRONMENT</strong> environment variable to <strong>Development</strong>
-    and restarting the app.
-</p>
+<section class="app-shell route-rail reveal" aria-labelledby="error-next-title">
+    <div>
+        <p class="eyebrow">Back Online</p>
+        <h2 id="error-next-title">Pick a route.</h2>
+    </div>
+    <div class="route-list">
+        <a asp-controller="Home" asp-action="Index">
+            <span>Go home</span>
+            <small>Return to the MontanaMesh homepage.</small>
+        </a>
+        <a asp-controller="Home" asp-action="Resources">
+            <span>Open resources</span>
+            <small>Find maps, docs, guides, and community links.</small>
+        </a>
+    </div>
+</section>

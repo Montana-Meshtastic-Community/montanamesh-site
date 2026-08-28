@@ -49,7 +49,7 @@
       starsEl.textContent = String(repo.stargazers_count ?? "-");
       forksEl.textContent = String(repo.forks_count ?? "-");
     } catch {
-      // Keep placeholders if request fails.
+      // Keep fallback dashes if the GitHub request fails.
     }
   }
 
