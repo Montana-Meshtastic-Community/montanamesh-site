@@ -31,11 +31,32 @@ public class HomeController : Controller
         return View("RecommendedConfigurationSettings");
     }
 
+    [HttpGet("/devices")]
+    public IActionResult DeviceGuide()
+    {
+        ViewData["BackgroundKey"] = "bozeman";
+        return View("DeviceGuide");
+    }
+
+    [HttpGet("/host-a-node")]
+    public IActionResult HostNode()
+    {
+        ViewData["BackgroundKey"] = "billings";
+        return View("HostNode");
+    }
+
     [HttpGet("/resources")]
     public IActionResult Resources()
     {
         ViewData["BackgroundKey"] = "butte";
         return View("Resources");
+    }
+
+    [HttpGet("/privacy")]
+    public IActionResult Privacy()
+    {
+        ViewData["BackgroundKey"] = "great-falls";
+        return View("Privacy");
     }
 
     [HttpGet("/resources/other-mesh-networks")]

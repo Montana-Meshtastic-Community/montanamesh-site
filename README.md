@@ -4,7 +4,7 @@ ASP.NET Core (`net8.0`) website for the Montana Meshtastic Community.
 
 ## What this app does
 
-- Serves the public website pages (`/`, `/connect`, `/setup`, `/recommended-configuration-settings`, `/resources`).
+- Serves the public website pages (`/`, `/connect`, `/devices`, `/host-a-node`, `/setup`, `/recommended-configuration-settings`, `/resources`, `/privacy`).
 - Exposes a lightweight stats API at `/api/nodes/stats`.
 - Reads node stats from `data/node-stats.json`.
 - Includes a helper script (`scripts/update-node-stats.sh`) that builds `data/node-stats.json` from MeshMonitor's node DB when mounted, with MontanaMesh MQTT traffic as the fallback source.

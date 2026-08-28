@@ -1,0 +1,123 @@
+@{
+    ViewData["Title"] = "Host a Node";
+}
+
+<section class="app-shell page-hero reveal" aria-labelledby="host-node-title">
+    <p class="eyebrow">Rooftops / Shops / Hills / Windows</p>
+    <h1 id="host-node-title">Host a useful node.</h1>
+    <p>
+        MontanaMesh gets stronger when radios are placed high, powered reliably, and left online. If you have a good view across Billings, Laurel, Lockwood, the Heights, or nearby rural corridors, your site may help dozens of other radios hear each other.
+    </p>
+</section>
+
+<section class="app-shell buying-rule reveal" aria-label="Best host sites">
+    <div>
+        <span class="card-index">Good Sites</span>
+        <h2>Height beats almost everything</h2>
+    </div>
+    <p>
+        A modest radio on a roof, ridge, tower, shop, barn, or high window can outperform an expensive radio sitting indoors at street level. Clear line of sight, safe mounting, and dependable power matter more than chasing the fanciest board.
+    </p>
+</section>
+
+<section class="app-shell device-grid host-grid" aria-label="Node hosting options">
+    <article class="device-card reveal">
+        <span class="card-index">01 / Window Node</span>
+        <h2>Easy indoor host</h2>
+        <p class="device-fit">Best for apartments, offices, and homes with a high window facing open terrain.</p>
+        <ul>
+            <li><strong>Needs:</strong> USB power, a 915 MHz radio, and a better antenna placed near glass.</li>
+            <li><strong>Good for:</strong> testing coverage, bridging a neighborhood, and learning before outdoor mounting.</li>
+            <li><strong>Watch:</strong> low-e glass, metal screens, and interior walls can quietly eat signal.</li>
+        </ul>
+    </article>
+
+    <article class="device-card reveal">
+        <span class="card-index">02 / Roofline Node</span>
+        <h2>Best community value</h2>
+        <p class="device-fit">Best for houses, garages, shops, churches, schools, and small businesses.</p>
+        <ul>
+            <li><strong>Needs:</strong> weatherproof enclosure, quality antenna, safe cable routing, and stable power.</li>
+            <li><strong>Good for:</strong> durable local coverage without needing a remote solar build.</li>
+            <li><strong>Watch:</strong> lightning exposure, water ingress, sun-baked plastic, and long coax runs.</li>
+        </ul>
+    </article>
+
+    <article class="device-card reveal">
+        <span class="card-index">03 / Remote Relay</span>
+        <h2>Coverage multiplier</h2>
+        <p class="device-fit">Best for hilltops, barns, towers, ranch sites, and places with broad views.</p>
+        <ul>
+            <li><strong>Needs:</strong> solar panel, oversized battery, low-power radio, weatherproofing, and periodic access.</li>
+            <li><strong>Good for:</strong> linking valleys, highways, neighborhoods, and towns that cannot hear each other directly.</li>
+            <li><strong>Watch:</strong> winter sun angle, snow cover, wind load, animals, and legal permission to mount.</li>
+        </ul>
+    </article>
+</section>
+
+<section class="app-shell host-checklist reveal" aria-labelledby="host-checklist-title">
+    <div>
+        <p class="eyebrow">Before We Mount</p>
+        <h2 id="host-checklist-title">What makes a site worth checking?</h2>
+    </div>
+    <ul>
+        <li>A clear view over rooftops, ridges, open fields, or a major travel corridor.</li>
+        <li>Permission to mount a small antenna or weatherproof box without creating a safety issue.</li>
+        <li>Reliable power, or a place where a solar panel can face good sun year-round.</li>
+        <li>A safe path for maintenance if the node needs a firmware update, battery swap, or antenna change.</li>
+        <li>A host who is comfortable with a small low-power radio being online for community coverage.</li>
+    </ul>
+</section>
+
+<section class="app-shell kit-table-wrap reveal" aria-labelledby="hosting-expectations-title">
+    <h2 id="hosting-expectations-title">What to expect</h2>
+    <div class="table-responsive">
+        <table class="table table-striped table-bordered align-middle kit-table">
+            <thead>
+            <tr>
+                <th>Question</th>
+                <th>Practical Answer</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+                <td>Does it need internet?</td>
+                <td>No for normal mesh repeating. Internet is only needed for optional MQTT gateway roles, dashboards, or remote management.</td>
+            </tr>
+            <tr>
+                <td>How much power does it use?</td>
+                <td>Most nodes are low-power devices. A wall-powered host is usually simple; solar hosts need more careful sizing.</td>
+            </tr>
+            <tr>
+                <td>Will it track me?</td>
+                <td>Fixed community nodes can use fixed coordinates or no shared position. Personal location sharing is a separate user choice.</td>
+            </tr>
+            <tr>
+                <td>Who maintains it?</td>
+                <td>That depends on the site. Some hosts run their own hardware; others coordinate with volunteers before anything is installed.</td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</section>
+
+<section class="app-shell route-rail reveal" aria-labelledby="host-next-title">
+    <div>
+        <p class="eyebrow">Raise Your Hand</p>
+        <h2 id="host-next-title">Have a possible site?</h2>
+    </div>
+    <div class="route-list">
+        <a href="https://discord.gg/SKmsDCraTV" target="_blank" rel="noopener noreferrer">
+            <span>Talk with us on Discord</span>
+            <small>Share the general area, mounting height, power situation, and what direction the site can see.</small>
+        </a>
+        <a asp-controller="Home" asp-action="DeviceGuide">
+            <span>Pick hardware</span>
+            <small>Compare window, rooftop, solar, vehicle, and pocket-device options.</small>
+        </a>
+        <a href="https://meshmonitor.montanamesh.com" target="_blank" rel="noopener noreferrer">
+            <span>Check the live map</span>
+            <small>Look for nearby nodes and coverage gaps before planning an install.</small>
+        </a>
+    </div>
+</section>

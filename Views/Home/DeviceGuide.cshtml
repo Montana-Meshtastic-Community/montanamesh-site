@@ -1,0 +1,159 @@
+@{
+    ViewData["Title"] = "Device Guide";
+}
+
+<section class="app-shell page-hero reveal" aria-labelledby="device-guide-title">
+    <p class="eyebrow">US 915 MHz / LongFast / Montana terrain</p>
+    <h1 id="device-guide-title">What should I buy?</h1>
+    <p>
+        Pick the radio for the job you actually want it to do. A pocket tracker, a vehicle node, and a rooftop relay all live on the same mesh, but they should not be built the same way.
+    </p>
+</section>
+
+<section class="app-shell buying-rule reveal" aria-label="Quick buying rule">
+    <div>
+        <span class="card-index">Start Here</span>
+        <h2>The short version</h2>
+    </div>
+    <p>
+        Buy a <strong>915 MHz</strong> Meshtastic-supported device for the United States, favor newer <strong>SX126x or LR11xx</strong> radios, and choose <strong>nRF52-based</strong> boards when battery life or solar operation matters.
+    </p>
+</section>
+
+<section class="app-shell device-grid" aria-label="Recommended Meshtastic device paths">
+    <article class="device-card reveal">
+        <span class="card-index">01 / Easiest Start</span>
+        <h2>Pocket radio or tracker</h2>
+        <p class="device-fit">Best for: first-time users, hikers, casual carry, loaner radios, and “I just want this to work.”</p>
+        <ul>
+            <li><strong>Look at:</strong> Seeed SenseCAP T1000-E, RAK WisMesh Pocket, RAK WisMesh Tag, LILYGO T-Echo.</li>
+            <li><strong>Why:</strong> enclosed, portable, Bluetooth-friendly, and less fiddly than a bare board.</li>
+            <li><strong>Tradeoff:</strong> small antennas and indoor pockets limit range. Clip it high on a pack when testing.</li>
+        </ul>
+    </article>
+
+    <article class="device-card reveal">
+        <span class="card-index">02 / Best Value</span>
+        <h2>Budget starter board</h2>
+        <p class="device-fit">Best for: learning, desk testing, experimenting, or building a cheap second node.</p>
+        <ul>
+            <li><strong>Look at:</strong> Heltec LoRa 32 V4/V3, Heltec Wireless Tracker, LILYGO LoRa T3-S3.</li>
+            <li><strong>Why:</strong> low cost, easy to flash, common in the Meshtastic community.</li>
+            <li><strong>Tradeoff:</strong> plan on a case, battery, better antenna, and more hands-on setup.</li>
+        </ul>
+    </article>
+
+    <article class="device-card reveal">
+        <span class="card-index">03 / Most Useful</span>
+        <h2>Home or rooftop node</h2>
+        <p class="device-fit">Best for: filling neighborhood gaps from a window, attic, mast, shop, or roofline.</p>
+        <ul>
+            <li><strong>Look at:</strong> RAK WisBlock Starter Kit, Heltec Mesh Node T114, Seeed Wio Tracker L1.</li>
+            <li><strong>Why:</strong> these are sensible foundations for always-on nodes with better antennas.</li>
+            <li><strong>Tradeoff:</strong> height, weatherproofing, feedline loss, and power are the real project.</li>
+        </ul>
+    </article>
+
+    <article class="device-card reveal">
+        <span class="card-index">04 / Coverage Builder</span>
+        <h2>Solar relay</h2>
+        <p class="device-fit">Best for: hilltops, sheds, barns, remote sites, and places that can hear multiple towns.</p>
+        <ul>
+            <li><strong>Look at:</strong> RAK WisMesh Repeater, RAK WisMesh Repeater Mini, Seeed SenseCAP Solar Node, RAK4631/WisBlock custom builds.</li>
+            <li><strong>Why:</strong> low-power radios plus real battery capacity make winter survival more realistic.</li>
+            <li><strong>Tradeoff:</strong> Montana cold, snow cover, and short winter days mean you should oversize power.</li>
+        </ul>
+    </article>
+
+    <article class="device-card reveal">
+        <span class="card-index">05 / Vehicle</span>
+        <h2>Truck or mobile node</h2>
+        <p class="device-fit">Best for: range testing, road trips, events, and moving coverage around Billings.</p>
+        <ul>
+            <li><strong>Look at:</strong> any solid 915 MHz Meshtastic board with USB-C power and an external antenna connector.</li>
+            <li><strong>Why:</strong> a roof-mounted antenna usually matters more than the exact board.</li>
+            <li><strong>Tradeoff:</strong> keep wiring tidy, avoid heat-soaked dashboards, and do not transmit without an antenna connected.</li>
+        </ul>
+    </article>
+
+    <article class="device-card reveal">
+        <span class="card-index">06 / Standalone Messaging</span>
+        <h2>Keyboard handheld</h2>
+        <p class="device-fit">Best for: people who want to send messages without pulling out a phone.</p>
+        <ul>
+            <li><strong>Look at:</strong> LILYGO T-Deck Plus, LILYGO T-Deck Pro, T-Lora Pager-style devices.</li>
+            <li><strong>Why:</strong> screen and keyboard make the radio feel like its own communicator.</li>
+            <li><strong>Tradeoff:</strong> bulkier, more power-hungry, and usually not the best first rooftop node.</li>
+        </ul>
+    </article>
+</section>
+
+<section class="app-shell decision-strip reveal" aria-labelledby="dont-buy-title">
+    <div>
+        <p class="eyebrow">Avoid Regret</p>
+        <h2 id="dont-buy-title">What not to buy first</h2>
+    </div>
+    <div class="decision-list">
+        <p>Do not buy a non-915 MHz radio for Montana unless you know exactly why you need it.</p>
+        <p>Do not start with an old SX127x board unless it is already in your parts bin.</p>
+        <p>Do not spend all your money on the radio and ignore the antenna, enclosure, battery, and mounting location.</p>
+    </div>
+</section>
+
+<section class="app-shell kit-table-wrap reveal" aria-labelledby="starter-kits-title">
+    <h2 id="starter-kits-title">Good starter kits by goal</h2>
+    <div class="table-responsive">
+        <table class="table table-striped table-bordered align-middle kit-table">
+            <thead>
+            <tr>
+                <th>Goal</th>
+                <th>Buy This Kind Of Setup</th>
+                <th>Why It Works</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+                <td>Try Meshtastic this week</td>
+                <td>Ready-to-use pocket device with Bluetooth and battery</td>
+                <td>Fast setup, fewer parts, easy to lend to a friend for testing.</td>
+            </tr>
+            <tr>
+                <td>Help Billings coverage</td>
+                <td>Low-power board, outdoor enclosure, quality 915 MHz antenna, high mounting spot</td>
+                <td>Location and antenna height help the shared mesh more than another indoor node.</td>
+            </tr>
+            <tr>
+                <td>Build a solar relay</td>
+                <td>nRF52 radio, weatherproof box, larger battery, panel sized for winter</td>
+                <td>Low idle draw and power margin keep the node alive through bad weather.</td>
+            </tr>
+            <tr>
+                <td>Test from a vehicle</td>
+                <td>USB-powered node with external antenna connector and a mag-mount antenna</td>
+                <td>The vehicle roof gives the antenna a better view than a handheld inside the cab.</td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</section>
+
+<section class="app-shell route-rail reveal" aria-labelledby="next-device-title">
+    <div>
+        <p class="eyebrow">Next Steps</p>
+        <h2 id="next-device-title">After you pick hardware.</h2>
+    </div>
+    <div class="route-list">
+        <a asp-controller="Home" asp-action="Connect">
+            <span>Set up your first radio</span>
+            <small>Pair the app, join the community, and get on the shared mesh.</small>
+        </a>
+        <a asp-controller="Home" asp-action="RecommendedConfigurationSettings">
+            <span>Use clean settings</span>
+            <small>Recommended role, hop, and broadcast settings for MontanaMesh.</small>
+        </a>
+        <a href="https://meshtastic.org/docs/hardware/devices/" target="_blank" rel="noopener noreferrer">
+            <span>Check official hardware docs</span>
+            <small>Confirm support before ordering a specific revision or variant.</small>
+        </a>
+    </div>
+</section>

@@ -2,13 +2,36 @@
     ViewData["Title"] = "Recommended Settings";
 }
 
-<h1>Recommended Settings</h1>
-<article class="stat-card">
-    <p>These recommendations are based on field use in Montana and may evolve as the network grows.</p>
+<section class="app-shell page-hero reveal" aria-labelledby="settings-title">
+    <p class="eyebrow">Shared Air / Cleaner Traffic / LongFast</p>
+    <h1 id="settings-title">Recommended settings.</h1>
+    <p>
+        These defaults are tuned for useful MontanaMesh participation. They keep radios visible without turning the shared channel into a constant stream of low-value chatter.
+    </p>
+</section>
 
-    <h2>Device Settings</h2>
+<section class="app-shell settings-grid" aria-label="Recommended device settings">
+    <article class="setting-card reveal">
+        <span class="card-index">Role</span>
+        <h2><code>CLIENT</code> or <code>CLIENT_MUTE</code></h2>
+        <p>Use this for most personal, home, and mobile nodes. Avoid Router unless the community has planned that node as real infrastructure.</p>
+    </article>
+    <article class="setting-card reveal">
+        <span class="card-index">Node Info</span>
+        <h2><code>10800</code> seconds</h2>
+        <p>Broadcast node info every 3 hours. This keeps metadata fresh while reducing repeated traffic.</p>
+    </article>
+    <article class="setting-card reveal">
+        <span class="card-index">Hop Limit</span>
+        <h2><code>5</code></h2>
+        <p>Avoid going higher than <code>6</code>. More hops can sound helpful, but they can also multiply congestion.</p>
+    </article>
+</section>
+
+<section class="app-shell kit-table-wrap reveal" aria-labelledby="settings-table-title">
+    <h2 id="settings-table-title">Settings table</h2>
     <div class="table-responsive">
-        <table class="table table-striped table-bordered align-middle">
+        <table class="table table-striped table-bordered align-middle kit-table">
             <thead>
             <tr>
                 <th>Setting</th>
@@ -35,8 +58,13 @@
             </tbody>
         </table>
     </div>
+</section>
 
-    <h2>CLI Examples</h2>
+<section class="app-shell code-panel reveal" aria-labelledby="cli-title">
+    <div>
+        <p class="eyebrow">CLI Examples</p>
+        <h2 id="cli-title">Apply the basics</h2>
+    </div>
     <pre><code>meshtastic \
   --set device.role CLIENT \
   --set device.node_info_broadcast_secs 10800
@@ -45,4 +73,21 @@ meshtastic \
   --set lora.hop_limit 5 \
   --set lora.ignore_mqtt true \
   --set lora.config_ok_to_mqtt true</code></pre>
-</article>
+</section>
+
+<section class="app-shell route-rail reveal" aria-labelledby="settings-next-title">
+    <div>
+        <p class="eyebrow">Need Context?</p>
+        <h2 id="settings-next-title">Set up with intent.</h2>
+    </div>
+    <div class="route-list">
+        <a asp-controller="Home" asp-action="DeviceGuide">
+            <span>Choose hardware</span>
+            <small>Match the device to the role before tuning settings.</small>
+        </a>
+        <a asp-controller="Home" asp-action="Connect">
+            <span>Connect your radio</span>
+            <small>Install the app, pair the device, and run a first test.</small>
+        </a>
+    </div>
+</section>

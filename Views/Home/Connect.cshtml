@@ -2,33 +2,77 @@
     ViewData["Title"] = "How to Connect";
 }
 
-<h1>How to Connect</h1>
+<section class="app-shell page-hero reveal" aria-labelledby="connect-title">
+    <p class="eyebrow">First Radio / Local Mesh / Discord</p>
+    <h1 id="connect-title">Get on the mesh.</h1>
+    <p>
+        Start with a supported 915 MHz radio, pair it with the Meshtastic app, and use the MontanaMesh recommendations so your first node helps the network instead of adding noise.
+    </p>
+</section>
 
-<article class="stat-card">
-    <h2>Join the Community</h2>
-    <p>Beyond the Meshtastic network, we're most active in our <a href="https://discord.gg/SKmsDCraTV" target="_blank" rel="noopener noreferrer">Discord server</a>.</p>
+<section class="app-shell step-timeline" aria-label="Connection steps">
+    <article class="step-card reveal">
+        <span class="card-index">01</span>
+        <h2>Join the community</h2>
+        <p>Most local coordination happens in the Montana Mesh Discord. It is the best place to ask what people can hear, compare devices, and plan coverage tests.</p>
+        <a class="btn btn-primary signal-button" href="https://discord.gg/SKmsDCraTV" target="_blank" rel="noopener noreferrer">Join Discord</a>
+    </article>
 
-    <h2>Get a Meshtastic Radio</h2>
-    <ul>
-        <li><strong>DIY:</strong> Build your own for around $35. Check the <a href="https://meshtastic.org/docs/hardware/" target="_blank" rel="noopener noreferrer">official supported hardware</a> page for guidance.</li>
-        <li><strong>Ready-to-go:</strong> Consider the <a href="https://meshtastic.org/docs/hardware/devices/seeed-studio/sensecap/card-tracker/" target="_blank" rel="noopener noreferrer">Seeed Studio SenseCAP Card Tracker</a>, an excellent option for quickly starting with Meshtastic, needing minimal setup.</li>
-        <li><strong>Pre-built:</strong> Battery-powered radios with 3D-printed cases are available for $50-$100 on Etsy or eBay.</li>
-        <li><strong>Outdoor Setup:</strong> A pre-built solar-powered node ($100-$200) is ideal if you can mount it high outdoors, or you can construct your own.</li>
-    </ul>
+    <article class="step-card reveal">
+        <span class="card-index">02</span>
+        <h2>Pick a radio</h2>
+        <p>Match the device to the job: pocket carry, vehicle testing, window node, rooftop node, or solar relay.</p>
+        <ul>
+            <li><strong>Beginner:</strong> ready-to-use pocket radio or tracker.</li>
+            <li><strong>Builder:</strong> Heltec, RAK, Seeed, or LILYGO board plus case, battery, and antenna.</li>
+            <li><strong>Coverage:</strong> outdoor-ready low-power node mounted high.</li>
+        </ul>
+        <a class="text-link" asp-controller="Home" asp-action="DeviceGuide">Open the device guide</a>
+    </article>
 
-    <h2>Set Up the Meshtastic App</h2>
-    <ul>
-        <li>Download the official Meshtastic app for <a href="https://play.google.com/store/apps/details?id=com.geeksville.mesh" target="_blank" rel="noopener noreferrer">Android</a> or <a href="https://apps.apple.com/us/app/meshtastic/id1586432531" target="_blank" rel="noopener noreferrer">iOS</a>.</li>
-        <li>Pair your radio to your smartphone via Bluetooth.</li>
-        <li>Open the app and start chatting.</li>
-    </ul>
+    <article class="step-card reveal">
+        <span class="card-index">03</span>
+        <h2>Install the app</h2>
+        <p>Use the official Meshtastic app, then pair by Bluetooth or USB depending on your device.</p>
+        <div class="link-pair">
+            <a href="https://play.google.com/store/apps/details?id=com.geeksville.mesh" target="_blank" rel="noopener noreferrer">Android app</a>
+            <a href="https://apps.apple.com/us/app/meshtastic/id1586432531" target="_blank" rel="noopener noreferrer">iOS app</a>
+        </div>
+    </article>
 
-    <h2>Best Practices</h2>
-    <p>Recommended Settings:</p>
-    <ul>
-        <li><strong>MQTT:</strong> Disabled or limited use; follow etiquette below.</li>
-        <li><strong>Role:</strong> Client (avoid Router).</li>
-        <li><strong>Hop Count:</strong> 3 hops recommended.</li>
-        <li><strong>Broadcast Interval:</strong> Node Info and Device Metrics every 4-6 hours.</li>
-    </ul>
-</article>
+    <article class="step-card reveal">
+        <span class="card-index">04</span>
+        <h2>Use clean settings</h2>
+        <p>Set a useful node name, keep broadcast intervals reasonable, avoid unnecessary Router roles, and follow the local LongFast guidance.</p>
+        <a class="text-link" asp-controller="Home" asp-action="RecommendedConfigurationSettings">Review recommended settings</a>
+    </article>
+</section>
+
+<section class="app-shell decision-strip reveal" aria-labelledby="connect-check-title">
+    <div>
+        <p class="eyebrow">First Test</p>
+        <h2 id="connect-check-title">Can anyone hear you?</h2>
+    </div>
+    <div class="decision-list">
+        <p>Put the radio near a window or outside with a clear view of the sky and nearby terrain.</p>
+        <p>Send a short test message and watch for replies, traceroutes, or new nodes in the app.</p>
+        <p>Check the live map, then ask in Discord if you are not seeing local traffic yet.</p>
+    </div>
+</section>
+
+<section class="app-shell route-rail reveal" aria-labelledby="connect-next-title">
+    <div>
+        <p class="eyebrow">Build From Here</p>
+        <h2 id="connect-next-title">Make your node more useful.</h2>
+    </div>
+    <div class="route-list">
+        <a asp-controller="Home" asp-action="HostNode">
+            <span>Host a node</span>
+            <small>Use a better location to improve shared MontanaMesh coverage.</small>
+        </a>
+        <a href="https://meshmonitor.montanamesh.com" target="_blank" rel="noopener noreferrer">
+            <span>Open the live map</span>
+            <small>See nearby nodes and current network activity.</small>
+        </a>
+    </div>
+</section>

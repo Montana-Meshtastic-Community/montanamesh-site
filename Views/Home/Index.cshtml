@@ -96,6 +96,10 @@
             <span>Get connected</span>
             <small>Hardware, app setup, and first radio guidance.</small>
         </a>
+        <a asp-controller="Home" asp-action="HostNode">
+            <span>Host a node</span>
+            <small>Use a roof, window, shop, or hilltop to improve local coverage.</small>
+        </a>
         <a asp-controller="Home" asp-action="RecommendedConfigurationSettings">
             <span>Configure cleanly</span>
             <small>Recommended settings that keep the shared channel usable.</small>
@@ -104,6 +108,39 @@
             <span>Use the network</span>
             <small>Maps, docs, dashboards, and regional groups.</small>
         </a>
+    </div>
+</section>
+
+<section class="app-shell faq-section reveal" aria-labelledby="faq-title">
+    <div class="faq-heading">
+        <p class="eyebrow">FAQ</p>
+        <h2 id="faq-title">Common first questions</h2>
+    </div>
+    <div class="faq-grid">
+        <article>
+            <h3>Do I need a license?</h3>
+            <p>No amateur radio license is required for normal Meshtastic use on the US 915 MHz ISM band, as long as you use legal hardware and settings.</p>
+        </article>
+        <article>
+            <h3>Does it work without cell service?</h3>
+            <p>Yes. Radios talk over LoRa directly and relay through nearby nodes. Your phone is mostly the screen and keyboard.</p>
+        </article>
+        <article>
+            <h3>How far will it reach?</h3>
+            <p>Range depends on terrain, antenna height, buildings, and line of sight. A hilltop or rooftop can hear much farther than a radio in a pocket.</p>
+        </article>
+        <article>
+            <h3>Can I hide my location?</h3>
+            <p>Yes. Location sharing is configurable. For public fixed nodes, share only what you are comfortable publishing.</p>
+        </article>
+        <article>
+            <h3>What channel should I use?</h3>
+            <p>Start with the local LongFast setup and the MontanaMesh recommended settings so your radio plays nicely with the shared mesh.</p>
+        </article>
+        <article>
+            <h3>Where do I ask for help?</h3>
+            <p>Join the Montana Mesh Discord. It is the best place to compare hardware, test coverage, and coordinate useful node locations.</p>
+        </article>
     </div>
 </section>
 

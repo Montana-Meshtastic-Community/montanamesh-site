@@ -2,49 +2,81 @@
     ViewData["Title"] = "Hosting Setup";
 }
 
-<h1>Hosting Setup</h1>
-
-<article class="stat-card">
+<section class="app-shell page-hero reveal" aria-labelledby="setup-title">
+    <p class="eyebrow">Open Stack / Public Services / Local Ingress</p>
+    <h1 id="setup-title">How MontanaMesh runs.</h1>
     <p>
-        Montana Meshtastic Community strives to be transparent and open source to the best of its ability.
-        Here is what is used to run our backend to support all this.
+        The public website, dashboards, MQTT broker, and ingestion tools run as a small containerized stack with private management paths and public community-facing endpoints.
     </p>
+</section>
 
-    <ul>
-        <li>
-            Fedora 42 VPS at
-            <a href="https://www.racknerd.com/" target="_blank" rel="noopener noreferrer">RackNerd</a>
-            <ul>
-                <li>
-                    Tailscale - private mesh VPN used for secure remote administration and service access.
-                </li>
-                <li>
-                    Podman
-                    <ul>
-                        <li>Portainer - GUI management interface for container operations.</li>
-                        <li>ASP.Net - This Website</li>
-                        <li>MQTT - Mosquitto</li>
-                        <li>PotatoMesh Web - backend ingestion service and map/API companion.</li>
-                        <li>
-                            <a href="https://meshmonitor.montanamesh.com" target="_blank" rel="noopener noreferrer">MeshMonitor</a>
-                        </li>
-                    </ul>
-                </li>
-            </ul>
-        </li>
-        <li>
-            Wormhole ingress node - Arch Linux Dell OptiPlex
-            <ul>
-                <li>
-                    Tailscale - private link back to the MontanaMesh VPS for ingress and MQTT bridge traffic.
-                </li>
-                <li>
-                    Podman
-                    <ul>
-                        <li>PotatoMesh Ingress - reads the attached Meshtastic radio and forwards node, position, telemetry, and message data to PotatoMesh Web.</li>
-                    </ul>
-                </li>
-            </ul>
-        </li>
-    </ul>
-</article>
+<section class="app-shell platform-grid" aria-label="MontanaMesh hosting stack">
+    <article class="platform-card reveal">
+        <span class="card-index">Public VPS</span>
+        <h2>Fedora 42 at RackNerd</h2>
+        <p>The public stack runs from a Fedora VPS with Podman services behind Caddy.</p>
+        <ul>
+            <li><strong>Caddy:</strong> TLS and public routing.</li>
+            <li><strong>ASP.NET Core:</strong> this website.</li>
+            <li><strong>Mosquitto:</strong> MQTT broker for Meshtastic traffic.</li>
+            <li><strong>MeshMonitor:</strong> public node map and dashboard.</li>
+            <li><strong>PotatoMesh Web:</strong> ingestion API and map companion.</li>
+            <li><strong>Portainer:</strong> private container management.</li>
+        </ul>
+        <a class="text-link" href="https://www.racknerd.com/" target="_blank" rel="noopener noreferrer">RackNerd</a>
+    </article>
+
+    <article class="platform-card reveal">
+        <span class="card-index">Private Link</span>
+        <h2>Tailscale management</h2>
+        <p>Tailscale keeps operator-only services off the public internet while still allowing remote administration and monitoring.</p>
+        <ul>
+            <li>Private service dashboards.</li>
+            <li>Host-to-host ingress paths.</li>
+            <li>Remote maintenance without exposing admin ports.</li>
+        </ul>
+    </article>
+
+    <article class="platform-card reveal">
+        <span class="card-index">Local Ingress</span>
+        <h2>Wormhole radio bridge</h2>
+        <p>The Wormhole host connects local radio hardware back to the public services over the private link.</p>
+        <ul>
+            <li><strong>Host:</strong> Dell OptiPlex class machine.</li>
+            <li><strong>Runtime:</strong> Podman user services.</li>
+            <li><strong>Work:</strong> forwards node, position, telemetry, and message data into PotatoMesh.</li>
+        </ul>
+    </article>
+</section>
+
+<section class="app-shell kit-table-wrap reveal" aria-labelledby="public-services-title">
+    <h2 id="public-services-title">Public services</h2>
+    <div class="table-responsive">
+        <table class="table table-striped table-bordered align-middle kit-table">
+            <thead>
+            <tr>
+                <th>Service</th>
+                <th>Purpose</th>
+                <th>Public Endpoint</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+                <td>Website</td>
+                <td>Community information, onboarding, and resources.</td>
+                <td><a href="https://montanamesh.com" target="_blank" rel="noopener noreferrer">montanamesh.com</a></td>
+            </tr>
+            <tr>
+                <td>MeshMonitor</td>
+                <td>Live node map and dashboard.</td>
+                <td><a href="https://meshmonitor.montanamesh.com" target="_blank" rel="noopener noreferrer">meshmonitor.montanamesh.com</a></td>
+            </tr>
+            <tr>
+                <td>PotatoMesh</td>
+                <td>Ingestion service and mesh data companion.</td>
+                <td><a href="https://potatomesh.montanamesh.com" target="_blank" rel="noopener noreferrer">potatomesh.montanamesh.com</a></td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</section>

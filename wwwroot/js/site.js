@@ -9,7 +9,7 @@
   function applyTheme(theme) {
     root.setAttribute("data-theme", theme);
     if (toggleIcon) {
-      toggleIcon.textContent = theme === "dark" ? "L" : "D";
+      toggleIcon.textContent = theme === "dark" ? "☀" : "☾";
     }
     if (toggle) {
       toggle.setAttribute("aria-label", theme === "dark" ? "Switch to light theme" : "Switch to dark theme");

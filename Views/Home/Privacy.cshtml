@@ -1,6 +1,41 @@
-﻿@{
-    ViewData["Title"] = "Privacy Policy";
+@{
+    ViewData["Title"] = "Privacy";
 }
-<h1>@ViewData["Title"]</h1>
 
-<p>Use this page to detail your site's privacy policy.</p>
+<section class="app-shell page-hero reveal" aria-labelledby="privacy-title">
+    <p class="eyebrow">Website / Radio / Public Maps</p>
+    <h1 id="privacy-title">Privacy.</h1>
+    <p>
+        MontanaMesh is a public community project. The website is designed to be simple, but radio networks and maps can expose information that operators should understand before sharing it.
+    </p>
+</section>
+
+<section class="app-shell resource-grid compact" aria-label="Privacy notes">
+    <article class="resource-card reveal">
+        <span class="card-index">Website</span>
+        <h2>Site data</h2>
+        <p>This site does not need personal accounts for normal browsing. Public web servers may still create operational access logs for security and reliability.</p>
+    </article>
+    <article class="resource-card reveal">
+        <span class="card-index">Radio</span>
+        <h2>Mesh traffic</h2>
+        <p>Meshtastic traffic can be heard by other radios on the same mesh. Avoid sending private, sensitive, or emergency-critical information as if it were guaranteed confidential.</p>
+    </article>
+    <article class="resource-card reveal">
+        <span class="card-index">Location</span>
+        <h2>Position sharing</h2>
+        <p>Only share precise device positions when you are comfortable with them appearing to other operators or public dashboards.</p>
+    </article>
+</section>
+
+<section class="app-shell decision-strip reveal" aria-labelledby="privacy-practice-title">
+    <div>
+        <p class="eyebrow">Good Practice</p>
+        <h2 id="privacy-practice-title">Share deliberately.</h2>
+    </div>
+    <div class="decision-list">
+        <p>Use fixed or approximate coordinates for public infrastructure nodes when that is enough.</p>
+        <p>Do not publish private site access details, credentials, or exact home information in public channels.</p>
+        <p>Ask in Discord if you are unsure how visible a setting will be before enabling it.</p>
+    </div>
+</section>

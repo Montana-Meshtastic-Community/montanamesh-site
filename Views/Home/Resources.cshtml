@@ -2,13 +2,55 @@
     ViewData["Title"] = "Resources";
 }
 
-<h1>Resources</h1>
-<p>Useful docs, tools, and channels for Montana Meshtastic operators.</p>
+<section class="app-shell page-hero reveal" aria-labelledby="resources-title">
+    <p class="eyebrow">Docs / Maps / Community</p>
+    <h1 id="resources-title">Resources.</h1>
+    <p>
+        Useful links for Montana Meshtastic operators, from official documentation to local dashboards and regional mesh groups.
+    </p>
+</section>
 
-<ul>
-    <li><a href="https://meshtastic.org/docs/" target="_blank" rel="noopener noreferrer">Meshtastic Official Documentation</a></li>
-    <li><a href="https://discord.gg/SKmsDCraTV" target="_blank" rel="noopener noreferrer">Montana Mesh Discord</a></li>
-    <li><a href="https://meshmonitor.montanamesh.com" target="_blank" rel="noopener noreferrer">Montana Mesh Node Map and Dashboard</a></li>
-    <li><a asp-controller="Home" asp-action="OtherMeshNetworks">Other Mesh Networks</a></li>
-    <li><a href="https://meshtastic.org/docs/hardware/" target="_blank" rel="noopener noreferrer">Supported Hardware List</a></li>
-</ul>
+<section class="app-shell resource-grid" aria-label="MontanaMesh resources">
+    <a class="resource-card reveal" href="https://meshtastic.org/docs/" target="_blank" rel="noopener noreferrer">
+        <span class="card-index">Docs</span>
+        <h2>Official Meshtastic Documentation</h2>
+        <p>Firmware, apps, configuration, hardware support, and deeper technical references.</p>
+    </a>
+    <a class="resource-card reveal" href="https://discord.gg/SKmsDCraTV" target="_blank" rel="noopener noreferrer">
+        <span class="card-index">Community</span>
+        <h2>Montana Mesh Discord</h2>
+        <p>Ask questions, compare coverage, plan tests, and coordinate node locations.</p>
+    </a>
+    <a class="resource-card reveal" href="https://meshmonitor.montanamesh.com" target="_blank" rel="noopener noreferrer">
+        <span class="card-index">Map</span>
+        <h2>Node Map and Dashboard</h2>
+        <p>Check live network activity and nearby nodes.</p>
+    </a>
+    <a class="resource-card reveal" asp-controller="Home" asp-action="DeviceGuide">
+        <span class="card-index">Hardware</span>
+        <h2>MontanaMesh Device Guide</h2>
+        <p>Pick a radio for pocket carry, vehicle testing, rooftop coverage, or solar relay use.</p>
+    </a>
+    <a class="resource-card reveal" asp-controller="Home" asp-action="HostNode">
+        <span class="card-index">Coverage</span>
+        <h2>Host a MontanaMesh Node</h2>
+        <p>Use a roof, window, shop, hill, or remote site to improve the shared network.</p>
+    </a>
+    <a class="resource-card reveal" asp-controller="Home" asp-action="OtherMeshNetworks">
+        <span class="card-index">Regional</span>
+        <h2>Other Mesh Networks</h2>
+        <p>Find nearby Montana groups and neighboring mesh communities.</p>
+    </a>
+</section>
+
+<section class="app-shell decision-strip reveal" aria-labelledby="resources-extra-title">
+    <div>
+        <p class="eyebrow">Reference</p>
+        <h2 id="resources-extra-title">Before ordering hardware.</h2>
+    </div>
+    <div class="decision-list">
+        <p>Confirm the device is supported by current Meshtastic firmware.</p>
+        <p>For Montana, choose the 915 MHz variant unless you have a specific technical reason not to.</p>
+        <p>Budget for the antenna, enclosure, battery, cable, and mounting hardware too.</p>
+    </div>
+</section>

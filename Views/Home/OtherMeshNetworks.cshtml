@@ -2,10 +2,40 @@
     ViewData["Title"] = "Other Mesh Networks";
 }
 
-<h1>Other Mesh Networks</h1>
-<p>Nearby Montana Meshtastic groups and regional mesh communities.</p>
+<section class="app-shell page-hero reveal" aria-labelledby="other-networks-title">
+    <p class="eyebrow">Montana / Neighboring Communities</p>
+    <h1 id="other-networks-title">Other mesh networks.</h1>
+    <p>
+        MontanaMesh is part of a larger radio community. These nearby groups are useful for learning, regional coordination, and understanding how other places are solving coverage.
+    </p>
+</section>
 
-<ul>
-    <li><a href="https://ravallimesh.org/" target="_blank" rel="noopener noreferrer">Ravalli Mesh</a> - Hamilton, MT</li>
-    <li><a href="https://fmn-mt.com/" target="_blank" rel="noopener noreferrer">Flathead Mesh Network</a> - Flathead, MT</li>
-</ul>
+<section class="app-shell resource-grid compact" aria-label="Regional mesh networks">
+    <a class="resource-card reveal" href="https://ravallimesh.org/" target="_blank" rel="noopener noreferrer">
+        <span class="card-index">Hamilton, MT</span>
+        <h2>Ravalli Mesh</h2>
+        <p>Regional Meshtastic activity in the Bitterroot Valley area.</p>
+    </a>
+    <a class="resource-card reveal" href="https://fmn-mt.com/" target="_blank" rel="noopener noreferrer">
+        <span class="card-index">Flathead, MT</span>
+        <h2>Flathead Mesh Network</h2>
+        <p>Mesh community and resources for the Flathead area.</p>
+    </a>
+</section>
+
+<section class="app-shell route-rail reveal" aria-labelledby="regional-next-title">
+    <div>
+        <p class="eyebrow">Local First</p>
+        <h2 id="regional-next-title">Build your own area.</h2>
+    </div>
+    <div class="route-list">
+        <a asp-controller="Home" asp-action="HostNode">
+            <span>Host a node</span>
+            <small>Turn a good Montana location into useful shared coverage.</small>
+        </a>
+        <a asp-controller="Home" asp-action="Resources">
+            <span>Back to resources</span>
+            <small>Return to maps, docs, local links, and setup guides.</small>
+        </a>
+    </div>
+</section>
