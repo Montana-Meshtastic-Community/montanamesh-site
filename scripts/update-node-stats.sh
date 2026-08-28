@@ -52,6 +52,7 @@ from __future__ import annotations
 import json
 import os
 import re
+import sqlite3
 import ssl
 import time
 from datetime import datetime
@@ -82,6 +83,8 @@ PASSWORD = os.environ.get("MQTT_STATS_PASSWORD") or os.environ.get("MQTT_PASSWOR
 CLIENT_ID = os.environ.get("MQTT_STATS_CLIENT_ID", f"montanamesh-node-stats-{os.getpid()}")
 SAMPLE_SECONDS = float(os.environ.get("MQTT_STATS_SAMPLE_SECONDS", "60"))
 CONNECT_TIMEOUT = float(os.environ.get("MQTT_STATS_CONNECT_TIMEOUT_SECONDS", "15"))
+MESHMONITOR_DB_PATH_RAW = os.environ.get("MESHMONITOR_DB_PATH", "").strip()
+MESHMONITOR_DB_PATH = Path(MESHMONITOR_DB_PATH_RAW).expanduser() if MESHMONITOR_DB_PATH_RAW else None
 
 
 def env_bool(name: str, default: bool = False) -> bool:
@@ -265,6 +268,50 @@ def write_json_atomic(path: Path, tmp_path: Path, payload: dict[str, object]) ->
     tmp_path.replace(path)
 
 
+def read_meshmonitor_node_counts(now: int) -> dict[str, int] | None:
+    if MESHMONITOR_DB_PATH is None or not MESHMONITOR_DB_PATH.exists():
+        return None
+
+    try:
+        connection = sqlite3.connect(f"file:{MESHMONITOR_DB_PATH}?mode=ro", uri=True, timeout=5)
+        connection.row_factory = sqlite3.Row
+    except sqlite3.Error as exc:
+        print(f"could not open MeshMonitor DB at {MESHMONITOR_DB_PATH}: {exc}", flush=True)
+        return None
+
+    node_key = "COALESCE(NULLIF(nodeId, ''), printf('!%08x', nodeNum & 4294967295))"
+    try:
+        table_exists = connection.execute(
+            "SELECT 1 FROM sqlite_master WHERE type = 'table' AND name = 'nodes'"
+        ).fetchone()
+        if not table_exists:
+            return None
+
+        counts = {
+            "totalNodes": connection.execute(
+                f"SELECT COUNT(DISTINCT {node_key}) AS count FROM nodes WHERE nodeNum IS NOT NULL OR NULLIF(nodeId, '') IS NOT NULL"
+            ).fetchone()["count"],
+            "nodes30Min": connection.execute(
+                f"SELECT COUNT(DISTINCT {node_key}) AS count FROM nodes WHERE lastHeard >= ?",
+                (now - 1800,),
+            ).fetchone()["count"],
+            "nodes2Hr": connection.execute(
+                f"SELECT COUNT(DISTINCT {node_key}) AS count FROM nodes WHERE lastHeard >= ?",
+                (now - 7200,),
+            ).fetchone()["count"],
+            "nodes24Hr": connection.execute(
+                f"SELECT COUNT(DISTINCT {node_key}) AS count FROM nodes WHERE lastHeard >= ?",
+                (now - 86400,),
+            ).fetchone()["count"],
+        }
+        return {key: int(value or 0) for key, value in counts.items()}
+    except sqlite3.Error as exc:
+        print(f"could not read MeshMonitor node counts from {MESHMONITOR_DB_PATH}: {exc}", flush=True)
+        return None
+    finally:
+        connection.close()
+
+
 now = int(time.time())
 node_database = load_node_database(now)
 seen_this_run: set[str] = set()
@@ -324,21 +371,32 @@ client.loop_stop()
 now = int(time.time())
 updated = format_utc(now)
 last_seen_values = [record["lastSeen"] for record in node_database.values()]
+meshmonitor_counts = read_meshmonitor_node_counts(now)
+
+fallback_counts = {
+    "totalNodes": len(node_database),
+    "nodes30Min": sum(1 for seen in last_seen_values if seen >= now - 1800),
+    "nodes2Hr": sum(1 for seen in last_seen_values if seen >= now - 7200),
+    "nodes24Hr": sum(1 for seen in last_seen_values if seen >= now - 86400),
+}
+counts = meshmonitor_counts or fallback_counts
+source = "meshmonitor-db" if meshmonitor_counts is not None else "mqtt"
 
 stats = {
-    "totalNodes": str(len(node_database)),
-    "nodes30Min": str(sum(1 for seen in last_seen_values if seen >= now - 1800)),
-    "nodes2Hr": str(sum(1 for seen in last_seen_values if seen >= now - 7200)),
-    "nodes24Hr": str(sum(1 for seen in last_seen_values if seen >= now - 86400)),
+    "totalNodes": str(counts["totalNodes"]),
+    "nodes30Min": str(counts["nodes30Min"]),
+    "nodes2Hr": str(counts["nodes2Hr"]),
+    "nodes24Hr": str(counts["nodes24Hr"]),
     "updatedAtUtc": updated,
 }
 database = {
     "updatedAtUtc": updated,
-    "source": "mqtt",
+    "source": source,
     "broker": f"{host}:{port}",
     "topic": TOPIC,
     "sampleSeconds": SAMPLE_SECONDS,
     "seenThisRun": len(seen_this_run),
+    "meshmonitorDbPath": str(MESHMONITOR_DB_PATH) if meshmonitor_counts is not None else None,
     "totalNodes": len(node_database),
     "nodes": {
         node_id: {
@@ -353,7 +411,7 @@ write_json_atomic(DATABASE_FILE, TMP_DATABASE, database)
 write_json_atomic(STATS_FILE, TMP_STATS, stats)
 print(
     f"wrote {STATS_FILE} from MQTT topic {TOPIC}: "
-    f"{stats['totalNodes']} total, {stats['nodes30Min']} active in 30m, {len(seen_this_run)} seen this run",
+    f"{stats['totalNodes']} total ({source}), {stats['nodes30Min']} active in 30m, {len(seen_this_run)} seen this run",
     flush=True,
 )
 PY

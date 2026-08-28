@@ -4,7 +4,7 @@ This folder contains helper scripts for the MontanaMesh website.
 
 ## Scripts
 
-- `update-node-stats.sh` samples MontanaMesh MQTT traffic, extracts Meshtastic node IDs from JSON payloads, protobuf `ServiceEnvelope` packets, or MQTT topic suffixes, updates `data/node-database.json` with unique node IDs plus first-seen and last-seen timestamps, and writes `data/node-stats.json`. `totalNodes` is the count of unique IDs in the node database; the 30-minute, 2-hour, and 24-hour counts are calculated from last-seen timestamps. Legacy `node-observations.json` and `node-history.tsv` are read as migration/seed inputs when present.
+- `update-node-stats.sh` samples MontanaMesh MQTT traffic, extracts Meshtastic node IDs from JSON payloads, protobuf `ServiceEnvelope` packets, or MQTT topic suffixes, updates `data/node-database.json` with unique node IDs plus first-seen and last-seen timestamps, and writes `data/node-stats.json`. When `MESHMONITOR_DB_PATH` points at a readable MeshMonitor SQLite DB, `totalNodes` and the 30-minute, 2-hour, and 24-hour counts are calculated from distinct node IDs in MeshMonitor's `nodes` table. Otherwise, counts fall back to the generated MQTT node database. Legacy `node-observations.json` and `node-history.tsv` are read as migration/seed inputs when present.
 
 ## Configuration
 
@@ -16,6 +16,7 @@ The script can read environment values from the parent `.env` file and supports:
 - `MQTT_STATS_TLS`, default `false`
 - `MQTT_STATS_SAMPLE_SECONDS`, default `60`
 - `MQTT_STATS_CONNECT_TIMEOUT_SECONDS`, default `15`
+- `MESHMONITOR_DB_PATH`, optional readable MeshMonitor SQLite DB path for DB-backed counts
 - `NODE_STATS_DATA_DIR`, default `montanamesh-site/data`
 - `NODE_STATS_DATABASE_FILE`, default `montanamesh-site/data/node-database.json`
 - `NODE_STATS_ENV_FILE`, default parent repo `.env`

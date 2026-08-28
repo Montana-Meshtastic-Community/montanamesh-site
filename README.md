@@ -7,7 +7,7 @@ ASP.NET Core (`net8.0`) website for the Montana Meshtastic Community.
 - Serves the public website pages (`/`, `/connect`, `/setup`, `/recommended-configuration-settings`, `/resources`).
 - Exposes a lightweight stats API at `/api/nodes/stats`.
 - Reads node stats from `data/node-stats.json`.
-- Includes a helper script (`scripts/update-node-stats.sh`) that builds `data/node-stats.json` from MontanaMesh MQTT traffic.
+- Includes a helper script (`scripts/update-node-stats.sh`) that builds `data/node-stats.json` from MeshMonitor's node DB when mounted, with MontanaMesh MQTT traffic as the fallback source.
 
 ## Tech stack
 
@@ -77,15 +77,18 @@ The script uses MQTT env vars from the parent repo `.env` when available (`../.e
 - `data/node-stats.json`
 - `data/node-database.json`
 
+When `MESHMONITOR_DB_PATH` points at a readable MeshMonitor SQLite DB, `node-stats.json` uses distinct IDs from MeshMonitor's `nodes` table for `totalNodes` and the 30-minute, 2-hour, and 24-hour windows. The MQTT-derived `node-database.json` is still updated so the site has a fallback source if the MeshMonitor DB is not mounted.
+
 Relevant settings:
 
 - `MQTT_STATS_BROKER_URL` defaults to `mqtt://mqtt5:1883` in the master-control stack; standalone script fallback is `mqtt://127.0.0.1:1883`
 - `MQTT_STATS_TOPIC` defaults to `msh/US/#`
 - `MQTT_STATS_TLS` defaults to `false`
 - `MQTT_STATS_SAMPLE_SECONDS` defaults to `60`
+- `MESHMONITOR_DB_PATH` enables MeshMonitor DB-backed counts when set to a readable SQLite DB path
 - `NODE_STATS_DATA_DIR` can override the output directory
 
-In the master-control stack, the `node-stats-updater` service samples the local `mqtt5` broker over the Compose network every 5 minutes. The database keeps every unique node ID it has seen, and `totalNodes` is the size of that unique node set.
+In the master-control stack, the `node-stats-updater` service samples the local `mqtt5` broker over the Compose network every 5 minutes and mounts the MeshMonitor data volume read-only at `/meshmonitor`. Homepage counts come from `/meshmonitor/meshmonitor.db` when available; otherwise, `totalNodes` falls back to the unique node set in `data/node-database.json`.
 
 ## Screenshots
 

@@ -8,7 +8,7 @@ This folder is the ASP.NET Core MVC website for the Montana Meshtastic Community
 - Provides onboarding pages for joining the Discord, choosing hardware, and configuring Meshtastic nodes.
 - Links public map/dashboard calls to MeshMonitor.
 - Exposes `/api/nodes/stats`, which returns node-count data read from `data/node-stats.json`.
-- Includes a script that samples MontanaMesh MQTT traffic and refreshes node stats.
+- Includes a script that refreshes node stats from MeshMonitor's SQLite DB when mounted, while continuing to sample MontanaMesh MQTT traffic as the fallback source.
 - Uses an industrial signal-operations visual system with local Montana background imagery, grid textures, live telemetry panels, and responsive action rails.
 
 ## Main Routes
