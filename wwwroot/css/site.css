@@ -79,9 +79,9 @@ body {
   min-height: 100vh;
   margin: 0;
   background:
-    linear-gradient(var(--page-overlay), var(--page-overlay)),
-    radial-gradient(circle at 18% 18%, color-mix(in srgb, var(--accent) 26%, transparent), transparent 28rem),
-    radial-gradient(circle at 82% 8%, color-mix(in srgb, var(--accent-2) 24%, transparent), transparent 24rem),
+    radial-gradient(circle at 18% 8%, color-mix(in srgb, var(--accent) 18%, transparent), transparent 26rem),
+    radial-gradient(circle at 84% 16%, color-mix(in srgb, var(--accent-2) 15%, transparent), transparent 24rem),
+    linear-gradient(180deg, color-mix(in srgb, var(--surface-strong) 72%, var(--bg)) 0%, var(--bg) 34rem),
     var(--bg);
   color: var(--text);
   font-family: var(--font-ui);
@@ -97,12 +97,13 @@ body::before {
   inset: 0;
   z-index: -3;
   background-image:
-    linear-gradient(var(--page-overlay), var(--page-overlay)),
-    var(--page-image);
+    radial-gradient(ellipse at 20% 12%, color-mix(in srgb, var(--accent) 12%, transparent), transparent 34rem),
+    radial-gradient(ellipse at 88% 10%, color-mix(in srgb, var(--accent-2) 10%, transparent), transparent 28rem),
+    linear-gradient(180deg, color-mix(in srgb, var(--surface-strong) 58%, transparent), transparent 34rem);
   background-position: center;
   background-size: cover;
   background-repeat: no-repeat;
-  filter: saturate(1.05) contrast(1.05);
+  opacity: 0.92;
 }
 
 body::after {
@@ -112,11 +113,12 @@ body::after {
   z-index: -2;
   pointer-events: none;
   background-image:
-    linear-gradient(color-mix(in srgb, var(--border) 38%, transparent) 1px, transparent 1px),
-    linear-gradient(90deg, color-mix(in srgb, var(--border) 38%, transparent) 1px, transparent 1px),
-    repeating-linear-gradient(135deg, transparent 0 10px, color-mix(in srgb, var(--accent) 10%, transparent) 10px 11px);
-  background-size: 56px 56px, 56px 56px, 16px 16px;
-  mask-image: linear-gradient(to bottom, rgba(0, 0, 0, 0.88), rgba(0, 0, 0, 0.12));
+    linear-gradient(color-mix(in srgb, var(--border) 22%, transparent) 1px, transparent 1px),
+    linear-gradient(90deg, color-mix(in srgb, var(--border) 18%, transparent) 1px, transparent 1px),
+    repeating-linear-gradient(128deg, transparent 0 18px, color-mix(in srgb, var(--accent) 7%, transparent) 18px 19px);
+  background-size: 72px 72px, 72px 72px, 22px 22px;
+  mask-image: linear-gradient(to bottom, rgba(0, 0, 0, 0.16), rgba(0, 0, 0, 0.72) 22rem, rgba(0, 0, 0, 0.32));
+  opacity: 0.66;
 }
 
 body.page-billings {
@@ -353,7 +355,7 @@ button:focus-visible,
   min-height: calc(100vh - 82px);
   display: grid;
   align-items: end;
-  padding: 6.5rem 0 4rem;
+  padding: clamp(4.5rem, 8vh, 6rem) 0 clamp(2.5rem, 6vh, 4rem);
   overflow: hidden;
 }
 
@@ -362,36 +364,57 @@ button:focus-visible,
   inset: 0;
   z-index: -1;
   background:
-    linear-gradient(112deg, color-mix(in srgb, var(--bg) 96%, transparent) 0%, color-mix(in srgb, var(--bg) 78%, transparent) 42%, color-mix(in srgb, var(--bg) 30%, transparent) 100%),
-    linear-gradient(0deg, var(--bg) 0%, color-mix(in srgb, var(--bg) 72%, transparent) 18%, transparent 46%),
+    linear-gradient(104deg, color-mix(in srgb, var(--bg) 98%, transparent) 0%, color-mix(in srgb, var(--bg) 88%, transparent) 37%, color-mix(in srgb, var(--bg) 38%, transparent) 68%, color-mix(in srgb, var(--bg) 18%, transparent) 100%),
+    linear-gradient(0deg, var(--bg) 0%, color-mix(in srgb, var(--bg) 78%, transparent) 20%, transparent 54%),
+    linear-gradient(180deg, color-mix(in srgb, var(--bg) 30%, transparent) 0%, transparent 34%),
     var(--page-image);
-  background-position: center, center, 68% 42%;
-  background-size: cover;
+  background-position: center, center, center, 74% 38%;
+  background-size: cover, cover, cover, cover;
+}
+
+.hero-media {
+  border-bottom: 1px solid color-mix(in srgb, var(--border) 56%, transparent);
+}
+
+.hero-media::before {
+  content: "";
+  position: absolute;
+  inset: -12% -18% -6% 28%;
+  background:
+    repeating-radial-gradient(ellipse at 68% 44%, transparent 0 132px, color-mix(in srgb, var(--accent) 18%, transparent) 133px 135px, transparent 136px 196px),
+    repeating-radial-gradient(ellipse at 72% 46%, transparent 0 210px, color-mix(in srgb, var(--accent-2) 12%, transparent) 211px 213px, transparent 214px 286px);
+  mask-image: linear-gradient(105deg, transparent 0 10%, rgba(0, 0, 0, 0.2) 26%, rgba(0, 0, 0, 0.86) 58%, transparent 100%);
+  opacity: 0.82;
 }
 
 .hero-media::after {
   content: "";
   position: absolute;
-  right: -8vw;
-  bottom: 20%;
-  width: min(58vw, 780px);
-  height: 2px;
-  transform: rotate(-12deg);
+  right: -10vw;
+  top: clamp(5rem, 15vh, 9rem);
+  width: min(74vw, 980px);
+  height: 120px;
+  transform: rotate(-8deg);
   transform-origin: right center;
-  background: linear-gradient(90deg, transparent, color-mix(in srgb, var(--accent) 85%, transparent), transparent);
-  box-shadow: 0 0 24px color-mix(in srgb, var(--accent) 44%, transparent);
-  opacity: 0.48;
+  background:
+    linear-gradient(90deg, transparent 0%, color-mix(in srgb, var(--accent) 76%, transparent) 34%, transparent 68%),
+    linear-gradient(90deg, transparent 18%, color-mix(in srgb, var(--accent-2) 34%, transparent) 48%, transparent 78%);
+  background-size: 100% 2px, 82% 1px;
+  background-position: center 42%, right 58%;
+  background-repeat: no-repeat;
+  filter: drop-shadow(0 0 18px color-mix(in srgb, var(--accent) 42%, transparent));
+  opacity: 0.58;
 }
 
 .hero-grid {
   display: grid;
-  grid-template-columns: minmax(0, 1.05fr) minmax(320px, 0.62fr);
-  gap: clamp(1.5rem, 5vw, 5rem);
+  grid-template-columns: minmax(0, 1fr) minmax(320px, 0.58fr);
+  gap: clamp(1.5rem, 4vw, 4rem);
   align-items: end;
 }
 
 .hero-copy {
-  max-width: 790px;
+  max-width: 720px;
 }
 
 .eyebrow {
@@ -407,18 +430,18 @@ h3 {
 }
 
 h1 {
-  max-width: 13ch;
-  font-size: clamp(3rem, 8vw, 6.8rem);
-  line-height: 0.92;
+  max-width: 12ch;
+  font-size: clamp(3rem, 6.2vw, 5.45rem);
+  line-height: 0.96;
   margin: 0;
 }
 
 .hero-lede {
-  max-width: 62ch;
-  margin: 1.25rem 0 0;
+  max-width: 58ch;
+  margin: 1.05rem 0 0;
   color: var(--subtext);
-  font-size: clamp(1rem, 2vw, 1.25rem);
-  line-height: 1.7;
+  font-size: clamp(1rem, 1.5vw, 1.16rem);
+  line-height: 1.62;
 }
 
 .hero-actions {
@@ -426,7 +449,7 @@ h1 {
   flex-wrap: wrap;
   align-items: center;
   gap: 0.8rem;
-  margin-top: 2rem;
+  margin-top: 1.55rem;
 }
 
 .signal-button,
@@ -790,6 +813,45 @@ pre {
   }
 }
 
+@media (min-width: 901px) and (max-height: 820px) {
+  .hero-section {
+    padding: 4.2rem 0 2.5rem;
+  }
+
+  .hero-copy {
+    max-width: 650px;
+  }
+
+  h1 {
+    max-width: 13ch;
+    font-size: clamp(3rem, 5.2vw, 4.55rem);
+    line-height: 0.98;
+  }
+
+  .hero-lede {
+    max-width: 54ch;
+    margin-top: 0.9rem;
+    font-size: 1rem;
+    line-height: 1.5;
+  }
+
+  .hero-actions {
+    margin-top: 1.2rem;
+  }
+
+  .telemetry-panel {
+    padding: 0.85rem;
+  }
+
+  .stat-value {
+    font-size: clamp(3rem, 6vw, 4.4rem);
+  }
+
+  .panel-note {
+    line-height: 1.45;
+  }
+}
+
 @media (max-width: 900px) {
   .hero-section {
     min-height: auto;
@@ -797,15 +859,20 @@ pre {
   }
 
   .hero-media {
-    background-position: center, center, 58% 36%;
+    background-position: center, center, center, 62% 34%;
+  }
+
+  .hero-media::before {
+    inset: -8% -60% 22% 4%;
+    opacity: 0.5;
   }
 
   .hero-media::after {
-    right: -30vw;
-    bottom: 48%;
-    width: 92vw;
-    transform: rotate(-18deg);
-    opacity: 0.26;
+    right: -42vw;
+    top: 4rem;
+    width: 116vw;
+    transform: rotate(-14deg);
+    opacity: 0.22;
   }
 
   .hero-grid,

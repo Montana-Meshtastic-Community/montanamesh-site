@@ -4,7 +4,7 @@ This folder contains site-wide CSS for the MontanaMesh website.
 
 ## Current Role
 
-`site.css` controls the industrial signal-operations visual theme, design tokens, local WebP page backgrounds, map-grid texture, homepage hero, live telemetry panel, route rail, service cards, navigation styling, responsive behavior, reveal animations, focus states, and light/dark presentation used by the shared layout and public pages.
+`site.css` controls the industrial signal-operations visual theme, design tokens, local WebP hero backgrounds, abstract page map-grid texture, homepage Rimrocks signal-sweep hero background, live telemetry panel, route rail, service cards, navigation styling, responsive behavior, reveal animations, focus states, and light/dark presentation used by the shared layout and public pages.
 
 ## Documentation
 
