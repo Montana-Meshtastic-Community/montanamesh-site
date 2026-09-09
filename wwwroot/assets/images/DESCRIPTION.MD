@@ -5,6 +5,7 @@ This folder contains image assets used by the MontanaMesh website, including the
 ## Contents
 
 - `logo.png`: navbar and manifest-adjacent logo.
+- `logo.svg`: original vector logo source used when regenerating raster logo assets.
 - `favicon.png`: PNG favicon used by the shared layout.
 - `backgrounds/`: optimized local WebP page backgrounds referenced by `wwwroot/css/site.css`.
 
