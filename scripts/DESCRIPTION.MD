@@ -10,7 +10,7 @@ This folder contains helper scripts for the MontanaMesh website.
 
 The script can read environment values from the parent `.env` file and supports:
 
-- `MQTT_STATS_BROKER_URL`, default `mqtt://mqtt5:1883` in the master-control stack; standalone script fallback is `mqtt://127.0.0.1:1883`
+- `MQTT_STATS_BROKER_URL`, default `mqtt://emqx:1883` in the master-control stack; standalone script fallback is `mqtt://127.0.0.1:1883`
 - `MQTT_STATS_TOPIC`, default `msh/US/#`
 - `MQTT_STATS_USERNAME` and `MQTT_STATS_PASSWORD`, default to `MQTT_USERNAME` and `MQTT_PASSWORD` if present
 - `MQTT_STATS_TLS`, default `false`

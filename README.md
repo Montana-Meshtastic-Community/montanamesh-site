@@ -95,7 +95,7 @@ maintain `data/node-database.json` from sampled MQTT traffic, giving the site
 a fallback when that database is not available.
 
 In the production stack, `node-stats-updater` runs every five minutes. It
-samples the local Mosquitto broker over the Compose network and mounts the
+samples the local EMQX broker over the Compose network and mounts the
 MeshMonitor data volume read-only.
 
 ### Updater configuration
@@ -105,7 +105,7 @@ settings can be overridden in the environment:
 
 | Setting | Default | Description |
 | --- | --- | --- |
-| `MQTT_STATS_BROKER_URL` | `mqtt://127.0.0.1:1883` | Broker used by the standalone updater. The root stack supplies `mqtt://mqtt5:1883`. |
+| `MQTT_STATS_BROKER_URL` | `mqtt://127.0.0.1:1883` | Broker used by the standalone updater. The root stack supplies `mqtt://emqx:1883`. |
 | `MQTT_STATS_TOPIC` | `msh/US/#` | MQTT topic filter to sample. |
 | `MQTT_STATS_TLS` | `false` | Enable TLS for the MQTT connection. |
 | `MQTT_STATS_SAMPLE_SECONDS` | `60` | Length of each MQTT sampling window. |
