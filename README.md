@@ -22,7 +22,7 @@ The site serves the public MontanaMesh experience, including:
 The primary public pages are available at:
 
 `/`, `/connect`, `/devices`, `/optimal-settings`, `/host-a-node`, `/setup`,
-`/recommended-configuration-settings`, `/resources`, and `/privacy`.
+`/recommended-configuration-settings`, `/resources`, `/contact`, and `/privacy`.
 
 ## Project layout
 
@@ -133,3 +133,32 @@ This repository uses the Montana Meshtastic Community GitHub SSH remote:
 ```text
 git@github.com:Montana-Meshtastic-Community/montanamesh-site.git
 ```
+
+## Contact form
+
+`GET /contact` shows a name, reply email, and message form. `POST /contact`
+validates the input and antiforgery token, checks a honeypot, and limits each
+source IP to three attempts per ten minutes (in memory, reset on restart).
+Success appears only after the SMTP server accepts the email; failed sends keep
+the entered text. Messages are emailed, not written to the website data folder.
+The sender stays fixed and the visitor address is set as Reply-To. Delivery uses
+MailKit with explicit STARTTLS and SMTP authentication before sending. Successful
+submissions log a Message-ID for provider tracing, without logging message content
+or visitor addresses. SMTP acceptance does not confirm inbox delivery; check the
+mailbox or provider when investigating accepted but missing messages.
+
+Configure `Contact__SmtpHost`, `Contact__SmtpPort` (default `587`),
+`Contact__EnableSsl` (default `true`, SMTP STARTTLS), `Contact__SmtpUsername`,
+`Contact__SmtpPassword`, `Contact__From`, and `Contact__To` using environment
+variables or local .NET user secrets. Use a verified sender address for `From`.
+Implicit TLS on port 465 is not supported; use the provider’s STARTTLS endpoint.
+For a local test relay only, TLS can be disabled. Without host, sender, and
+recipient configuration, submission shows an unavailable message.
+
+The master-control stack maps root `.env` settings `CONTACT_SMTP_HOST`,
+`CONTACT_SMTP_PORT`, `CONTACT_ENABLE_SSL`, `CONTACT_SMTP_USERNAME`,
+`CONTACT_SMTP_PASSWORD`, `CONTACT_FROM`, and `CONTACT_TO` into these options.
+Keep passwords out of this public repository. Recreate the website container
+when changing delivery settings. The standalone Compose file requires adding
+these environment variables explicitly. Production rate limits use the source
+IP supplied by the trusted reverse proxy; keep the application behind Caddy.

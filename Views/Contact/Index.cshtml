@@ -1,0 +1,51 @@
+@model ContactViewModel
+
+<section class="app-shell page-hero" aria-labelledby="contact-title">
+    <h1 id="contact-title">Let’s talk mesh.</h1>
+    <p>Have a question, a place for a node, or an idea for MontanaMesh? Leave your info and a message, and I’ll email you back.</p>
+</section>
+
+<section class="app-shell contact-layout" aria-label="Contact MontanaMesh">
+    <div class="contact-note">
+        <h2>A person on the other end.</h2>
+        <p>You don’t need to know all the radio jargon to get in touch. Tell me what you’re trying to do and, if it helps, what part of Montana you’re in.</p>
+        <p>This is a volunteer project, so replies may take a little time.</p>
+        <a href="https://discord.gg/SKmsDCraTV" target="_blank" rel="noopener noreferrer">You can also join us on Discord</a>
+    </div>
+    <div class="contact-panel">
+        @if (TempData["ContactSent"] is true)
+        {
+            <div role="status" class="contact-success">
+                <h2>Message sent.</h2>
+                <p>Thanks for reaching out. I’ll reply to the email address you provided.</p>
+                <a asp-controller="Contact" asp-action="Index">Send another message</a>
+            </div>
+        }
+        else
+        {
+            <form asp-controller="Contact" asp-action="Send" method="post">
+                <div asp-validation-summary="All" class="contact-errors" role="alert"></div>
+                <div class="contact-field">
+                    <label asp-for="Name">Your name</label>
+                    <input asp-for="Name" autocomplete="name" maxlength="100" required />
+                </div>
+                <div class="contact-field">
+                    <label asp-for="Email">Your email</label>
+                    <input asp-for="Email" type="email" autocomplete="email" maxlength="254" required aria-describedby="email-help" />
+                    <small id="email-help">Where I should send your reply.</small>
+                </div>
+                <div class="contact-field">
+                    <label asp-for="Message">What’s on your mind?</label>
+                    <textarea asp-for="Message" rows="7" minlength="10" maxlength="5000" required aria-describedby="message-help"></textarea>
+                    <small id="message-help">10–5,000 characters. Please leave out passwords and private site access details.</small>
+                </div>
+                <div class="contact-trap" aria-hidden="true">
+                    <label asp-for="Website">Leave this field empty</label>
+                    <input asp-for="Website" tabindex="-1" autocomplete="off" />
+                </div>
+                <p class="contact-privacy">Your name, email, and message are sent to the MontanaMesh inbox so I can reply. <a asp-controller="Home" asp-action="Privacy">Privacy details</a></p>
+                <button type="submit" class="btn btn-primary">Send message</button>
+            </form>
+        }
+    </div>
+</section>

@@ -15,6 +15,7 @@ This folder is the ASP.NET Core MVC website for the Montana Meshtastic Community
 
 - `/`: homepage with Discord, map link, and live node stats.
 - `/setup`: hosting/setup transparency page describing the VPS stack and Wormhole ingress node.
+- `/contact`: validated contact form with MailKit SMTP delivery and explicit authentication, antiforgery protection, honeypot, and per-IP rate limiting; see README for host-local email settings.
 - `/connect`: user onboarding and Meshtastic app/radio guidance.
 - `/recommended-configuration-settings`: recommended Meshtastic settings.
 - `/resources`: docs, dashboard, map, and community links.

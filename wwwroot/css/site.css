@@ -1357,3 +1357,21 @@ pre {
     transform: none;
   }
 }
+
+/* Contact: a quiet form beside the community invitation. */
+.contact-layout { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.5fr); gap: clamp(2rem, 5vw, 5rem); padding-bottom: 4rem; align-items: start; }
+.contact-note { max-width: 42ch; color: var(--subtext); }
+.contact-note h2 { color: var(--text); }
+.contact-panel { background: var(--surface); border: 1px solid var(--border); border-top: 3px solid var(--accent); padding: clamp(1.25rem, 3vw, 2.5rem); }
+.contact-field { display: grid; gap: .5rem; margin-bottom: 1.5rem; }
+.contact-field label { font-weight: 700; }
+.contact-field input, .contact-field textarea { width: 100%; min-width: 0; background: var(--bg); color: var(--text); border: 1px solid var(--border); border-radius: var(--radius-sm); padding: .8rem; font: inherit; }
+.contact-field textarea { resize: vertical; }
+.contact-field input:focus-visible, .contact-field textarea:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
+.contact-field .input-validation-error { border-color: var(--danger); }
+.contact-field small, .contact-privacy { color: var(--subtext); font-size: .9rem; }
+.contact-errors { color: var(--danger); }
+.contact-errors.validation-summary-valid { display: none; }
+.contact-trap { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); }
+.contact-success h2 { color: var(--accent-2); }
+@media (max-width: 767px) { .contact-layout { grid-template-columns: 1fr; } }
