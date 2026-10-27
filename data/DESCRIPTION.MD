@@ -9,6 +9,8 @@ This folder stores runtime data consumed by the MontanaMesh website.
 - `node-observations.json`: legacy generated MQTT node last-seen state. The stats updater can migrate from it if present.
 - `node-history.tsv`: legacy historical node data if retained by local tooling or prior runs. The stats updater can seed the generated node database from it.
 
+All `node-*` files above are generated per host and gitignored, so local and production copies never conflict with Git. A fresh checkout starts without them; the website returns zero/default counts until the stats updater writes `node-stats.json`.
+
 ## How Data Is Updated
 
 `montanamesh-site/scripts/update-node-stats.sh` samples MontanaMesh MQTT traffic and records unique node IDs in `node-database.json`. When `MESHMONITOR_DB_PATH` points at a readable MeshMonitor SQLite DB, `node-stats.json` uses distinct IDs from MeshMonitor's `nodes` table for total and recently-heard windows. If that DB is unavailable, counts fall back to `node-database.json`. The updater can migrate IDs from legacy `node-observations.json` and merge IDs from `node-history.tsv`. In the root compose stack, the `node-stats-updater` container runs that script every five minutes by default.
