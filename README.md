@@ -120,7 +120,7 @@ otherwise the updater uses `MQTT_USERNAME` and `MQTT_PASSWORD`.
 This repository is a submodule of the MontanaMesh master-control workspace.
 Deploy it through that workspace rather than treating this standalone Compose
 file as the public production definition. The root stack provides Caddy,
-Mosquitto, MeshMonitor, persistent data mounts, and the scheduled updater.
+EMQX, MeshMonitor, persistent data mounts, and the scheduled updater.
 
 Before submitting a website change, build it locally and keep screenshots or
 service documentation current whenever behavior, routes, data contracts, or
