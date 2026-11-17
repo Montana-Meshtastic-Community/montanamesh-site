@@ -1,5 +1,7 @@
 @{
     ViewData["Title"] = "Montana Meshtastic Community";
+    ViewData["MetaDescription"] = "Join MontanaMesh, a volunteer Meshtastic community building practical off-grid LoRa messaging coverage around Billings and across Montana.";
+    ViewData["HeroImage"] = Url.Content("~/assets/images/backgrounds/billings-skyline-2024.webp");
 }
 
 <section class="hero-section" aria-labelledby="home-title">
@@ -12,8 +14,8 @@
                 A volunteer-built Meshtastic community connecting Billings, the Heights, Laurel, and the rest of Montana through practical LoRa radio coverage.
             </p>
             <div class="hero-actions" aria-label="Primary actions">
-                <a class="btn btn-primary signal-button" href="https://discord.gg/SKmsDCraTV" target="_blank" rel="noopener noreferrer">Join Discord</a>
-                <a class="btn btn-outline-light signal-button" href="https://meshmonitor.montanamesh.com" target="_blank" rel="noopener noreferrer">Open Live Map</a>
+                <a class="btn btn-primary signal-button" href="@CommunityLinks.Discord" target="_blank" rel="noopener noreferrer">Join Discord</a>
+                <a class="btn btn-outline-light signal-button" href="@CommunityLinks.MeshMonitor" target="_blank" rel="noopener noreferrer">Open Live Map</a>
                 <a class="text-link" asp-controller="Home" asp-action="Connect">Start with a radio</a>
             </div>
         </div>
@@ -25,23 +27,23 @@
             </div>
             <div class="primary-stat">
                 <span class="stat-label">Total Nodes</span>
-                <strong id="totalNodes" class="stat-value" aria-live="polite">Loading</strong>
+                <strong id="totalNodes" class="stat-value" data-node-stat="totalNodes">--</strong>
             </div>
             <div class="mini-stats">
                 <article>
                     <span>30 min</span>
-                    <strong id="nodes30min" aria-live="polite">--</strong>
+                    <strong id="nodes30min" data-node-stat="nodes30Min">--</strong>
                 </article>
                 <article>
                     <span>2 hr</span>
-                    <strong id="nodes2hr" aria-live="polite">--</strong>
+                    <strong id="nodes2hr" data-node-stat="nodes2Hr">--</strong>
                 </article>
                 <article>
                     <span>24 hr</span>
-                    <strong id="nodes24hr" aria-live="polite">--</strong>
+                    <strong id="nodes24hr" data-node-stat="nodes24Hr">--</strong>
                 </article>
             </div>
-            <p class="panel-note">Updated from MontanaMesh MQTT traffic. Best viewed with a radio, an antenna, and a clear bit of sky.</p>
+            <p class="panel-note" id="nodeStatsStatus" role="status">Node statistics are unavailable.</p>
         </aside>
     </div>
 </section>

@@ -18,19 +18,21 @@ public class NodesController : ControllerBase
     }
 
     [HttpGet("stats")]
+    [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
     public ActionResult<NodeStatsResponse> GetStats()
     {
         var statsFilePath = Path.Combine(_environment.ContentRootPath, "data", "node-stats.json");
-        if (!System.IO.File.Exists(statsFilePath))
-        {
-            return Ok(new NodeStatsResponse());
-        }
-
         try
         {
             var json = System.IO.File.ReadAllText(statsFilePath);
             using var doc = JsonDocument.Parse(json);
             var root = doc.RootElement;
+            if (root.ValueKind != JsonValueKind.Object)
+            {
+                throw new JsonException("The node statistics snapshot must be a JSON object.");
+            }
+
+            var source = GetValue(root, "source", "Source", "");
 
             return Ok(new NodeStatsResponse
             {
@@ -38,10 +40,15 @@ public class NodesController : ControllerBase
                 Nodes30Min = GetValue(root, "nodes30Min", "Nodes30Min", "0"),
                 Nodes2Hr = GetValue(root, "nodes2Hr", "Nodes2Hr", "0"),
                 Nodes24Hr = GetValue(root, "nodes24Hr", "Nodes24Hr", "0"),
-                UpdatedAtUtc = GetValue(root, "updatedAtUtc", "UpdatedAtUtc", "Not yet updated")
+                UpdatedAtUtc = GetValue(root, "updatedAtUtc", "UpdatedAtUtc", "Not yet updated"),
+                Source = source is "meshmonitor-db" or "mqtt" ? source : null
             });
         }
-        catch (Exception ex)
+        catch (IOException ex) when (ex is FileNotFoundException or DirectoryNotFoundException)
+        {
+            return Ok(new NodeStatsResponse());
+        }
+        catch (Exception ex) when (ex is IOException or UnauthorizedAccessException or JsonException)
         {
             _logger.LogError(ex, "Failed to read node stats from {StatsFilePath}", statsFilePath);
             return Ok(new NodeStatsResponse());

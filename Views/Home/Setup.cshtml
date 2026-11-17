@@ -1,5 +1,6 @@
 @{
     ViewData["Title"] = "How MontanaMesh Runs";
+    ViewData["MetaDescription"] = "See how MontanaMesh runs its public website, MQTT broker, MeshMonitor dashboard, PotatoMesh services, and private management stack.";
 }
 
 <section class="app-shell page-hero reveal" aria-labelledby="setup-title">
@@ -13,7 +14,7 @@
 <section class="app-shell platform-grid" aria-label="MontanaMesh hosting stack">
     <article class="platform-card reveal">
         <span class="card-index">Public VPS</span>
-        <h2>Fedora 42 at RackNerd</h2>
+        <h2>RackNerd VPS</h2>
         <p>The public stack runs from a Fedora VPS with Podman services behind Caddy.</p>
         <ul>
             <li><strong>Caddy:</strong> TLS and public routing.</li>
@@ -42,9 +43,8 @@
         <h2>Wormhole radio bridge</h2>
         <p>The Wormhole host connects local radio hardware back to the public services over the private link.</p>
         <ul>
-            <li><strong>Host:</strong> Dell OptiPlex class machine.</li>
-            <li><strong>Runtime:</strong> Podman user services.</li>
-            <li><strong>Work:</strong> forwards node, position, telemetry, and message data into PotatoMesh.</li>
+            <li>Meshtastic and MeshCore radios connect to MeshMonitor over private links.</li>
+            <li>PotatoMesh reads node, position, telemetry, and message data through virtual nodes in MeshMonitor.</li>
         </ul>
     </article>
 </section>
@@ -69,12 +69,12 @@
             <tr>
                 <td>MeshMonitor</td>
                 <td>Live node map and dashboard.</td>
-                <td><a href="https://meshmonitor.montanamesh.com" target="_blank" rel="noopener noreferrer">meshmonitor.montanamesh.com</a></td>
+                <td><a href="@CommunityLinks.MeshMonitor" target="_blank" rel="noopener noreferrer">meshmonitor.montanamesh.com</a></td>
             </tr>
             <tr>
                 <td>PotatoMesh</td>
                 <td>Ingestion service and mesh data companion.</td>
-                <td><a href="https://potatomesh.montanamesh.com" target="_blank" rel="noopener noreferrer">potatomesh.montanamesh.com</a></td>
+                <td><a href="@CommunityLinks.PotatoMesh" target="_blank" rel="noopener noreferrer">potatomesh.montanamesh.com</a></td>
             </tr>
             </tbody>
         </table>

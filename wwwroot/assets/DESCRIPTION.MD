@@ -10,7 +10,7 @@ This folder contains public static assets for the MontanaMesh website.
 - `fonts/` with Iosevka font files.
 - `images/` with image assets used by the layout.
 - `images/backgrounds/` with optimized local WebP page backgrounds.
-- `js/` legacy or alternate JavaScript asset path.
+- Application scripts live in `wwwroot/js/`.
 
 ## Documentation
 

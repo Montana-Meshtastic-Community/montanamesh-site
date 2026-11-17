@@ -1,17 +1,10 @@
 @{
-    var backgroundKey = (ViewData["BackgroundKey"] as string) ?? "billings";
     var siteName = "Montana Meshtastic Community";
     var pageTitle = (ViewData["Title"] as string) ?? siteName;
     var fullTitle = pageTitle == siteName ? siteName : $"{pageTitle} | {siteName}";
     var metaDescription = (ViewData["MetaDescription"] as string) ?? "MontanaMesh is a volunteer Meshtastic community building practical off-grid LoRa messaging coverage around Billings and across Montana.";
-    var backgroundImagePath = backgroundKey switch
-    {
-        "missoula" => "/assets/images/backgrounds/missoula.webp",
-        "great-falls" => "/assets/images/backgrounds/great-falls-central-ave.webp",
-        "bozeman" => "/assets/images/backgrounds/bozeman-main-st.webp",
-        "butte" => "/assets/images/backgrounds/butte-uptown.webp",
-        _ => "/assets/images/backgrounds/billings-skyline-2024.webp"
-    };
+    var heroImage = ViewData["HeroImage"] as string;
+    var pageStyle = heroImage is null ? null : $"--page-image: url('{heroImage}')";
 }
 <!DOCTYPE html>
 <html lang="en" data-theme="dark">
@@ -23,11 +16,14 @@
     <link rel="icon" type="image/png" href="~/assets/images/favicon.png" />
     <link rel="preload" href="~/assets/fonts/iosevka-regular.woff2" as="font" type="font/woff2" crossorigin />
     <link rel="preload" href="~/assets/fonts/iosevka-bold.woff2" as="font" type="font/woff2" crossorigin />
-    <link rel="preload" href="@backgroundImagePath" as="image" type="image/webp" />
+    @if (heroImage is not null)
+    {
+        <link rel="preload" href="@heroImage" as="image" type="image/webp" />
+    }
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
 </head>
-<body class="page-@backgroundKey">
+<body style="@pageStyle">
     <a class="skip-nav" href="#main">Skip to content</a>
     <header class="site-header">
         <nav class="navbar navbar-expand-lg app-header" aria-label="Primary navigation">
@@ -76,7 +72,7 @@
                         </li>
                         <li class="nav-item"><a class="nav-link nav-pill" asp-controller="Contact" asp-action="Index">Contact</a></li>
                         <li class="nav-item ms-lg-5 mt-2 mt-lg-0">
-                            <a id="repoStatsLink" class="repo-link" href="https://github.com/Montana-Meshtastic-Community/montanamesh-site" target="_blank" rel="noopener noreferrer">
+                            <a id="repoStatsLink" class="repo-link" href="@CommunityLinks.RepositoryPage" data-repo-api="@CommunityLinks.RepositoryApi" target="_blank" rel="noopener noreferrer">
                                 <span class="repo-label">montanamesh-site</span>
                                 <span class="repo-stat">Stars <span id="repoStars">-</span></span>
                                 <span class="repo-stat">Forks <span id="repoForks">-</span></span>

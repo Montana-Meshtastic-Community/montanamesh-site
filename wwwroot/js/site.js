@@ -1,77 +1,85 @@
 (() => {
-  const key = "montana_theme";
-  const root = document.documentElement;
-  const toggle = document.getElementById("themeToggle");
-  const toggleIcon = document.getElementById("themeToggleIcon");
-  const starsEl = document.getElementById("repoStars");
-  const forksEl = document.getElementById("repoForks");
+  function setupTheme() {
+    const key = "montana_theme";
+    const root = document.documentElement;
+    const toggle = document.getElementById("themeToggle");
+    const toggleIcon = document.getElementById("themeToggleIcon");
 
-  function applyTheme(theme) {
-    root.setAttribute("data-theme", theme);
-    if (toggleIcon) {
-      toggleIcon.textContent = theme === "dark" ? "☀" : "☾";
+    function applyTheme(theme) {
+      const dark = theme === "dark";
+      root.dataset.theme = theme;
+      if (toggleIcon) {
+        toggleIcon.textContent = dark ? "☀" : "☾";
+      }
+      const switchLabel = dark ? "Switch to light theme" : "Switch to dark theme";
+      toggle?.setAttribute("aria-label", switchLabel);
+      toggle?.setAttribute("title", switchLabel);
     }
-    if (toggle) {
-      toggle.setAttribute("aria-label", theme === "dark" ? "Switch to light theme" : "Switch to dark theme");
-      toggle.setAttribute("title", theme === "dark" ? "Switch to light theme" : "Switch to dark theme");
+
+    let savedTheme;
+    try {
+      savedTheme = localStorage.getItem(key);
+    } catch {
+      // Browsers may deny storage access for this origin.
     }
-  }
+    applyTheme(savedTheme === "light" ? "light" : "dark");
 
-  const savedTheme = localStorage.getItem(key);
-  const initialTheme = savedTheme === "light" || savedTheme === "dark" ? savedTheme : "dark";
-  applyTheme(initialTheme);
-
-  if (toggle) {
-    toggle.addEventListener("click", () => {
-      const nextTheme = root.getAttribute("data-theme") === "dark" ? "light" : "dark";
-      localStorage.setItem(key, nextTheme);
+    toggle?.addEventListener("click", () => {
+      const nextTheme = root.dataset.theme === "dark" ? "light" : "dark";
       applyTheme(nextTheme);
+      try {
+        localStorage.setItem(key, nextTheme);
+      } catch {
+        // Theme changes still work for this page when storage is unavailable.
+      }
     });
   }
 
   async function loadRepoStats() {
-    if (!starsEl || !forksEl) {
+    const endpoint = document.getElementById("repoStatsLink")?.dataset.repoApi;
+    const stars = document.getElementById("repoStars");
+    const forks = document.getElementById("repoForks");
+    if (!endpoint || !stars || !forks) {
       return;
     }
 
     try {
-      const response = await fetch("https://api.github.com/repos/Montana-Meshtastic-Community/montanamesh-site", {
-        headers: {
-          Accept: "application/vnd.github+json"
-        }
+      const response = await fetch(endpoint, {
+        headers: { Accept: "application/vnd.github+json" }
       });
-
-      if (!response.ok) {
-        return;
+      if (response.ok) {
+        const repo = await response.json();
+        stars.textContent = String(repo.stargazers_count ?? "-");
+        forks.textContent = String(repo.forks_count ?? "-");
       }
-
-      const repo = await response.json();
-      starsEl.textContent = String(repo.stargazers_count ?? "-");
-      forksEl.textContent = String(repo.forks_count ?? "-");
     } catch {
-      // Keep fallback dashes if the GitHub request fails.
+      // Keep the displayed dashes if GitHub is unreachable.
     }
   }
 
-  loadRepoStats();
+  function setupReveals() {
+    const elements = document.querySelectorAll(".reveal");
+    if (!elements.length || !("IntersectionObserver" in window) || window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+      return;
+    }
 
-  const revealEls = document.querySelectorAll(".reveal");
-  if (revealEls.length && !window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
-    document.body.classList.add("reveal-ready");
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach((entry) => {
+    const observer = new IntersectionObserver(entries => {
+      for (const entry of entries) {
         if (entry.isIntersecting) {
           entry.target.classList.add("is-visible");
           observer.unobserve(entry.target);
         }
-      });
+      }
     }, { threshold: 0.12 });
 
-    revealEls.forEach((el, index) => {
-      el.style.transitionDelay = `${Math.min(index * 70, 280)}ms`;
-      observer.observe(el);
+    elements.forEach((element, index) => {
+      element.style.transitionDelay = `${Math.min(index * 70, 280)}ms`;
+      observer.observe(element);
     });
-  } else {
-    revealEls.forEach((el) => el.classList.add("is-visible"));
+    document.body.classList.add("reveal-ready");
   }
+
+  setupTheme();
+  loadRepoStats();
+  setupReveals();
 })();

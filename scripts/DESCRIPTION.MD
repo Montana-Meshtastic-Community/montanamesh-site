@@ -13,13 +13,17 @@ The script can read environment values from the parent `.env` file and supports:
 - `MQTT_STATS_BROKER_URL`, default `mqtt://emqx:1883` in the master-control stack; standalone script fallback is `mqtt://127.0.0.1:1883`
 - `MQTT_STATS_TOPIC`, default `msh/US/#`
 - `MQTT_STATS_USERNAME` and `MQTT_STATS_PASSWORD`, default to `MQTT_USERNAME` and `MQTT_PASSWORD` if present
-- `MQTT_STATS_TLS`, default `false`
+- `MQTT_STATS_TLS`, set to `true` or `false` to override the broker URL scheme. Leave blank to infer from the URL.
 - `MQTT_STATS_SAMPLE_SECONDS`, default `60`
 - `MQTT_STATS_CONNECT_TIMEOUT_SECONDS`, default `15`
 - `MESHMONITOR_DB_PATH`, optional readable MeshMonitor SQLite DB path for DB-backed counts
 - `NODE_STATS_DATA_DIR`, default `montanamesh-site/data`
 - `NODE_STATS_DATABASE_FILE`, default `montanamesh-site/data/node-database.json`
 - `NODE_STATS_ENV_FILE`, default parent repo `.env`
+
+MQTT sampling keeps fallback history current while the site uses MeshMonitor counts. The updater can publish MeshMonitor counts when MQTT fails. If both sources fail, it keeps the previous snapshot. Concurrent runs targeting the same data directory take turns.
+
+Run the updater regression tests from the website directory with `PYTHONPATH=scripts python3 -B -m unittest discover -s scripts/tests`.
 
 ## Documentation
 

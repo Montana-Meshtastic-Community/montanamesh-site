@@ -1,5 +1,9 @@
 @{
+    var portable = RadioProfile.Portable;
+    var baseStation = RadioProfile.BaseStation;
+    var router = RadioProfile.Router;
     ViewData["Title"] = "Recommended Meshtastic Settings";
+    ViewData["MetaDescription"] = "Use MontanaMesh recommended Meshtastic settings for roles, LoRa, hop limits, position sharing, telemetry, MQTT, security, and clean shared-channel behavior.";
 }
 
 <section class="app-shell page-hero reveal" aria-labelledby="settings-title">
@@ -13,12 +17,12 @@
 <section class="app-shell settings-grid" aria-label="Recommended device settings">
     <article class="setting-card reveal">
         <span class="card-index">Role</span>
-        <h2><code>CLIENT</code> first</h2>
-        <p>Use <code>CLIENT</code> for most radios. Use <code>CLIENT_MUTE</code> when you want to reduce relay load, and use <code>CLIENT_BASE</code> for a stable personal base station.</p>
+        <h2><code>@portable.Role</code> first</h2>
+        <p>Use <code>@portable.Role</code> for most radios. Use <code>@RadioProfile.QuietClientRole</code> when you want to reduce relay load, and use <code>@baseStation.Role</code> for a stable personal base station.</p>
     </article>
     <article class="setting-card reveal">
         <span class="card-index">LoRa</span>
-        <h2><code>US</code> / <code>LONG_FAST</code></h2>
+        <h2><code>@RadioProfile.Region</code> / <code>@RadioProfile.ModemPreset</code></h2>
         <p>Use the US 915 MHz region and LongFast preset for the public Montana mesh unless a group deliberately coordinates something else.</p>
     </article>
     <article class="setting-card reveal">
@@ -43,38 +47,38 @@
             <tbody>
             <tr>
                 <td>Region</td>
-                <td><code>US</code></td>
+                <td><code>@RadioProfile.Region</code></td>
                 <td>Use the United States 915 MHz region for Montana.</td>
             </tr>
             <tr>
                 <td>Modem preset</td>
-                <td><code>LONG_FAST</code></td>
+                <td><code>@RadioProfile.ModemPreset</code></td>
                 <td>The expected public mesh preset for normal MontanaMesh participation.</td>
             </tr>
             <tr>
                 <td>Role</td>
-                <td><code>CLIENT</code> or <code>CLIENT_MUTE</code></td>
+                <td><code>@portable.Role</code> or <code>@RadioProfile.QuietClientRole</code></td>
                 <td>Best default for most personal, mobile, indoor, and experimental nodes.</td>
             </tr>
             <tr>
                 <td>Base station role</td>
-                <td><code>CLIENT_BASE</code></td>
+                <td><code>@baseStation.Role</code></td>
                 <td>Good for a stable home, attic, roofline, or shop node that supports your favorited nearby nodes.</td>
             </tr>
             <tr>
                 <td>Router roles</td>
-                <td><code>ROUTER</code> or <code>ROUTER_LATE</code> only by plan</td>
+                <td><code>@router.Role</code> or <code>@RadioProfile.LowerPriorityRouterRole</code> only by plan</td>
                 <td>Use infrastructure roles only for well-placed, reliable, coordinated coverage sites.</td>
             </tr>
             <tr>
                 <td>Hop limit</td>
-                <td><code>3</code> portable, <code>5</code> fixed</td>
+                <td><code>@portable.HopLimit</code> portable, <code>@baseStation.HopLimit</code> fixed</td>
                 <td>Higher hop counts can increase congestion. Avoid higher than <code>6</code> unless there is a specific reason.</td>
             </tr>
             <tr>
                 <td>Node info broadcast</td>
-                <td><code>10800</code> seconds</td>
-                <td>Three hours keeps names and node info fresh without constant repeated metadata.</td>
+                <td><code>@RadioProfile.NodeInfoSeconds</code> seconds</td>
+                <td>Keeps names and node info fresh without constant repeated metadata.</td>
             </tr>
             </tbody>
         </table>
@@ -134,7 +138,7 @@
             <tbody>
             <tr>
                 <td>Device metrics telemetry</td>
-                <td>Every <code>10800</code> seconds or less often</td>
+                <td>Every <code>@RadioProfile.NodeInfoSeconds</code> seconds or less often</td>
                 <td>Battery and voltage are useful, but the firmware default can be chatty for large public meshes.</td>
             </tr>
             <tr>
@@ -185,17 +189,9 @@
         <p class="eyebrow">CLI Examples</p>
         <h2 id="cli-title">Apply the basics</h2>
     </div>
-    <pre><code>meshtastic \
-  --set lora.region US \
-  --set lora.modem_preset LONG_FAST \
-  --set lora.hop_limit 3 \
-  --set device.role CLIENT \
-  --set device.node_info_broadcast_secs 10800
+    <pre><code>@RadioProfile.Command(portable.SharedMeshSettings)
 
-meshtastic \
-  --set lora.hop_limit 5 \
-  --set device.role CLIENT_BASE \
-  --set position.fixed_position true</code></pre>
+@RadioProfile.Command(baseStation.HopSetting, baseStation.RoleSetting, baseStation.PositionSetting)</code></pre>
 </section>
 
 <section class="app-shell resource-grid compact reveal" aria-label="Official configuration references">

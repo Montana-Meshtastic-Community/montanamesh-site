@@ -4,16 +4,16 @@ This folder stores runtime data consumed by the MontanaMesh website.
 
 ## Current Files
 
-- `node-stats.json`: current node-count snapshot returned by `/api/nodes/stats`.
+- `node-stats.json`: current node-count snapshot returned by `/api/nodes/stats`, including the update time and source.
 - `node-database.json`: generated MQTT node database keyed by unique node ID with first-seen and last-seen timestamps. This remains the fallback stats source when the MeshMonitor SQLite DB is not mounted.
 - `node-observations.json`: legacy generated MQTT node last-seen state. The stats updater can migrate from it if present.
 - `node-history.tsv`: legacy historical node data if retained by local tooling or prior runs. The stats updater can seed the generated node database from it.
 
-All `node-*` files above are generated per host and gitignored, so local and production copies never conflict with Git. A fresh checkout starts without them; the website returns zero/default counts until the stats updater writes `node-stats.json`.
+The checkout and container build exclude these host-local data files. Before a snapshot is available the API returns its default payload for compatibility, and the homepage shows unavailable counts.
 
 ## How Data Is Updated
 
-`montanamesh-site/scripts/update-node-stats.sh` samples MontanaMesh MQTT traffic and records unique node IDs in `node-database.json`. When `MESHMONITOR_DB_PATH` points at a readable MeshMonitor SQLite DB, `node-stats.json` uses distinct IDs from MeshMonitor's `nodes` table for total and recently-heard windows. If that DB is unavailable, counts fall back to `node-database.json`. The updater can migrate IDs from legacy `node-observations.json` and merge IDs from `node-history.tsv`. In the root compose stack, the `node-stats-updater` container runs that script every five minutes by default.
+`montanamesh-site/scripts/update-node-stats.sh` samples MontanaMesh MQTT traffic and records unique node IDs in `node-database.json`. When `MESHMONITOR_DB_PATH` points at a readable MeshMonitor SQLite DB, `node-stats.json` uses distinct IDs from MeshMonitor's `nodes` table even during a broker outage. A successful MQTT sample supplies fallback counts when the SQLite source is unavailable. If both sources fail, the site keeps the previous snapshot and timestamp. The updater can migrate IDs from legacy `node-observations.json` and seed IDs from `node-history.tsv`. An undated TSV entry supplies an initial observation for a new node. In the root Compose stack, the `node-stats-updater` runs about every five minutes by default.
 
 ## Documentation
 

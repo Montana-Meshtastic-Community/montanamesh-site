@@ -27,7 +27,7 @@ This folder is the ASP.NET Core MVC website for the Montana Meshtastic Community
 - `Models/`: small response/view models.
 - `Views/`: Razor pages and shared layout.
 - `wwwroot/`: CSS, JavaScript, images, favicon assets, fonts, and client libraries.
-- `data/`: node stats data and MQTT observation state read by the API.
+- `data/`: node statistics snapshot read by the API and MQTT observation history maintained by the updater.
 - `scripts/`: helper scripts, currently the MQTT node stats updater.
 - `docs/`: project screenshots and supporting documentation assets.
 - `Properties/`: launch settings for local development.

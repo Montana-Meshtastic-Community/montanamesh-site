@@ -5,7 +5,9 @@ This folder contains small C# model classes used by the MontanaMesh website.
 ## Models
 
 - `ErrorViewModel.cs` holds the ASP.NET error request ID and whether it should be displayed.
-- `NodeStatsResponse.cs` is the response model for `/api/nodes/stats`. It returns total nodes, 30-minute active nodes, 2-hour active nodes, 24-hour active nodes, and the UTC update timestamp as strings for simple frontend rendering.
+- `NodeStatsResponse.cs` defines the string count fields, update timestamp, and optional source in `/api/nodes/stats`.
+- `CommunityLinks.cs` supplies the community links used across views.
+- `RadioProfile.cs` supplies the recommended Meshtastic settings used in both guide tables and CLI examples.
 
 ## Documentation
 

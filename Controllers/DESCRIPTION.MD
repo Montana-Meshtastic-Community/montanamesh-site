@@ -4,8 +4,8 @@ This folder contains the ASP.NET Core controllers for the MontanaMesh website.
 
 ## Controllers
 
-- `HomeController.cs` serves the public MVC pages, including resource subpages, and sets a `BackgroundKey` used by the layout/CSS for page-specific presentation.
-- `NodesController.cs` exposes the `/api/nodes/stats` API. It reads `data/node-stats.json`, accepts either camelCase or PascalCase property names, and returns safe zero/default values if the file is missing or unreadable.
+- `HomeController.cs` routes public pages and errors. The views supply page metadata.
+- `NodesController.cs` exposes the non-cacheable `/api/nodes/stats` API. It reads `data/node-stats.json`, accepts either camelCase or PascalCase property names, and returns the compatibility defaults if the file is missing or unreadable.
 
 ## Behavior Notes
 

@@ -1,6 +1,8 @@
 # .NET build artifacts
 **/bin/
 **/obj/
+node_modules/
+__pycache__/
 *.user
 *.suo
 
@@ -27,3 +29,4 @@ data/node-database.json
 data/node-history.tsv
 data/node-observations.json
 data/.node-*.tmp
+data/.node-stats.lock

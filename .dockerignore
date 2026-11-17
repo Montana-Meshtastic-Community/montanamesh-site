@@ -9,3 +9,12 @@ obj/
 *.tmp
 *.log
 restore.binlog
+.git
+.env
+.env.*
+passwords.txt
+podman-compose.yml
+node_modules/
+data/
+docs/
+scripts/

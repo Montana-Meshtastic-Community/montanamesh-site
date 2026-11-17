@@ -69,7 +69,6 @@ public class ContactController(IConfiguration configuration, ILogger<ContactCont
     {
         ViewData["Title"] = "Contact";
         ViewData["MetaDescription"] = "Get in touch with MontanaMesh about joining the mesh, hosting a node, or a question about the community.";
-        ViewData["BackgroundKey"] = "billings";
         Response.Headers.CacheControl = "no-store";
         return View("Index", model);
     }

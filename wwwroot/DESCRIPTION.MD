@@ -6,8 +6,8 @@ This folder is the ASP.NET Core web root. Files here are served directly as stat
 
 - `css/`: site-wide CSS.
 - `js/`: site-wide JavaScript.
-- `assets/`: images, icons, web manifest, fonts, and duplicate legacy asset paths.
-- `lib/`: vendored frontend libraries such as Bootstrap and jQuery. Treat as third-party/generated unless intentionally updating dependencies.
+- `assets/`: images, icons, web manifest, and fonts.
+- `lib/`: vendored Bootstrap assets.
 - `favicon.ico`: root favicon.
 
 ## Documentation

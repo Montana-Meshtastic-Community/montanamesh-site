@@ -1,10 +1,11 @@
 # Background Images
 
-This folder contains optimized local WebP background images used by `wwwroot/css/site.css`.
+This folder contains optimized local WebP background images. The homepage
+selects and preloads the Billings skyline through its Razor view.
 
 ## Files
 
-- `billings-skyline-2024.webp`: Billings page background, optimized from the Wikimedia Commons Billings skyline image.
+- `billings-skyline-2024.webp`: homepage hero background, optimized from the Wikimedia Commons Billings skyline image.
 - `missoula.webp`: Missoula page background, optimized from the Wikimedia Commons Missoula image.
 - `great-falls-central-ave.webp`: Great Falls page background, optimized from the Wikimedia Commons Central Avenue and Civic Center image.
 - `bozeman-main-st.webp`: Bozeman page background, optimized from the Wikimedia Commons Main Street Bozeman image.

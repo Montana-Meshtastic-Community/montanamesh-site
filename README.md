@@ -61,19 +61,16 @@ dotnet build
 
 ## Run in a container
 
-This folder includes a standalone Compose definition for local container work:
+A standalone container serves the public pages on loopback:
 
 ```bash
-podman-compose -f podman-compose.yml up -d --build
-podman-compose -f podman-compose.yml ps
+podman build -t montanamesh-site .
+podman run --rm -p 127.0.0.1:8080:8080 montanamesh-site
 ```
 
-Open [http://localhost:8080](http://localhost:8080). Stop the local container
-with:
-
-```bash
-podman-compose -f podman-compose.yml down
-```
+Open [http://localhost:8080](http://localhost:8080). Press Ctrl+C to stop the
+container. For live counts, mount the directory containing the generated
+`node-stats.json` at `/app/data`. The build excludes host-local data.
 
 For the full MontanaMesh deployment, use the master-control repository’s root
 Compose stack. There, the site is exposed locally on port `8082` and routed
@@ -82,7 +79,11 @@ publicly through Caddy at `montanamesh.com`.
 ## Live node statistics
 
 The homepage reads its telemetry from `GET /api/nodes/stats`, backed by
-`data/node-stats.json`. Refresh it manually with:
+`data/node-stats.json`. The API returns the count fields as strings, an
+`updatedAtUtc` timestamp and, when available, `source` (`meshmonitor-db` or
+`mqtt`). The homepage shows dashes when a snapshot is unavailable and labels
+counts older than 15 minutes as stale. Refresh it manually with Python 3 and
+`paho-mqtt` installed. Install `meshtastic` to decode protobuf payloads:
 
 ```bash
 ./scripts/update-node-stats.sh
@@ -90,9 +91,10 @@ The homepage reads its telemetry from `GET /api/nodes/stats`, backed by
 
 When a readable MeshMonitor SQLite database is supplied through
 `MESHMONITOR_DB_PATH`, the updater uses distinct node IDs from its `nodes`
-table for the total, 30-minute, 2-hour, and 24-hour counts. It continues to
-maintain `data/node-database.json` from sampled MQTT traffic, giving the site
-a fallback when that database is not available.
+table for the total, 30-minute, 2-hour, and 24-hour counts. It also samples MQTT
+traffic and maintains `data/node-database.json` for fallback. A broker outage
+still allows publication from MeshMonitor. If neither source can provide a
+fresh snapshot, the updater preserves the previous counts and timestamp.
 
 In the production stack, `node-stats-updater` runs every five minutes. It
 samples the local EMQX broker over the Compose network and mounts the
@@ -107,7 +109,7 @@ settings can be overridden in the environment:
 | --- | --- | --- |
 | `MQTT_STATS_BROKER_URL` | `mqtt://127.0.0.1:1883` | Broker used by the standalone updater. The root stack supplies `mqtt://emqx:1883`. |
 | `MQTT_STATS_TOPIC` | `msh/US/#` | MQTT topic filter to sample. |
-| `MQTT_STATS_TLS` | `false` | Enable TLS for the MQTT connection. |
+| `MQTT_STATS_TLS` | infer from broker URL | Set explicitly to `true` or `false` to override the URL scheme. |
 | `MQTT_STATS_SAMPLE_SECONDS` | `60` | Length of each MQTT sampling window. |
 | `MESHMONITOR_DB_PATH` | unset | Readable SQLite path used for MeshMonitor-backed counts. |
 | `NODE_STATS_DATA_DIR` | `data/` | Alternate directory for generated statistics files. |
@@ -115,12 +117,17 @@ settings can be overridden in the environment:
 `MQTT_STATS_USERNAME` and `MQTT_STATS_PASSWORD` take precedence when set;
 otherwise the updater uses `MQTT_USERNAME` and `MQTT_PASSWORD`.
 
+Run the updater regression tests from the website directory:
+
+```bash
+PYTHONPATH=scripts python3 -B -m unittest discover -s scripts/tests
+```
+
 ## Deployment notes
 
 This repository is a submodule of the MontanaMesh master-control workspace.
-Deploy it through that workspace rather than treating this standalone Compose
-file as the public production definition. The root stack provides Caddy,
-EMQX, MeshMonitor, persistent data mounts, and the scheduled updater.
+Deploy it through that workspace. The root stack provides Caddy, EMQX,
+MeshMonitor, persistent data mounts, and the scheduled updater.
 
 Before submitting a website change, build it locally and keep screenshots or
 service documentation current whenever behavior, routes, data contracts, or
@@ -159,6 +166,7 @@ The master-control stack maps root `.env` settings `CONTACT_SMTP_HOST`,
 `CONTACT_SMTP_PORT`, `CONTACT_ENABLE_SSL`, `CONTACT_SMTP_USERNAME`,
 `CONTACT_SMTP_PASSWORD`, `CONTACT_FROM`, and `CONTACT_TO` into these options.
 Keep passwords out of this public repository. Recreate the website container
-when changing delivery settings. The standalone Compose file requires adding
-these environment variables explicitly. Production rate limits use the source
-IP supplied by the trusted reverse proxy; keep the application behind Caddy.
+when changing delivery settings. For a standalone container, pass a host-local
+environment file with the `Contact__*` settings using `podman run --env-file`.
+Production rate limits use the source IP supplied by the trusted reverse
+proxy. Keep the application behind Caddy.

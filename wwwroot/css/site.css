@@ -1,6 +1,5 @@
 :root {
   --font-ui: "Iosevka", ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
-  --page-image: url("/assets/images/backgrounds/billings-skyline-2024.webp");
   --radius-sm: 6px;
   --radius-md: 8px;
   --ease: cubic-bezier(0.2, 0.8, 0.2, 1);
@@ -119,26 +118,6 @@ body::after {
   background-size: 72px 72px, 72px 72px, 22px 22px;
   mask-image: linear-gradient(to bottom, rgba(0, 0, 0, 0.16), rgba(0, 0, 0, 0.72) 22rem, rgba(0, 0, 0, 0.32));
   opacity: 0.66;
-}
-
-body.page-billings {
-  --page-image: url("/assets/images/backgrounds/billings-skyline-2024.webp");
-}
-
-body.page-missoula {
-  --page-image: url("/assets/images/backgrounds/missoula.webp");
-}
-
-body.page-great-falls {
-  --page-image: url("/assets/images/backgrounds/great-falls-central-ave.webp");
-}
-
-body.page-bozeman {
-  --page-image: url("/assets/images/backgrounds/bozeman-main-st.webp");
-}
-
-body.page-butte {
-  --page-image: url("/assets/images/backgrounds/butte-uptown.webp");
 }
 
 .skip-nav {
@@ -374,7 +353,7 @@ button:focus-visible,
     linear-gradient(104deg, color-mix(in srgb, var(--bg) 98%, transparent) 0%, color-mix(in srgb, var(--bg) 88%, transparent) 37%, color-mix(in srgb, var(--bg) 38%, transparent) 68%, color-mix(in srgb, var(--bg) 18%, transparent) 100%),
     linear-gradient(0deg, var(--bg) 0%, color-mix(in srgb, var(--bg) 78%, transparent) 20%, transparent 54%),
     linear-gradient(180deg, color-mix(in srgb, var(--bg) 30%, transparent) 0%, transparent 34%),
-    var(--page-image);
+    var(--page-image, none);
   background-position: center, center, center, 74% 38%;
   background-size: cover, cover, cover, cover;
 }
