@@ -150,7 +150,7 @@
     <div>
         <p class="eyebrow">Base CLI</p>
         <h2 id="base-cli-title">Stable fixed node</h2>
-        <p class="code-note">Replace <code>LATITUDE</code>, <code>LONGITUDE</code>, and <code>ALTITUDE_METERS</code> with the node's location in decimal degrees and meters. Round the coordinates if you do not want an exact location on public maps.</p>
+        <p class="code-note">Replace <code>LATITUDE</code> and <code>LONGITUDE</code> with decimal degrees that include a decimal point, and <code>ALTITUDE_METERS</code> with whole meters, for example <code>--setlat 45.78 --setlon -108.50 --setalt 950</code>. To keep the location approximate, use fewer decimal places but keep the point: write <code>46.0</code>, not <code>46</code>. The CLI reads a number without a decimal point as a raw internal value and will place the node near 0,0.</p>
     </div>
     <pre><code>@baseStation.FullCommand</code></pre>
 </section>
@@ -212,7 +212,7 @@
     <div>
         <p class="eyebrow">Router CLI</p>
         <h2 id="router-cli-title">Planned infrastructure</h2>
-        <p class="code-note">Replace <code>LATITUDE</code>, <code>LONGITUDE</code>, and <code>ALTITUDE_METERS</code> with the node's location in decimal degrees and meters. Round the coordinates if you do not want an exact location on public maps.</p>
+        <p class="code-note">Replace <code>LATITUDE</code> and <code>LONGITUDE</code> with decimal degrees that include a decimal point, and <code>ALTITUDE_METERS</code> with whole meters, for example <code>--setlat 45.78 --setlon -108.50 --setalt 950</code>. To keep the location approximate, use fewer decimal places but keep the point: write <code>46.0</code>, not <code>46</code>. The CLI reads a number without a decimal point as a raw internal value and will place the node near 0,0.</p>
     </div>
     <pre><code>@router.FullCommand</code></pre>
 </section>

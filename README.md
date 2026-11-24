@@ -32,7 +32,7 @@ The primary public pages are available at:
 | `Models/` | View and API response models |
 | `Views/` | Razor pages and shared layout components |
 | `wwwroot/` | CSS, JavaScript, images, and browser assets |
-| `data/` | Node-statistics snapshots and MQTT observation state |
+| `data/` | Node-statistics snapshots, MQTT observation state, and local-run form-protection keys |
 | `scripts/` | Maintenance helpers, including the node-stats updater |
 | `docs/screenshots/` | Screenshots used in this documentation |
 
@@ -144,8 +144,13 @@ git@github.com:Montana-Meshtastic-Community/montanamesh-site.git
 ## Contact form
 
 `GET /contact` shows a name, reply email, and message form. `POST /contact`
-validates the input and antiforgery token, checks a honeypot, and limits each
-source IP to three attempts per ten minutes (in memory, reset on restart).
+validates the input and antiforgery token, checks a honeypot, and rejects reply
+addresses MimeKit cannot parse. Only submissions that pass those checks count
+toward the limit of three sends per ten minutes per source IPv4 address or
+IPv6 /64 (in memory, reset on restart). A failed SMTP delivery returns its send,
+and a separate cap of ten attempts per window bounds SMTP connections. Unreadable
+or oversized form bodies get a plain 400 or 413. An expired form, a rejected
+address, or a rate-limited send re-renders the form with the visitor's text.
 Success appears only after the SMTP server accepts the email; failed sends keep
 the entered text. Messages are emailed, not written to the website data folder.
 The sender stays fixed and the visitor address is set as Reply-To. Delivery uses
@@ -170,3 +175,17 @@ when changing delivery settings. For a standalone container, pass a host-local
 environment file with the `Contact__*` settings using `podman run --env-file`.
 Production rate limits use the source IP supplied by the trusted reverse
 proxy. Keep the application behind Caddy.
+
+Antiforgery and TempData keys persist so forms opened before a redeploy still
+submit. Locally they default to the git-ignored `data/dataprotection-keys/`; the
+master-control stack sets `DataProtection__KeysPath=/app/keys` on a website-only
+named volume. Never commit key files.
+
+## Security headers
+
+Forwarded headers are applied first, so HSTS and secure cookies see Caddy's
+HTTPS scheme. Every response sets a Content Security Policy (same-origin assets,
+plus `https://api.github.com` for repository stats), `nosniff`, `DENY` framing,
+and a strict referrer policy, and omits the `Server` header. Keep scripts and
+styles in `wwwroot/`; inline `<script>` or `<style>` blocks are blocked. Page
+routes accept `HEAD` as well as `GET`, and error pages render for any method.

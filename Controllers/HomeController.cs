@@ -8,34 +8,35 @@ public class HomeController : Controller
 {
     public IActionResult Index() => View();
 
-    [HttpGet("/setup")]
+    [HttpGetOrHead("/setup")]
     public IActionResult Setup() => View();
 
-    [HttpGet("/connect")]
+    [HttpGetOrHead("/connect")]
     public IActionResult Connect() => View();
 
-    [HttpGet("/recommended-configuration-settings")]
+    [HttpGetOrHead("/recommended-configuration-settings")]
     public IActionResult RecommendedConfigurationSettings() => View();
 
-    [HttpGet("/optimal-settings")]
+    [HttpGetOrHead("/optimal-settings")]
     public IActionResult OptimalSettings() => View();
 
-    [HttpGet("/devices")]
+    [HttpGetOrHead("/devices")]
     public IActionResult DeviceGuide() => View();
 
-    [HttpGet("/host-a-node")]
+    [HttpGetOrHead("/host-a-node")]
     public IActionResult HostNode() => View();
 
-    [HttpGet("/resources")]
+    [HttpGetOrHead("/resources")]
     public IActionResult Resources() => View();
 
-    [HttpGet("/privacy")]
+    [HttpGetOrHead("/privacy")]
     public IActionResult Privacy() => View();
 
-    [HttpGet("/resources/other-mesh-networks")]
+    [HttpGetOrHead("/resources/other-mesh-networks")]
     public IActionResult OtherMeshNetworks() => View();
 
-    [HttpGet("/error/{statusCode:int:range(400,599)}")]
+    // Re-executed status pages keep the original method, so this route accepts any verb.
+    [Route("/error/{statusCode:int:range(400,599)}")]
     public IActionResult StatusCodePage(int statusCode)
     {
         Response.StatusCode = statusCode;

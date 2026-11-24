@@ -7,6 +7,7 @@ This folder stores runtime data consumed by the MontanaMesh website.
 - `node-stats.json`: current node-count snapshot returned by `/api/nodes/stats`, including the update time and source.
 - `node-database.json`: generated MQTT node database keyed by unique node ID with first-seen and last-seen timestamps. This remains the fallback stats source when the MeshMonitor SQLite DB is not mounted.
 - `node-observations.json`: legacy generated MQTT node last-seen state. The stats updater can migrate from it if present.
+- `dataprotection-keys/`: ASP.NET Core Data Protection keys for local runs only. The root stack keeps production keys in a separate named volume. Git-ignored; never commit.
 - `node-history.tsv`: legacy historical node data if retained by local tooling or prior runs. The stats updater can seed the generated node database from it.
 
 The checkout and container build exclude these host-local data files. Before a snapshot is available the API returns its default payload for compatibility, and the homepage shows unavailable counts.

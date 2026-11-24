@@ -30,3 +30,6 @@ data/node-history.tsv
 data/node-observations.json
 data/.node-*.tmp
 data/.node-stats.lock
+
+# Form-protection keys written at runtime; never commit
+data/dataprotection-keys/
