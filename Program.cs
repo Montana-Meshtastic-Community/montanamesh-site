@@ -4,13 +4,21 @@ using MontanaMesh.Web.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
+// The framework's own forwarded-headers switch would run before the trusted-proxy check below.
+if (builder.Configuration.GetValue<bool>("FORWARDEDHEADERS_ENABLED") ||
+    builder.Configuration.GetValue<bool>("ForwardedHeaders_Enabled"))
+{
+    throw new InvalidOperationException(
+        "Unset ASPNETCORE_FORWARDEDHEADERS_ENABLED; this site applies forwarded headers only from its trusted proxy.");
+}
+
 builder.WebHost.ConfigureKestrel(options => options.AddServerHeader = false);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
 builder.Services.Configure<ForwardedHeadersOptions>(options =>
 {
-    // Kestrel is published only on loopback and Caddy overwrites these headers.
+    // Untrusted senders have these headers stripped before this runs; Caddy overwrites them.
     options.ForwardedHeaders = ForwardedHeaders.XForwardedFor | ForwardedHeaders.XForwardedProto;
     options.KnownNetworks.Clear();
     options.KnownProxies.Clear();
@@ -26,6 +34,20 @@ builder.Services.AddAntiforgery(options => options.Cookie.SecurePolicy = CookieS
 builder.Services.AddSingleton<ContactSubmissionLimiter>();
 
 var app = builder.Build();
+
+// Trust X-Forwarded-* only from the published-port forwarder. Rootless Podman delivers
+// Caddy's connections to 127.0.0.1:8082 from the container's own address, which other
+// containers on the shared network cannot use; their connections arrive from their own IPs.
+app.Use((context, next) =>
+{
+    if (!TrustedProxy.IsForwarder(context.Connection))
+    {
+        context.Request.Headers.Remove("X-Forwarded-For");
+        context.Request.Headers.Remove("X-Forwarded-Proto");
+        context.Request.Headers.Remove("X-Forwarded-Host");
+    }
+    return next();
+});
 
 // Must run first so HSTS, HTTPS redirection, and cookies see Caddy's original HTTPS scheme.
 app.UseForwardedHeaders();

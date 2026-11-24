@@ -174,7 +174,11 @@ Keep passwords out of this public repository. Recreate the website container
 when changing delivery settings. For a standalone container, pass a host-local
 environment file with the `Contact__*` settings using `podman run --env-file`.
 Production rate limits use the source IP supplied by the trusted reverse
-proxy. Keep the application behind Caddy.
+proxy. Keep the application behind Caddy. `X-Forwarded-*` headers are trusted
+only when the connection's remote address equals its local address. Rootless
+Podman delivers connections to the published `127.0.0.1:8082` port that way, so
+Caddy is trusted while other containers on the shared network, which connect
+from their own IPs, have the headers stripped.
 
 Antiforgery and TempData keys persist so forms opened before a redeploy still
 submit. Locally they default to the git-ignored `data/dataprotection-keys/`; the
