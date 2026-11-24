@@ -1,13 +1,13 @@
 @{
-    ViewData["Title"] = "How to Connect to MontanaMesh";
-    ViewData["MetaDescription"] = "Learn how to join MontanaMesh with a supported 915 MHz Meshtastic radio, the official app, and local recommended settings.";
+    ViewData["Title"] = "How to Connect to Montana Mesh";
+    ViewData["MetaDescription"] = "Learn how to join Montana Mesh with a supported 915 MHz Meshtastic radio, the official app, and local recommended settings.";
 }
 
 <section class="app-shell page-hero reveal" aria-labelledby="connect-title">
     <p class="eyebrow">First Radio / Local Mesh / Discord</p>
     <h1 id="connect-title">Get on the mesh.</h1>
     <p>
-        Start with a supported 915 MHz radio, pair it with the Meshtastic app, and use the MontanaMesh recommendations so your first node helps the network instead of adding noise.
+        Start with a supported 915 MHz radio, pair it with the Meshtastic app, and use the Montana Mesh recommendations so your first node helps the network instead of adding noise.
     </p>
 </section>
 
@@ -33,11 +33,13 @@
 
     <article class="step-card reveal">
         <span class="card-index">03</span>
-        <h2>Install the app</h2>
+        <h2>Flash and pair</h2>
         <p>Use the official Meshtastic app, then pair by Bluetooth or USB depending on your device.</p>
+        <p>Bought a bare board like a Heltec, RAK, or LILYGO? Put Meshtastic firmware on it first with the official web flasher in Chrome or Edge over USB. Ready-made radios usually ship with it installed, but the flasher can update them too.</p>
         <div class="link-pair">
             <a href="https://play.google.com/store/apps/details?id=com.geeksville.mesh" target="_blank" rel="noopener noreferrer">Android app</a>
             <a href="https://apps.apple.com/us/app/meshtastic/id1586432531" target="_blank" rel="noopener noreferrer">iOS app</a>
+            <a href="https://flasher.meshtastic.org/" target="_blank" rel="noopener noreferrer">Web flasher</a>
         </div>
     </article>
 
@@ -69,7 +71,7 @@
     <div class="route-list">
         <a asp-controller="Home" asp-action="HostNode">
             <span>Host a node</span>
-            <small>Use a better location to improve shared MontanaMesh coverage.</small>
+            <small>Use a better location to improve shared Montana Mesh coverage.</small>
         </a>
         <a href="@CommunityLinks.MeshMonitor" target="_blank" rel="noopener noreferrer">
             <span>Open the live map</span>

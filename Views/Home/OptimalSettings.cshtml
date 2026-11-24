@@ -3,7 +3,7 @@
     var baseStation = RadioProfile.BaseStation;
     var router = RadioProfile.Router;
     ViewData["Title"] = "Optimal Meshtastic Settings";
-    ViewData["MetaDescription"] = "Compare MontanaMesh optimal Meshtastic settings for portable nodes, base stations, and planned router infrastructure.";
+    ViewData["MetaDescription"] = "Compare Montana Mesh optimal Meshtastic settings for portable nodes, base stations, and planned router infrastructure.";
 }
 
 <section class="app-shell page-hero reveal" aria-labelledby="optimal-settings-title">
@@ -109,7 +109,7 @@
             <tr>
                 <td>Device role</td>
                 <td><code>@baseStation.Role</code></td>
-                <td>Prioritizes traffic to and from your favorited nodes while remaining usable as a normal client.</td>
+                <td>Always relays traffic to and from your favorited nodes, after other radios have had a chance, and otherwise behaves like a normal client.</td>
             </tr>
             <tr>
                 <td>LoRa region</td>
@@ -150,6 +150,7 @@
     <div>
         <p class="eyebrow">Base CLI</p>
         <h2 id="base-cli-title">Stable fixed node</h2>
+        <p class="code-note">Replace <code>LATITUDE</code>, <code>LONGITUDE</code>, and <code>ALTITUDE_METERS</code> with the node's location in decimal degrees and meters. Round the coordinates if you do not want an exact location on public maps.</p>
     </div>
     <pre><code>@baseStation.FullCommand</code></pre>
 </section>
@@ -211,6 +212,7 @@
     <div>
         <p class="eyebrow">Router CLI</p>
         <h2 id="router-cli-title">Planned infrastructure</h2>
+        <p class="code-note">Replace <code>LATITUDE</code>, <code>LONGITUDE</code>, and <code>ALTITUDE_METERS</code> with the node's location in decimal degrees and meters. Round the coordinates if you do not want an exact location on public maps.</p>
     </div>
     <pre><code>@router.FullCommand</code></pre>
 </section>

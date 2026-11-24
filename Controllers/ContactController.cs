@@ -39,7 +39,7 @@ public class ContactController(IConfiguration configuration, ILogger<ContactCont
             message.From.Add(MailboxAddress.Parse(settings["From"]!));
             message.To.Add(MailboxAddress.Parse(settings["To"]!));
             message.ReplyTo.Add(MailboxAddress.Parse(model.Email));
-            message.Subject = "MontanaMesh contact message";
+            message.Subject = "Montana Mesh contact message";
             message.MessageId = MimeKit.Utils.MimeUtils.GenerateMessageId("montanamesh.com");
             message.Body = new TextPart("plain") { Text = $"Name: {model.Name}\nEmail: {model.Email}\n\n{model.Message}" };
             using var smtp = new SmtpClient { Timeout = 15000 };
@@ -68,7 +68,7 @@ public class ContactController(IConfiguration configuration, ILogger<ContactCont
     private ViewResult ContactView(ContactViewModel model)
     {
         ViewData["Title"] = "Contact";
-        ViewData["MetaDescription"] = "Get in touch with MontanaMesh about joining the mesh, hosting a node, or a question about the community.";
+        ViewData["MetaDescription"] = "Get in touch with Montana Mesh about joining the mesh, hosting a node, or a question about the community.";
         Response.Headers.CacheControl = "no-store";
         return View("Index", model);
     }

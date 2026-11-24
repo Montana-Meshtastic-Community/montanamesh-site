@@ -941,6 +941,12 @@ a.resource-card:focus {
   margin: 0;
 }
 
+.code-panel .code-note {
+  margin: 0.75rem 0 0;
+  color: var(--muted);
+  font-size: 0.92rem;
+}
+
 .host-grid {
   grid-template-columns: repeat(3, minmax(0, 1fr));
 }
